@@ -1,0 +1,88 @@
+<!-- header.html -->
+<aside class="sidebar">
+    <div class="header">
+      <div class="logo">
+        <div class="logo-icon">A</div>
+        <span>AlugAki</span>
+      </div>
+      <div class="keyboard-shortcut"></div>
+    </div>
+  
+    <nav class="nav-menu">
+      <a href="#" class="nav-item active">
+        <i class="fas fa-home"></i>
+        <span>Home</span>
+      </a>
+      <a href="#" class="nav-item">
+        <i class="fas fa-bell"></i>
+        <span>Notifications</span>
+      </a>
+      <a href="#" class="nav-item">
+        <i class="fas fa-tasks"></i>
+        <span>Tasks</span>
+      </a>
+      <a href="#" class="nav-item">
+        <i class="fas fa-cog"></i>
+        <span>Settings</span>
+      </a>
+    </nav>
+  
+  </aside>
+  
+  <header class="main-header">
+    <div class="search-wrapper">
+      <i class="fas fa-search"></i>
+      <input type="text" placeholder="Pesquisar..." />
+    </div>
+  
+    <div class="header-right">
+      <div class="notification-icon">
+        <i class="fas fa-bell"></i>
+        <span class="notif-dot"></span>
+      </div>
+  
+      <div class="user-info-header" id="user-menu-trigger">
+        <img src="https://i.pravatar.cc/40" alt="User Avatar" class="user-avatar-header">
+        <div class="user-details">
+          <span class="user-name">Teste T.</span>
+          <span class="user-role">Admin</span>
+        </div>
+      </div>
+
+      <!-- DROPDOWN MENU -->
+      <div class="user-dropdown-menu" id="user-dropdown">
+        <div class="dropdown-item">
+          <i class="fas fa-user"></i>
+          <span>Minha conta</span>
+        </div>
+
+        <div class="dropdown-item">
+          <i class="fas fa-moon"></i>
+          <span>Dark mode</span>
+          <label class="toggle-switch">
+            <input type="checkbox" id="dark-mode-toggle">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="dropdown-divider"></div>
+
+        <div class="dropdown-item">
+          <i class="fas fa-question-circle"></i>
+          <span>Ajuda</span>
+        </div>
+
+        <div class="dropdown-item">
+          <i class="fas fa-globe"></i>
+          <span>Suporte</span>
+        </div>
+
+        <div class="dropdown-divider"></div>
+
+        <div class="dropdown-item logout">
+          <i class="fas fa-sign-out-alt"></i>
+          <span>Sair</span>
+        </div>
+      </div>
+    </div>
+  </header>
