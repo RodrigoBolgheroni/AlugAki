@@ -46,10 +46,27 @@
         
         // Evento de toggle do menu (RECOLHER/EXPANDIR)
         if (keyboardShortcut && sidebar && sidebarContainer) {
-            keyboardShortcut.addEventListener('click', function() {
+            keyboardShortcut.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                // Toggle das classes
                 sidebar.classList.toggle('collapsed');
                 sidebarContainer.classList.toggle('collapsed');
+                
+                // Salvar estado no localStorage (opcional)
+                const isCollapsed = sidebar.classList.contains('collapsed');
+                localStorage.setItem('sidebarCollapsed', isCollapsed);
+                
+                console.log('Sidebar', isCollapsed ? 'colapsada' : 'expandida');
             });
+            
+            // Restaurar estado salvo (opcional)
+            const savedState = localStorage.getItem('sidebarCollapsed');
+            if (savedState === 'true') {
+                sidebar.classList.add('collapsed');
+                sidebarContainer.classList.add('collapsed');
+            }
         }
     }
 

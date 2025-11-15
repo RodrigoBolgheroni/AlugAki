@@ -62,6 +62,15 @@ body {
     font-weight: 600;
 }
 
+.logo-icone-img{
+    width: 50px;
+    height: 45px;
+}
+.logo-escrita-img{
+    width: 130px;
+    height: 45px;
+}
+
 .keyboard-shortcut {
     width: 32px;
     height: 32px;
@@ -466,3 +475,27 @@ input:checked + .toggle-slider:before {
         width: 240px;
     }
 }
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-icon, .logo-text, .logo > span {
+  display: flex;
+  align-items: center;
+}
+
+.logo-icone-img,
+.logo-escrita-img {
+  display: block;
+  max-height: 50px;
+  width: auto;
+  align-self: center;
+}
+.logo-escrita-img{
+    padding-top: 14px;
+}
+  
+
