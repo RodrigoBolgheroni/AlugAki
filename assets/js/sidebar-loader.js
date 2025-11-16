@@ -30,19 +30,24 @@
         const keyboardShortcut = document.querySelector('.keyboard-shortcut');
         const sidebar = document.querySelector('.sidebar');
         const sidebarContainer = document.getElementById('sidebar-container');
+
+        sidebarContainer.classList.toggle("collapsed");
+
         
         // Evento de navegação
         navLinks.forEach(link => {
             link.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                // Remove active de todos
+                const href = this.getAttribute('href');
+        
+                if (href === "#" || href === "" || href === null) {
+                    e.preventDefault();
+                }
+        
                 navLinks.forEach(item => item.classList.remove('active'));
-                
-                // Adiciona active no clicado
                 this.classList.add('active');
             });
         });
+        
         
         // Evento de toggle do menu (RECOLHER/EXPANDIR)
         if (keyboardShortcut && sidebar && sidebarContainer) {

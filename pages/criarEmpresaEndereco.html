@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Empresa - AlugAki</title>
+    <link rel="stylesheet" href="../assets/css/criar-empresa.css">
+</head>
+
+<body>
+
+<div class="container-cadastro">
+
+    <aside class="sidebar-steps">
+        <div class="logo">
+            <div class="logo-icon">
+              <img src="../assets/image/icone-logo.png" class="logo-icone-img">
+            </div>
+            <div class="logo-text">
+              <img src="../assets/image/escrita-logo.png" class="logo-escrita-img">
+            </div>
+          </div>
+
+        <ul class="steps-list">
+            <li>
+                <span class="circle">1</span> Tipo De Usuario
+            </li>
+            <li>
+                <span class="circle">2</span> Informações
+            </li>
+            <li class="active">
+                <span class="circle">3</span> Endereço
+            </li>
+            <li>
+                <span class="circle">4</span> Finalizar
+            </li>
+        </ul>
+    </aside>
+
+    <!-- ========== FORMULÁRIO PRINCIPAL ========== -->
+    <main class="content">
+
+        <h1>Endereço</h1>
+        <p class="descricao">Preencha os campos abaixo para criar sua conta empresarial.</p>
+
+        <form class="formulario">
+            <div class="campo">
+                <label>CEP <span>*</span></label>
+                <input type="text" placeholder="00000-000" required>
+            </div>
+        
+            <div class="campo-duplo">
+                <div class="campo">
+                    <label>Logradouro <span>*</span></label>
+                    <input type="text" required>
+                </div>
+        
+                <div class="campo">
+                    <label>Número <span>*</span></label>
+                    <input type="text" required>
+                </div>
+            </div>
+        
+            <div class="campo">
+                <label>Complemento</label>
+                <input type="text">
+            </div>
+        
+            <div class="campo-duplo">
+                <div class="campo">
+                    <label>Bairro <span>*</span></label>
+                    <input type="text" required>
+                </div>
+        
+                <div class="campo">
+                    <label>Cidade <span>*</span></label>
+                    <input type="text" required>
+                </div>
+            </div>
+        
+            <div class="campo">
+                <label>Estado <span>*</span></label>
+                <select required>
+                    <option value="">Selecione</option>
+                    <option value="SP">SP</option>
+                    <option value="RJ">RJ</option>
+                    <option value="MG">MG</option>
+                    <option value="RS">RS</option>
+                    <option value="SC">SC</option>
+                    <option value="PR">PR</option>
+                    <option value="BA">BA</option>
+                    <option value="ES">ES</option>
+                    <option value="PE">PE</option>
+                    <option value="CE">CE</option>
+                    <option value="GO">GO</option>
+                    <option value="DF">DF</option>
+                    <option value="MT">MT</option>
+                    <option value="MS">MS</option>
+                    <option value="AM">AM</option>
+                    <option value="PA">PA</option>
+                </select>
+            </div>
+        
+            <button class="btn-proximo">Próximo</button>
+        </form>
+        
+    </main>
+
+</div>
+
+</body>
+</html>

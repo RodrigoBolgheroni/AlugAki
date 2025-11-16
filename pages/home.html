@@ -8,152 +8,6 @@
   <link rel="stylesheet" href="../assets/css/style.css">
   <link rel="stylesheet" href="../modals/style.css">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Poppins', sans-serif;
-      display: flex;
-      min-height: 100vh;
-      background: #1a1a1a; /* Fundo escuro como no exemplo */
-    }
-
-    /* ==== SIDEBAR ==== */
-    #sidebar-container {
-      width: 320px;
-      flex-shrink: 0;
-    }
-
-    .sidebar-loading {
-      width: 320px;
-      height: 100vh;
-      background: #252525;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #A8A8A8;
-    }
-
-    /* ==== CONTAINER PRINCIPAL ==== */
-    .page-container {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      padding: 20px; /* Espaçamento ao redor */
-      gap: 20px; /* Espaçamento entre header e main */
-      border-radius: 20px;
-    }
-
-    /* ==== HEADER SUPERIOR ==== */
-
-
-    header .search-bar {
-      display: flex;
-      align-items: center;
-      background: #333;
-      padding: 8px 16px;
-      border-radius: 8px;
-      width: 350px;
-    }
-
-    header .search-bar input {
-      border: none;
-      outline: none;
-      background: transparent;
-      color: #fff;
-      width: 100%;
-      margin-left: 8px;
-      font-size: 14px;
-    }
-
-    header .search-bar input::placeholder {
-      color: #999;
-    }
-
-    header .icons {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-
-    header .icons i {
-      font-size: 18px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    header .icons i:hover {
-      color: #F2C94C;
-    }
-
-    header .user {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: #333;
-      padding: 8px 14px;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    header .user:hover {
-      background: #3a3a3a;
-    }
-
-    header .user img {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      object-fit: cover;
-      background: #555; /* Fallback caso não tenha imagem */
-    }
-
-    /* ==== CONTEÚDO PRINCIPAL ==== */
-    main {
-      flex: 1;
-      background: #525252; /* Fundo escuro como no exemplo */
-      border-radius: 20px; /* Bordas bem arredondadas */
-      padding: 40px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-      overflow-y: auto;
-      color: #fff; /* Texto branco para contraste */
-    }
-
-    main h1 {
-      color: #fff;
-      margin-bottom: 30px;
-      font-size: 28px;
-      font-weight: 600;
-    }
-
-    main p {
-      color: #ccc;
-      line-height: 1.6;
-      margin-bottom: 15px;
-    }
-
-    /* ==== SCROLLBAR CUSTOMIZADA ==== */
-    main::-webkit-scrollbar {
-      width: 8px;
-    }
-
-    main::-webkit-scrollbar-track {
-      background: #1a1a1a;
-      border-radius: 10px;
-    }
-
-    main::-webkit-scrollbar-thumb {
-      background: #555;
-      border-radius: 10px;
-    }
-
-    main::-webkit-scrollbar-thumb:hover {
-      background: #777;
-    }
 
   </style>
 </head>
@@ -171,6 +25,9 @@
       <h1>Painel De Controle</h1>
       <p>Bem-vindo ao seu dashboard.</p>
       <p>Aqui você pode gerenciar seus imóveis, contratos e muito mais.</p>
+      <div class="container-2">
+        Teste
+      </div>
     </main>
   </div>
 

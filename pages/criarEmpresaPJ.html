@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Empresa - AlugAki</title>
+    <link rel="stylesheet" href="../assets/css/criar-empresa.css">
+</head>
+
+<body>
+
+<div class="container-cadastro">
+
+    <aside class="sidebar-steps">
+        <div class="logo">
+            <div class="logo-icon">
+              <img src="../assets/image/icone-logo.png" class="logo-icone-img">
+            </div>
+            <div class="logo-text">
+              <img src="../assets/image/escrita-logo.png" class="logo-escrita-img">
+            </div>
+          </div>
+
+        <ul class="steps-list">
+            <li>
+                <span class="circle">1</span> Tipo De Usuario
+            </li>
+            <li class="active">
+                <span class="circle">2</span> Informações
+            </li>
+            <li>
+                <span class="circle">3</span> Endereço
+            </li>
+            <li>
+                <span class="circle">4</span> Finalizar
+            </li>
+        </ul>
+    </aside>
+
+    <!-- ========== FORMULÁRIO PRINCIPAL ========== -->
+    <main class="content">
+
+        <h1>Informações Pessoais</h1>
+        <p class="descricao">Preencha os campos abaixo para criar sua conta empresarial.</p>
+
+        <form class="formulario">
+
+            <div class="campo-duplo">
+                <div class="campo">
+                    <label>Razão Social <span>*</span></label>
+                    <input type="text" placeholder="" required>
+                </div>
+                <div class="campo">
+                    <label>CNPJ <span>*</span></label>
+                    <input type="text" placeholder="00.000.000/0000-00" required>
+                </div>
+            </div>
+
+            <div class="campo-duplo">
+
+                <div class="campo">
+                    <label>Área de atuação <span>*</span></label>
+                    <select required>
+                        <option value="proprietario">Corretor</option>
+                        <option value="proprietario">Proprietário De Imoveis</option>
+                        <option value="inquilino">Imobiliária</option>
+                    </select>
+                </div>
+                <div class="campo">
+                    <label>Nº de imóveis administrados <span>*</span></label>
+                    <input type="number" required>
+                </div>
+            </div>
+
+
+            <button class="btn-proximo">Próximo</button>
+
+        </form>
+    </main>
+
+</div>
+
+</body>
+</html>
