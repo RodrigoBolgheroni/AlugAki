@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AlugAki - Editar Inquilino</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../modals/style.css">
+  <style>
+    /* ===== MESMO CSS QUE VOCÊ JÁ TINHA ===== */
+    /* ... Inclua todo o CSS que você já tinha no seu <style> ... */
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background: rgba(0,0,0,0.5);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background: var(--color-neutral-500);
+      padding: 24px;
+      border-radius: 12px;
+      width: 400px;
+      max-width: 90%;
+      position: relative;
+    }
+
+    .modal-content h3 {
+      margin-bottom: 16px;
+      color: var(--color-neutral-100);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: transparent;
+      border: none;
+      font-size: 20px;
+      color: var(--color-neutral-100);
+      cursor: pointer;
+    }
+
+    .modal-content input[type="file"],
+    .modal-content input[type="text"],
+    .modal-content select {
+      width: 100%;
+      padding: 10px 12px;
+      margin-bottom: 16px;
+      border-radius: 8px;
+      border: 1px solid var(--color-neutral-400);
+      background: var(--color-neutral-500);
+      color: var(--color-neutral-100);
+      font-family: var(--font-secondary);
+      font-size: 14px;
+      outline: none;
+      transition: all 0.2s;
+    }
+
+    .modal-content input:focus,
+    .modal-content select:focus {
+      border-color: var(--color-primary-300);
+      background: var(--color-neutral-400);
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+    }
+
+    .btn-primary, .btn-secondary {
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--color-primary-300);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--color-primary-400);
+    }
+
+    .btn-secondary {
+      background: var(--color-neutral-400);
+      color: var(--color-neutral-100);
+      border: 1px solid var(--color-neutral-300);
+    }
+
+    .btn-secondary:hover {
+      background: var(--color-neutral-300);
+    }
+
+  </style>
+</head>
+<body>
+  <div id="sidebar-container">
+    <div class="sidebar-loading">Carregando...</div>
+  </div>
+  
+  <div class="page-container">
+    <main class="main-principal">
+      <div class="breadcrumb">
+        <a href="#">Inquilinos</a>
+        <i class="fas fa-chevron-right"></i>
+        <span>Editar</span>
+      </div>
+
+      <div class="page-header">
+        <h1>Editar Inquilino</h1>
+        <div class="header-actions">
+          <button class="btn btn-danger">
+            <i class="fas fa-trash"></i>
+            Excluir
+          </button>
+        </div>
+      </div>
+
+      <!-- Tabs Navigation -->
+      <div class="tabs-nav">
+        <button class="tab-nav-btn active" onclick="switchTab('dados')">
+          <i class="fas fa-user"></i>
+          Dados
+        </button>
+        <button class="tab-nav-btn" onclick="switchTab('anexos')">
+          <i class="fas fa-paperclip"></i>
+          Anexos
+        </button>
+      </div>
+
+      <!-- Tab: Dados -->
+      <div id="tab-dados" class="tab-pane active">
+        <div class="form-container">
+          <!-- Seção 1: Tipo de Cadastro -->
+          <div class="form-section">
+            <div class="section-header">
+              <div class="section-number">1</div>
+              <h2>Tipo de Cadastro</h2>
+              <span class="tipo-badge pf" id="tipoBadge">
+                <i class="fas fa-user"></i> Pessoa Física
+              </span>
+            </div>
+            <div class="info-alert">
+              <i class="fas fa-info-circle"></i>
+              <span>Para alterar o tipo de cadastro, é necessário criar um novo inquilino.</span>
+            </div>
+          </div>
+
+          <!-- Seção 2: Dados do Inquilino -->
+          <div class="form-section">
+            <div class="section-header">
+              <div class="section-number">2</div>
+              <h2>Dados do Inquilino</h2>
+            </div>
+
+            <div class="form-row full">
+              <div class="form-group">
+                <label>Nome completo <span class="required">*</span></label>
+                <input type="text" placeholder="Digite o nome completo" value="Maria Silva Santos">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>CPF <span class="required">*</span></label>
+                <input type="text" id="cpf" placeholder="000.000.000-00" value="123.456.789-00">
+              </div>
+              <div class="form-group">
+                <label>E-mail</label>
+                <input type="email" placeholder="exemplo@email.com" value="maria.silva@email.com">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>Telefone celular</label>
+                <input type="tel" class="tel-input" placeholder="(00) 00000-0000" value="(11) 98765-4321">
+              </div>
+              <div class="form-group">
+                <label>Telefone fixo</label>
+                <input type="tel" class="tel-input" placeholder="(00) 0000-0000" value="(11) 3456-7890">
+              </div>
+            </div>
+          </div>
+
+          <!-- Seção 3: Endereço -->
+          <div class="form-section">
+            <div class="section-header">
+              <div class="section-number">3</div>
+              <h2>Endereço</h2>
+            </div>
+
+            <div class="cep-group">
+              <div class="form-group">
+                <label>CEP <span class="required">*</span></label>
+                <input type="text" id="cep" placeholder="00000-000" value="01310-100">
+              </div>
+              <button class="btn-search-cep">
+                <i class="fas fa-search"></i>
+                Buscar
+              </button>
+            </div>
+
+            <div class="form-row three-cols">
+              <div class="form-group">
+                <label>Logradouro <span class="required">*</span></label>
+                <input type="text" id="logradouro" placeholder="Rua, Avenida, etc" value="Avenida Paulista">
+              </div>
+              <div class="form-group">
+                <label>Número <span class="required">*</span></label>
+                <input type="text" placeholder="123" value="1578">
+              </div>
+              <div class="form-group">
+                <label>Complemento</label>
+                <input type="text" placeholder="Apto, Bloco, etc" value="Apto 45">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>Bairro <span class="required">*</span></label>
+                <input type="text" id="bairro" placeholder="Digite o bairro" value="Bela Vista">
+              </div>
+              <div class="form-group">
+                <label>Cidade <span class="required">*</span></label>
+                <input type="text" id="cidade" placeholder="Digite a cidade" value="São Paulo">
+              </div>
+            </div>
+
+            <div class="form-row full">
+              <div class="form-group">
+                <label>Estado <span class="required">*</span></label>
+                <select id="estado">
+                  <option value="">Selecione o estado</option>
+                  <option value="SP" selected>São Paulo</option>
+                  <option value="RJ">Rio de Janeiro</option>
+                  <option value="MG">Minas Gerais</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Ações do Formulário -->
+          <div class="form-actions">
+            <button class="btn btn-primary" id="btnSalvar">
+              <i class="fas fa-save"></i>
+              Salvar Alterações
+            </button>
+            <button class="btn btn-secondary" id="btnDesfazer">
+              <i class="fas fa-undo"></i>
+              Desfazer Alterações
+            </button>
+            <button class="btn btn-cancel" id="btnCancelar">
+              <i class="fas fa-times"></i>
+              Cancelar
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab: Anexos -->
+      <div id="tab-anexos" class="tab-pane">
+        <div class="form-container">
+          <div class="form-section">
+            <div class="section-header">
+              <div class="section-number">
+                <i class="fas fa-paperclip"></i>
+              </div>
+              <h2>Gerenciar Anexos</h2>
+            </div>
+
+            <button class="btn btn-primary" id="btnAddAttachment">
+              <i class="fas fa-plus"></i>
+              Adicionar Anexo
+            </button>
+
+            <!-- Attachments List -->
+            <div class="attachments-list" id="attachmentsList">
+              <div class="empty-attachments">
+                <i class="fas fa-times"></i>
+                <p>Nenhum anexo adicionado</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button class="btn btn-primary">
+              <i class="fas fa-check"></i>
+              Concluir
+            </button>
+            <button class="btn btn-cancel">
+              <i class="fas fa-times"></i>
+              Cancelar
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal" id="attachmentModal">
+    <div class="modal-content">
+      <button class="modal-close" id="closeModal"><i class="fas fa-times"></i></button>
+      <h3>Adicionar Anexo</h3>
+      <div class="upload-area" id="uploadArea">
+        <input type="file" id="fileInput" multiple accept=".pdf,.doc,.docx,.jpg,.jpeg,.png">
+        <div class="upload-icon">
+          <i class="fas fa-cloud-upload-alt"></i>
+        </div>
+        <div class="upload-text">Clique para selecionar ou arraste arquivos aqui</div>
+        <div class="upload-hint">PDF, DOC, DOCX, JPG, PNG (máx. 10MB cada)</div>
+      </div>
+      <input type="text" id="modalDesc" placeholder="Descrição do anexo">
+      <select id="modalType">
+        <option value="">Selecionar tipo</option>
+        <option value="RG">RG</option>
+        <option value="CPF">CPF</option>
+        <option value="CNPJ">CNPJ</option>
+        <option value="Comprovante de residencia">Comprovante de residência</option>
+      </select>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" id="modalCancel">Cancelar</button>
+        <button class="btn btn-primary" id="modalAdd">Adicionar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../assets/js/sidebar-loader.js"></script>
+  <script src="../assets/js/dark-mode.js"></script>
+  <script>
+    // Tabs
+    function switchTab(tabName) {
+      document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.tab-nav-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('tab-' + tabName).classList.add('active');
+      event.target.classList.add('active');
+    }
+
+    // Modal
+    const btnAddAttachment = document.getElementById('btnAddAttachment');
+    const attachmentModal = document.getElementById('attachmentModal');
+    const closeModal = document.getElementById('closeModal');
+    const modalCancel = document.getElementById('modalCancel');
+    const modalAdd = document.getElementById('modalAdd');
+
+    btnAddAttachment.addEventListener('click', () => attachmentModal.style.display = 'flex');
+    closeModal.addEventListener('click', () => attachmentModal.style.display = 'none');
+    modalCancel.addEventListener('click', () => attachmentModal.style.display = 'none');
+
+    // Add Attachment
+    const attachmentsList = document.getElementById('attachmentsList');
+    modalAdd.addEventListener('click', () => {
+      const fileInput = document.getElementById('modalFile');
+      const desc = document.getElementById('modalDesc').value;
+      const type = document.getElementById('modalType').value;
+
+      if (!fileInput.files.length) return alert('Selecione um arquivo');
+
+      const file = fileInput.files[0];
+      const fileSize = (file.size / (1024 * 1024)).toFixed(1);
+      const fileIcon = getFileIcon(file.type);
+      const today = new Date().toLocaleDateString('pt-BR');
+
+      const attachmentItem = document.createElement('div');
+      attachmentItem.className = 'attachment-item';
+      attachmentItem.innerHTML = `
+        <div class="attachment-icon"><i class="${fileIcon}"></i></div>
+        <div class="attachment-info">
+          <div class="attachment-name">${file.name}</div>
+          <div class="attachment-meta">
+            <span><i class="far fa-calendar"></i> ${today}</span>
+            <span><i class="fas fa-weight"></i> ${fileSize} MB</span>
+          </div>
+          <div class="attachment-desc">${desc}</div>
+          <div class="attachment-type">${type}</div>
+        </div>
+        <div class="attachment-actions">
+          <button class="btn-icon btn-download" title="Baixar"><i class="fas fa-download"></i></button>
+          <button class="btn-icon btn-delete" title="Excluir"><i class="fas fa-trash"></i></button>
+        </div>
+      `;
+
+      // Delete
+      attachmentItem.querySelector('.btn-delete').addEventListener('click', () => {
+        if(confirm('Deseja excluir este anexo?')) attachmentItem.remove();
+      });
+
+      attachmentsList.querySelector('.empty-attachments')?.remove();
+      attachmentsList.appendChild(attachmentItem);
+
+      // Reset modal
+      fileInput.value = '';
+      document.getElementById('modalDesc').value = '';
+      document.getElementById('modalType').value = '';
+      attachmentModal.style.display = 'none';
+    });
+
+    function getFileIcon(fileType) {
+      if(fileType.includes('pdf')) return 'fas fa-file-pdf';
+      if(fileType.includes('word') || fileType.includes('document')) return 'fas fa-file-word';
+      if(fileType.includes('image')) return 'fas fa-file-image';
+      return 'fas fa-file';
+    }
+  </script>
+</body>
+</html>
