@@ -3,22 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AlugAki - Home</title>
+  <title>AlugAki - Criar Inquilino</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="../assets/css/style.css">
   <link rel="stylesheet" href="../modals/style.css">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap');
+    
     .circle {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    border: 2px solid var(--color-primary-400);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 12px;
-}
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 2px solid var(--color-primary-400);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 12px;
+    }
+
     .page-header h1 {
       font-family: var(--font-primary);
       font-size: 36px;
@@ -26,30 +28,22 @@
       color: var(--color-neutral-100);
     }
 
-    /* Form Container */
     .form-container {
       background: #2a2a2a;
       border-radius: 16px;
       overflow: hidden;
     }
 
-    /* Tabs */
     .tabs {
       display: flex;
       border-bottom: 2px solid var(--color-neutral-400);
       background: #2a2a2a;
     }
-    .tab {
-    display: flex;
-    align-items: center;
-    gap: 10px; /* espaço entre o círculo e o texto */
-    }
-    .circle {
-    flex-shrink: 0; /* impede o círculo de achatar */
-    }
-
 
     .tab {
+      display: flex;
+      align-items: center;
+      gap: 10px;
       flex: 1;
       padding: 18px 24px;
       background: transparent;
@@ -61,6 +55,10 @@
       cursor: pointer;
       transition: all 0.2s;
       position: relative;
+    }
+
+    .tab .circle {
+      flex-shrink: 0;
     }
 
     .tab:hover {
@@ -82,7 +80,7 @@
       background: var(--color-primary-300);
     }
 
-    /* Tab Content */
+    /* Tab Content - CORRIGIDO */
     .tab-content {
       display: none;
       padding: 32px;
@@ -92,7 +90,6 @@
       display: block;
     }
 
-    /* Tipo de Cadastro */
     .tipo-cadastro {
       display: flex;
       gap: 16px;
@@ -136,7 +133,6 @@
       color: var(--color-neutral-100);
     }
 
-    /* Form Fields */
     .form-group {
       margin-bottom: 24px;
     }
@@ -191,7 +187,6 @@
       color: var(--color-neutral-300);
     }
 
-    /* CEP Search Button */
     .cep-group {
       display: flex;
       gap: 12px;
@@ -223,7 +218,6 @@
       border-color: var(--color-primary-300);
     }
 
-    /* Form Actions */
     .form-actions {
       display: flex;
       gap: 12px;
@@ -279,12 +273,7 @@
       color: var(--color-neutral-100);
     }
 
-    /* Responsive */
     @media (max-width: 768px) {
-      body {
-        padding: 20px;
-      }
-
       .form-row {
         grid-template-columns: 1fr;
       }
@@ -325,393 +314,369 @@
   <div id="sidebar-container">
     <div class="sidebar-loading">Carregando...</div>
   </div>
+  
   <div class="page-container">
     <main class="main-principal">
-        <div class="breadcrumb">
-            <a href="#">Inquilinos</a>
-            <i class="fas fa-chevron-right"></i>
-            <span>Criar</span>
+      <div class="breadcrumb">
+        <a href="#">Inquilinos</a>
+        <i class="fas fa-chevron-right"></i>
+        <span>Criar</span>
+      </div>
+      
+      <div class="page-header">
+        <h1>Criar Inquilino</h1>
+      </div>
+
+      <div class="form-container">
+        <!-- Tabs -->
+        <div class="tabs">
+          <button class="tab active" data-tab="0">
+            <span class="circle">1</span> Tipo de Cadastro
+          </button>
+          <button class="tab" data-tab="1">
+            <span class="circle">2</span> Dados do Inquilino
+          </button>
+          <button class="tab" data-tab="2">
+            <span class="circle">3</span> Endereço
+          </button>
+          <button class="tab tab-pj" data-tab="3" style="display:none;">
+            <span class="circle">4</span> Representante Legal
+          </button>
+        </div>
+
+        <!-- Tab 0: Tipo de Cadastro -->
+        <div class="tab-content active" data-content="0">
+          <div class="tipo-usuario-container">
+            <label class="tipo-opcao">
+              <input type="radio" name="tipo_usuario" value="pf">
+              <div class="option-box">
+                <i class="fa-solid fa-user"></i>
+                <span>Pessoa Física</span>
+              </div>
+            </label>
+          
+            <label class="tipo-opcao">
+              <input type="radio" name="tipo_usuario" value="pj">
+              <div class="option-box">
+                <i class="fa-solid fa-building"></i>
+                <span>Pessoa Jurídica</span>
+              </div>
+            </label>
           </div>
-        
-          <!-- Header -->
-          <div class="page-header">
-            <h1>Criar Inquilino</h1>
+        </div>
+
+        <!-- Tab 1: Dados do Inquilino -->
+        <div class="tab-content" data-content="1">
+          <div class="form-row full">
+            <div class="form-group">
+              <label>Nome completo <span class="required">*</span></label>
+              <input type="text" placeholder="Digite o nome completo">
+            </div>
           </div>
     
-          <div class="form-container">
-            <!-- Tabs -->
-            <div class="tabs">
-              <button class="tab active" onclick="showTab(0)"><span class="circle">1</span> Tipo de Cadastro</button>
-              <button class="tab" onclick="showTab(1)"><span class="circle">2</span>Dados do Inquilino</button>
-              <button class="tab" onclick="showTab(2)"><span class="circle">3</span>Endereço</button>
-              <button class="tab tab-pj" style="display:none;" onclick="showTab(3)">
-                <span class="circle">4</span> Representante Legal
+          <div class="form-row">
+            <div class="form-group">
+              <label>CPF <span class="required">*</span></label>
+              <input type="text" placeholder="000.000.000-00">
+            </div>
+            <div class="form-group">
+              <label>E-mail</label>
+              <input type="email" placeholder="exemplo@email.com">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Telefone celular</label>
+              <input type="tel" placeholder="(00) 00000-0000">
+            </div>
+            <div class="form-group">
+              <label>Telefone fixo</label>
+              <input type="tel" placeholder="(00) 0000-0000">
+            </div>
+          </div>
+        </div>
+    
+        <!-- Tab 2: Endereço -->
+        <div class="tab-content" data-content="2">
+          <div class="cep-group">
+            <div class="form-group">
+              <label>CEP <span class="required">*</span></label>
+              <input type="text" id="cep" placeholder="00000-000">
+            </div>
+            <button class="btn-search-cep">
+              <i class="fas fa-search"></i>
+              Buscar
             </button>
-            
+          </div>
+    
+          <div class="form-row">
+            <div class="form-group">
+              <label>Logradouro <span class="required">*</span></label>
+              <input type="text" placeholder="Rua, Avenida, etc">
             </div>
-        
-            <div class="tab-content active">
-                <div class="tipo-usuario-container">
+            <div class="form-group">
+              <label>Número <span class="required">*</span></label>
+              <input type="text" placeholder="123">
+            </div>
+          </div>
+    
+          <div class="form-row full">
+            <div class="form-group">
+              <label>Complemento</label>
+              <input type="text" placeholder="Apartamento, Bloco, etc">
+            </div>
+          </div>
+    
+          <div class="form-row">
+            <div class="form-group">
+              <label>Bairro <span class="required">*</span></label>
+              <input type="text" placeholder="Digite o bairro">
+            </div>
+            <div class="form-group">
+              <label>Cidade <span class="required">*</span></label>
+              <input type="text" placeholder="Digite a cidade">
+            </div>
+          </div>
+    
+          <div class="form-row full">
+            <div class="form-group">
+              <label>Estado <span class="required">*</span></label>
+              <select>
+                <option value="">Selecione o estado</option>
+                <option value="AC">Acre</option>
+                <option value="AL">Alagoas</option>
+                <option value="AP">Amapá</option>
+                <option value="AM">Amazonas</option>
+                <option value="BA">Bahia</option>
+                <option value="CE">Ceará</option>
+                <option value="DF">Distrito Federal</option>
+                <option value="ES">Espírito Santo</option>
+                <option value="GO">Goiás</option>
+                <option value="MA">Maranhão</option>
+                <option value="MT">Mato Grosso</option>
+                <option value="MS">Mato Grosso do Sul</option>
+                <option value="MG">Minas Gerais</option>
+                <option value="PA">Pará</option>
+                <option value="PB">Paraíba</option>
+                <option value="PR">Paraná</option>
+                <option value="PE">Pernambuco</option>
+                <option value="PI">Piauí</option>
+                <option value="RJ">Rio de Janeiro</option>
+                <option value="RN">Rio Grande do Norte</option>
+                <option value="RS">Rio Grande do Sul</option>
+                <option value="RO">Rondônia</option>
+                <option value="RR">Roraima</option>
+                <option value="SC">Santa Catarina</option>
+                <option value="SP">São Paulo</option>
+                <option value="SE">Sergipe</option>
+                <option value="TO">Tocantins</option>
+              </select>
+            </div>
+          </div>
+        </div>
 
-                    <label class="tipo-opcao">
-                        <input type="radio" name="tipo_usuario" value="pf">
-                        <div class="option-box">
-                            <i class="fa-solid fa-user"></i>
-                            <span>Pessoa Física</span>
-                        </div>
-                    </label>
-                
-                    <label class="tipo-opcao">
-                        <input type="radio" name="tipo_usuario" value="pj">
-                        <div class="option-box">
-                            <i class="fa-solid fa-building"></i>
-                            <span>Pessoa Jurídica</span>
-                        </div>
-                    </label>
-                
-                </div>
-            </div>
-
-            <div class="tab-content">
-              <div class="form-row full">
-                <div class="form-group">
-                  <label>Nome completo <span class="required">*</span></label>
-                  <input type="text" placeholder="Digite o nome completo">
-                </div>
-              </div>
-        
-              <div class="form-row">
-                <div class="form-group">
-                  <label>CPF <span class="required">*</span></label>
-                  <input type="text" placeholder="000.000.000-00">
-                </div>
-                <div class="form-group">
-                  <label>E-mail</label>
-                  <input type="email" placeholder="exemplo@email.com">
-                </div>
-              </div>
-              <div class="form-row">
-                <div class="form-group">
-                  <label>Telefone celular</label>
-                  <input type="tel" placeholder="(00) 00000-0000">
-                </div>
-                <div class="form-group">
-                  <label>Telefone fixo</label>
-                  <input type="tel" placeholder="(00) 0000-0000">
-                </div>
-              </div>
-            </div>
-        
-            <div class="tab-content">
-              <div class="cep-group">
-                <div class="form-group">
-                  <label>CEP <span class="required">*</span></label>
-                  <input type="text" id="cep" placeholder="00000-000">
-                </div>
-                <button class="btn-search-cep">
-                  <i class="fas fa-search"></i>
-                  Buscar
-                </button>
-              </div>
-        
-              <div class="form-row">
-                <div class="form-group">
-                  <label>Logradouro <span class="required">*</span></label>
-                  <input type="text" placeholder="Rua, Avenida, etc">
-                </div>
-                <div class="form-group">
-                  <label>Número <span class="required">*</span></label>
-                  <input type="text" placeholder="123">
-                </div>
-              </div>
-        
-              <div class="form-row full">
-                <div class="form-group">
-                  <label>Complemento</label>
-                  <input type="text" placeholder="Apartamento, Bloco, etc">
-                </div>
-              </div>
-        
-              <div class="form-row">
-                <div class="form-group">
-                  <label>Bairro <span class="required">*</span></label>
-                  <input type="text" placeholder="Digite o bairro">
-                </div>
-                <div class="form-group">
-                  <label>Cidade <span class="required">*</span></label>
-                  <input type="text" placeholder="Digite a cidade">
-                </div>
-              </div>
-        
-              <div class="form-row full">
-                <div class="form-group">
-                  <label>Estado <span class="required">*</span></label>
-                  <select>
-                    <option value="">Selecione o estado</option>
-                    <option value="AC">Acre</option>
-                    <option value="AL">Alagoas</option>
-                    <option value="AP">Amapá</option>
-                    <option value="AM">Amazonas</option>
-                    <option value="BA">Bahia</option>
-                    <option value="CE">Ceará</option>
-                    <option value="DF">Distrito Federal</option>
-                    <option value="ES">Espírito Santo</option>
-                    <option value="GO">Goiás</option>
-                    <option value="MA">Maranhão</option>
-                    <option value="MT">Mato Grosso</option>
-                    <option value="MS">Mato Grosso do Sul</option>
-                    <option value="MG">Minas Gerais</option>
-                    <option value="PA">Pará</option>
-                    <option value="PB">Paraíba</option>
-                    <option value="PR">Paraná</option>
-                    <option value="PE">Pernambuco</option>
-                    <option value="PI">Piauí</option>
-                    <option value="RJ">Rio de Janeiro</option>
-                    <option value="RN">Rio Grande do Norte</option>
-                    <option value="RS">Rio Grande do Sul</option>
-                    <option value="RO">Rondônia</option>
-                    <option value="RR">Roraima</option>
-                    <option value="SC">Santa Catarina</option>
-                    <option value="SP">São Paulo</option>
-                    <option value="SE">Sergipe</option>
-                    <option value="TO">Tocantins</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-            <div class="tab-content tab-content-pj" style="display:none;">
-                <div class="form-row full">
-                    <div class="form-group">
-                        <label>Nome completo do representante <span class="required">*</span></label>
-                        <input type="text" placeholder="Digite o nome completo">
-                    </div>
-                </div>
-            
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>CPF <span class="required">*</span></label>
-                        <input type="text" placeholder="000.000.000-00">
-                    </div>
-                    <div class="form-group">
-                        <label>E-mail</label>
-                        <input type="email" placeholder="exemplo@email.com">
-                    </div>
-                </div>
-            
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Telefone</label>
-                        <input type="tel" placeholder="(00) 00000-0000">
-                    </div>
-                    <div class="form-group">
-                        <label>Cargo</label>
-                        <input type="text" placeholder="Diretor, Gerente, etc">
-                    </div>
-                </div>
-            </div>
-            
-            <div class="form-actions">
-                <button class="btn btn-primary btn-back">
-                    <i class="fa-solid fa-chevron-left"></i>
-                    Voltar
-                </button>
-                <button class="btn btn-cancel">
-                    <i class="fas fa-times"></i>
-                    Cancelar
-                  </button>
-                  <button class="btn btn-primary btn-next">
-                    <i class="fa-solid fa-chevron-right"></i>
-                    Próximo
-                </button>
+        <!-- Tab 3: Representante Legal (PJ apenas) -->
+        <div class="tab-content" data-content="3">
+          <div class="form-row full">
+            <div class="form-group">
+              <label>Nome completo do representante <span class="required">*</span></label>
+              <input type="text" placeholder="Digite o nome completo">
             </div>
           </div>
         
-          <script>
-            // Navegação entre abas
-            function showTab(index) {
-              const tabs = document.querySelectorAll('.tab');
-              const contents = document.querySelectorAll('.tab-content');
-              
-              tabs.forEach((tab, i) => {
-                if (i === index) {
-                  tab.classList.add('active');
-                  contents[i].classList.add('active');
-                } else {
-                  tab.classList.remove('active');
-                  contents[i].classList.remove('active');
-                }
-              });
-            }
+          <div class="form-row">
+            <div class="form-group">
+              <label>CPF <span class="required">*</span></label>
+              <input type="text" placeholder="000.000.000-00">
+            </div>
+            <div class="form-group">
+              <label>E-mail</label>
+              <input type="email" placeholder="exemplo@email.com">
+            </div>
+          </div>
         
-            // Seleção de tipo de cadastro
-            function selectTipo(element) {
-              document.querySelectorAll('.tipo-option').forEach(opt => {
-                opt.classList.remove('selected');
-              });
-              element.classList.add('selected');
-              element.querySelector('input[type="radio"]').checked = true;
-            }
+          <div class="form-row">
+            <div class="form-group">
+              <label>Telefone</label>
+              <input type="tel" placeholder="(00) 00000-0000">
+            </div>
+            <div class="form-group">
+              <label>Cargo</label>
+              <input type="text" placeholder="Diretor, Gerente, etc">
+            </div>
+          </div>
+        </div>
         
-            // Busca CEP
-            document.querySelector('.btn-search-cep').addEventListener('click', function() {
-              const cep = document.getElementById('cep').value.replace(/\D/g, '');
-              
-              if (cep.length === 8) {
-                fetch(`https://viacep.com.br/ws/${cep}/json/`)
-                  .then(response => response.json())
-                  .then(data => {
-                    if (!data.erro) {
-                      document.querySelector('input[placeholder="Rua, Avenida, etc"]').value = data.logradouro;
-                      document.querySelector('input[placeholder="Digite o bairro"]').value = data.bairro;
-                      document.querySelector('input[placeholder="Digite a cidade"]').value = data.localidade;
-                      document.querySelector('select').value = data.uf;
-                    } else {
-                      alert('CEP não encontrado');
-                    }
-                  })
-                  .catch(() => alert('Erro ao buscar CEP'));
-              } else {
-                alert('CEP inválido');
-              }
-            });
-        
-            // Máscaras de input
-            document.querySelector('input[placeholder="000.000.000-00"]').addEventListener('input', function(e) {
-              let value = e.target.value.replace(/\D/g, '');
-              value = value.replace(/(\d{3})(\d)/, '$1.$2');
-              value = value.replace(/(\d{3})(\d)/, '$1.$2');
-              value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
-              e.target.value = value;
-            });
-        
-            document.querySelector('input[placeholder="00000-000"]').addEventListener('input', function(e) {
-              let value = e.target.value.replace(/\D/g, '');
-              value = value.replace(/(\d{5})(\d)/, '$1-$2');
-              e.target.value = value;
-            });
-        
-            document.querySelectorAll('input[type="tel"]').forEach(input => {
-              input.addEventListener('input', function(e) {
-                let value = e.target.value.replace(/\D/g, '');
-                if (value.length <= 10) {
-                  value = value.replace(/(\d{2})(\d)/, '($1) $2');
-                  value = value.replace(/(\d{4})(\d)/, '$1-$2');
-                } else {
-                  value = value.replace(/(\d{2})(\d)/, '($1) $2');
-                  value = value.replace(/(\d{5})(\d)/, '$1-$2');
-                }
-                e.target.value = value;
-              });
-            });
-          </script>
-          <script>
-            let currentTab = 0; // aba inicial
-          
-            function updateButtons() {
-              const btnBack = document.querySelector('.btn-back');
-              const btnNext = document.querySelector('.btn-next');
-              const tabs = document.querySelectorAll('.tab-content');
-          
-              // Desabilita o VOLTAR na primeira aba
-              if (currentTab === 0) {
-                btnBack.disabled = true;
-                btnBack.style.opacity = "0.4";
-                btnBack.style.cursor = "not-allowed";
-              } else {
-                btnBack.disabled = false;
-                btnBack.style.opacity = "1";
-                btnBack.style.cursor = "pointer";
-              }
-          
-              // Troca "Próximo" por "Concluir" na última aba
-              let totalTabs = document.querySelectorAll('.tab-content')
-             .length - (document.querySelector('input[value="pj"]').checked ? 0 : 1);
-
-            if (currentTab === totalTabs - 1) {
-
-                btnNext.innerHTML = '<i class="fa-solid fa-check"></i> Concluir';
-              } else {
-                btnNext.innerHTML = '<i class="fa-solid fa-chevron-right"></i> Próximo';
-              }
-            }
-          
-            function showTab(index) {
-              const tabs = document.querySelectorAll('.tab');
-              const contents = document.querySelectorAll('.tab-content');
-          
-              currentTab = index;
-          
-              tabs.forEach((tab, i) => {
-                tab.classList.toggle('active', i === index);
-                contents[i].classList.toggle('active', i === index);
-              });
-          
-              updateButtons();
-            }
-// Detectar PF/PJ e ativar/desativar aba do representante
-document.querySelectorAll('input[name="tipo_usuario"]').forEach(radio => {
-  radio.addEventListener('change', function () {
-
-      const isPJ = this.value === "pj";
-      const tabPJ = document.querySelector(".tab-pj");
-      const contentPJ = document.querySelector(".tab-content-pj");
-
-      if (isPJ) {
-          // Mostrar a aba e o conteúdo
-          tabPJ.style.display = "flex";
-          contentPJ.style.display = "block";
-
-          // Ajustar a numeração
-          document.querySelector(".tab-pj .circle").textContent =
-              document.querySelectorAll(".tab").length;
-
-      } else {
-          // Esconder totalmente
-          tabPJ.style.display = "none";
-          contentPJ.style.display = "none";
-
-          // Caso esteja nela quando mudar pra PF → volta
-          if (currentTab === 3) {
-              showTab(2);
-          }
-      }
-
-      updateButtons();
-  });
-});
-
-          
-            // Botão PRÓXIMO
-            document.querySelector('.btn-next').addEventListener('click', () => {
-              const tabs = document.querySelectorAll('.tab-content');
-          
-              let totalTabs = document.querySelectorAll('.tab-content')
-            .length - (document.querySelector('input[value="pj"]').checked ? 0 : 1);
-
-            if (currentTab < totalTabs - 1) {
-
-                showTab(currentTab + 1);
-              } else {
-                alert("Cadastro concluído!"); // coloque aqui o que quiser
-              }
-            });
-          
-            // Botão VOLTAR
-            document.querySelector('.btn-back').addEventListener('click', () => {
-              if (currentTab > 0) {
-                showTab(currentTab - 1);
-              }
-            });
-          
-            // Inicia com a aba 0 configurada corretamente
-            updateButtons();
-          </script>
-          
+        <!-- Botões de Ação -->
+        <div class="form-actions">
+          <button class="btn btn-primary btn-back">
+            <i class="fa-solid fa-chevron-left"></i>
+            Voltar
+          </button>
+          <button class="btn btn-cancel">
+            <i class="fas fa-times"></i>
+            Cancelar
+          </button>
+          <button class="btn btn-primary btn-next">
+            <i class="fa-solid fa-chevron-right"></i>
+            Próximo
+          </button>
+        </div>
+      </div>
     </main>
   </div>
 
   <script src="../assets/js/sidebar-loader.js"></script>
   <script src="../assets/js/dark-mode.js"></script>
 
+  <script>
+    let currentTab = 0;
+
+    function showTab(index) {
+      const tabs = document.querySelectorAll('.tab');
+      const contents = document.querySelectorAll('.tab-content');
+      
+      currentTab = index;
+      
+      // Remove active de todos
+      tabs.forEach(tab => tab.classList.remove('active'));
+      contents.forEach(content => content.classList.remove('active'));
+      
+      // Adiciona active apenas no índice correto
+      tabs[index].classList.add('active');
+      contents[index].classList.add('active');
+      
+      updateButtons();
+    }
+
+    function updateButtons() {
+      const btnBack = document.querySelector('.btn-back');
+      const btnNext = document.querySelector('.btn-next');
+      const isPJ = document.querySelector('input[value="pj"]')?.checked;
+      
+      // Total de abas (3 para PF, 4 para PJ)
+      const totalTabs = isPJ ? 4 : 3;
+
+      // Botão Voltar
+      if (currentTab === 0) {
+        btnBack.disabled = true;
+        btnBack.style.opacity = "0.4";
+        btnBack.style.cursor = "not-allowed";
+      } else {
+        btnBack.disabled = false;
+        btnBack.style.opacity = "1";
+        btnBack.style.cursor = "pointer";
+      }
+
+      // Botão Próximo/Concluir
+      if (currentTab === totalTabs - 1) {
+        btnNext.innerHTML = '<i class="fa-solid fa-check"></i> Concluir';
+      } else {
+        btnNext.innerHTML = '<i class="fa-solid fa-chevron-right"></i> Próximo';
+      }
+    }
+
+    // Detectar mudança PF/PJ
+    document.querySelectorAll('input[name="tipo_usuario"]').forEach(radio => {
+      radio.addEventListener('change', function() {
+        const isPJ = this.value === "pj";
+        const tabPJ = document.querySelector(".tab-pj");
+
+        if (isPJ) {
+          tabPJ.style.display = "flex";
+        } else {
+          tabPJ.style.display = "none";
+          
+          // Se estava na aba PJ, volta para Endereço
+          if (currentTab === 3) {
+            showTab(2);
+          }
+        }
+
+        updateButtons();
+      });
+    });
+
+    // Clique nas abas
+    document.querySelectorAll('.tab').forEach((tab, index) => {
+      tab.addEventListener('click', () => showTab(index));
+    });
+
+    // Botão Próximo
+    document.querySelector('.btn-next').addEventListener('click', () => {
+      const isPJ = document.querySelector('input[value="pj"]')?.checked;
+      const totalTabs = isPJ ? 4 : 3;
+
+      if (currentTab < totalTabs - 1) {
+        showTab(currentTab + 1);
+      } else {
+        alert("Cadastro concluído!");
+        // Aqui você pode adicionar a lógica de salvamento
+      }
+    });
+
+    // Botão Voltar
+    document.querySelector('.btn-back').addEventListener('click', () => {
+      if (currentTab > 0) {
+        showTab(currentTab - 1);
+      }
+    });
+
+    // Busca CEP
+    document.querySelector('.btn-search-cep').addEventListener('click', function() {
+      const cep = document.getElementById('cep').value.replace(/\D/g, '');
+      
+      if (cep.length === 8) {
+        fetch(`https://viacep.com.br/ws/${cep}/json/`)
+          .then(response => response.json())
+          .then(data => {
+            if (!data.erro) {
+              document.querySelector('input[placeholder="Rua, Avenida, etc"]').value = data.logradouro;
+              document.querySelector('input[placeholder="Digite o bairro"]').value = data.bairro;
+              document.querySelector('input[placeholder="Digite a cidade"]').value = data.localidade;
+              document.querySelector('select').value = data.uf;
+            } else {
+              alert('CEP não encontrado');
+            }
+          })
+          .catch(() => alert('Erro ao buscar CEP'));
+      } else {
+        alert('CEP inválido');
+      }
+    });
+
+    // Máscaras de input
+    document.querySelector('input[placeholder="000.000.000-00"]').addEventListener('input', function(e) {
+      let value = e.target.value.replace(/\D/g, '');
+      value = value.replace(/(\d{3})(\d)/, '$1.$2');
+      value = value.replace(/(\d{3})(\d)/, '$1.$2');
+      value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+      e.target.value = value;
+    });
+
+    document.querySelector('input[placeholder="00000-000"]').addEventListener('input', function(e) {
+      let value = e.target.value.replace(/\D/g, '');
+      value = value.replace(/(\d{5})(\d)/, '$1-$2');
+      e.target.value = value;
+    });
+
+    document.querySelectorAll('input[type="tel"]').forEach(input => {
+      input.addEventListener('input', function(e) {
+        let value = e.target.value.replace(/\D/g, '');
+        if (value.length <= 10) {
+          value = value.replace(/(\d{2})(\d)/, '($1) $2');
+          value = value.replace(/(\d{4})(\d)/, '$1-$2');
+        } else {
+          value = value.replace(/(\d{2})(\d)/, '($1) $2');
+          value = value.replace(/(\d{5})(\d)/, '$1-$2');
+        }
+        e.target.value = value;
+      });
+    });
+
+    // Inicialização
+    updateButtons();
+  </script>
 </body>
 </html>
