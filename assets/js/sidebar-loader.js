@@ -15,6 +15,9 @@
                 container.innerHTML = '';
                 container.appendChild(template.content.cloneNode(true));
                 
+                // Restaurar estado ANTES de inicializar eventos
+                restoreInitialState();
+                
                 // Inicializar eventos
                 initSidebarEvents();
                 initUserDropdown();
@@ -24,6 +27,29 @@
             });
     }
 
+    // Restaurar estado inicial do sidebar
+    function restoreInitialState() {
+        const sidebar = document.querySelector('.sidebar');
+        const sidebarContainer = document.getElementById('sidebar-container');
+        const mainHeader = document.querySelector('.main-header');
+        
+        // Verificar estado salvo no localStorage
+        const savedState = localStorage.getItem('sidebarCollapsed');
+        const isCollapsed = savedState === 'true';
+        
+        if (isCollapsed) {
+            // Aplicar estado colapsado
+            sidebar?.classList.add('collapsed');
+            sidebarContainer?.classList.add('collapsed');
+        } else {
+            // Garantir que está expandido (remover collapsed se existir)
+            sidebar?.classList.remove('collapsed');
+            sidebarContainer?.classList.remove('collapsed');
+        }
+        
+        console.log('Estado inicial:', isCollapsed ? 'colapsado' : 'expandido');
+    }
+
     // Configurar eventos do sidebar
     function initSidebarEvents() {
         const navLinks = document.querySelectorAll('.nav-item');
@@ -31,9 +57,6 @@
         const sidebar = document.querySelector('.sidebar');
         const sidebarContainer = document.getElementById('sidebar-container');
 
-        sidebarContainer.classList.toggle("collapsed");
-
-        
         // Evento de navegação
         navLinks.forEach(link => {
             link.addEventListener('click', function(e) {
@@ -48,7 +71,6 @@
             });
         });
         
-        
         // Evento de toggle do menu (RECOLHER/EXPANDIR)
         if (keyboardShortcut && sidebar && sidebarContainer) {
             keyboardShortcut.addEventListener('click', function(e) {
@@ -59,19 +81,12 @@
                 sidebar.classList.toggle('collapsed');
                 sidebarContainer.classList.toggle('collapsed');
                 
-                // Salvar estado no localStorage (opcional)
+                // Salvar estado no localStorage
                 const isCollapsed = sidebar.classList.contains('collapsed');
                 localStorage.setItem('sidebarCollapsed', isCollapsed);
                 
                 console.log('Sidebar', isCollapsed ? 'colapsada' : 'expandida');
             });
-            
-            // Restaurar estado salvo (opcional)
-            const savedState = localStorage.getItem('sidebarCollapsed');
-            if (savedState === 'true') {
-                sidebar.classList.add('collapsed');
-                sidebarContainer.classList.add('collapsed');
-            }
         }
     }
 
