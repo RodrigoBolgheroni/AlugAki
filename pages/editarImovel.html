@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AlugAki - Editar Imóvel</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../modals/style.css">
+  <link rel="stylesheet" href="../assets/css/editar.css">
+</head>
+
+<body>
+  <div id="sidebar-container">
+    <div class="sidebar-loading">Carregando...</div>
+  </div>
+
+  <div class="page-container">
+    <main class="main-principal">
+
+      <!-- Breadcrumb -->
+      <div class="breadcrumb">
+        <a href="#">Imóveis</a>
+        <i class="fas fa-chevron-right"></i>
+        <span>Editar</span>
+      </div>
+
+      <!-- Título + Excluir -->
+      <div class="page-header">
+        <h1>Editar Imóvel</h1>
+        <div class="header-actions">
+          <button class="btn btn-danger">
+            <i class="fas fa-trash"></i>
+            Excluir
+          </button>
+        </div>
+      </div>
+
+      <!-- Abas -->
+      <div class="tabs-nav">
+        <button class="tab-nav-btn active" onclick="switchTab('gerais')">
+          <i class="fas fa-home"></i>
+          Informações Gerais
+        </button>
+        <button class="tab-nav-btn" onclick="switchTab('adicionais')">
+          <i class="fas fa-circle-plus"></i>
+          Informações Adicionais
+        </button>
+        <button class="tab-nav-btn" onclick="switchTab('anexos')">
+          <i class="fas fa-paperclip"></i>
+          Documentos
+        </button>
+      </div>
+
+      <!-- TAB: DADOS -->
+      <!-- TAB: INFORMAÇÕES GERAIS -->
+      <div id="tab-gerais" class="tab-pane active">
+        <div class="form-container">
+
+          <!-- 1 - Proprietário -->
+          <div class="form-section">
+            <div class="section-header">
+              <div class="section-number">1</div>
+              <h2>Proprietário</h2>
+            </div>
+
+            <div class="form-row full">
+              <div class="form-group">
+                <label>Proprietário <span class="required">*</span></label>
+                <select>
+                  <option value="">Selecione</option>
+                  <option>João da Silva</option>
+                  <option>Maria Oliveira</option>
+                  <option>XPTO Imóveis LTDA</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2 - Tipo do Imóvel -->
+          <div class="form-section">
+            <div class="section-header">
+              <div class="section-number">2</div>
+              <h2>Tipo do Imóvel</h2>
+            </div>
+
+            <div class="form-row full">
+              <div class="form-group">
+                <label>Tipo do Imóvel <span class="required">*</span></label>
+                <select>
+                  <option>Selecione</option>
+                  <option>Casa</option>
+                  <option>Apartamento</option>
+                  <option>Kitnet</option>
+                  <option>Sala Comercial</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3 - Identificação do Imóvel -->
+          <div class="form-section">
+            <div class="section-header">
+              <div class="section-number">3</div>
+              <h2>Identificação do Imóvel</h2>
+            </div>
+
+            <div class="form-row full">
+              <div class="form-group">
+                <label>Identificação Do Imóvel</label>
+                <input type="text"
+                  placeholder="Digite um identificador para o imóvel, pode ser um ID, nome ou referência criada livremente.">
+              </div>
+            </div>
+          </div>
+
+          <!-- 4 - Endereço -->
+          <div class="form-section">
+            <div class="section-header">
+              <div class="section-number">4</div>
+              <h2>Endereço</h2>
+            </div>
+
+            <div class="cep-group">
+              <div class="form-group">
+                <label>CEP <span class="required">*</span></label>
+                <input type="text" placeholder="00000-000" id="cep">
+              </div>
+
+              <button class="btn-search-cep">
+                <i class="fas fa-search"></i> Buscar
+              </button>
+            </div>
+
+            <div class="form-row three-cols">
+              <div class="form-group">
+                <label>Logradouro <span class="required">*</span></label>
+                <input type="text">
+              </div>
+
+              <div class="form-group">
+                <label>Número <span class="required">*</span></label>
+                <input type="text">
+              </div>
+
+              <div class="form-group">
+                <label>Complemento</label>
+                <input type="text">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>Bairro <span class="required">*</span></label>
+                <input type="text">
+              </div>
+
+              <div class="form-group">
+                <label>Cidade <span class="required">*</span></label>
+                <input type="text">
+              </div>
+            </div>
+
+            <div class="form-row full">
+              <div class="form-group">
+                <label>Estado <span class="required">*</span></label>
+                <select>
+                  <option value="">Selecione</option>
+                  <option>SP</option>
+                  <option>RJ</option>
+                  <option>MG</option>
+                  <option>ES</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5 - Descrição -->
+          <div class="form-section">
+            <div class="section-header">
+              <div class="section-number">5</div>
+              <h2>Descrição</h2>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Área (m²) </label>
+                <input type="number" placeholder="Ex: 120">
+              </div>
+
+              <div class="form-group">
+                <label>Número de cômodos </label>
+                <input type="number" placeholder="Ex: 5">
+              </div>
+            </div>
+
+            <div class="form-row number">
+              <div class="form-group">
+                <label>Número de quartos </label>
+                <input type="number" placeholder="Ex: 3">
+              </div>
+
+              <div class="form-group">
+                <label>Banheiros </label>
+                <input type="number" placeholder="Ex: 2">
+              </div>
+              <div class="form-group">
+                <label>Número de vagas </label>
+                <input type="number" placeholder="Ex: 2">
+              </div>
+            </div>
+
+
+            <div class="form-row full">
+              <div class="form-group">
+                <label>Descrição</label>
+                <textarea placeholder="Descreva detalhes adicionais..." rows="5"></textarea>
+                <p style="font-size: 13px;">Descreva brevemente o imóvel: tipo, tamanho, disposição, comodidades e
+                  características especiais. Descrição do imóvel no contrato de aluguel.</p>
+              </div>
+            </div>
+
+          </div>
+
+
+          <!-- 6 - Informações do Aluguel -->
+          <div class="form-section">
+            <div class="section-header">
+              <div class="section-number">6</div>
+              <h2>Informações do Aluguel</h2>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>Status da Alocação <span class="required">*</span></label>
+                <select>
+                  <option value="">Selecione</option>
+                  <option>Disponível</option>
+                  <option>Alugado</option>
+                  <option>Em manutenção</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label>Tipo de Locação <span class="required">*</span></label>
+                <select>
+                  <option value="">Selecione</option>
+                  <option>Mensal</option>
+                  <option>Temporada</option>
+                  <option>Anual</option>
+                </select>
+              </div>
+
+            </div>
+            <div class="form-row full" id="campoRowCondominio">
+              <div class="form-group" id="campoCondominio" style="display:none;">
+                <label>Condomínio </label>
+                <p class="desc-input">Não incluir despesas pontuais (aluguel de salão ou churrasqueira).</p>
+                <input type="number" placeholder="R$ 0">
+              </div>
+
+            </div>
+
+            <!-- IPTU -->
+            <div class="form-row">
+              <div class="form-group">
+                <label>O imóvel paga IPTU?</label>
+                <p class="desc-input">Informa se o imovel paga IPTU.</p>
+                <!-- BOTÕES SIM/NÃO -->
+                <div class="toggle-iptu">
+                  <button type="button" id="iptuSim" class="btn-toggle-iptu">Sim</button>
+                  <button type="button" id="iptuNao" class="btn-toggle-iptu">Não</button>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Aluguel excluindo encargos </label>
+                <p class="desc-input">Valor do aluguel sem condomínio, IPTU e demais encargos.</p>
+                <input type="number" placeholder="R$ 0">
+              </div>
+            </div>
+            <div class="form-row full">
+              <div class="form-group">
+                <div class="form-group" id="campoIPTU" style="display:none;">
+                  <label>Valor total anual do IPTU </label>
+                  <p class="desc-input">Não inclua centavos. Pode arredondar para mais.</p>
+                  <input type="number" placeholder="R$ 0">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-section">
+            <div class="section-header">
+              <div class="section-number">7</div>
+              <h2>Notas / Comentários</h2>
+            </div>
+            <div class="form-row full">
+              <div class="form-group">
+                <label>Nota Privada</label>
+                <textarea placeholder="Descreva detalhes adicionais..." rows="5"></textarea>
+                <p style="font-size: 13px;">Está nota é visivel apenas para você</p>
+              </div>
+            </div>
+
+          </div>
+
+
+          <!-- AÇÕES -->
+          <div class="form-actions">
+            <button class="btn btn-cancel">
+              <i class="fas fa-times"></i> Cancelar
+            </button>
+
+            <button class="btn btn-primary">
+              <i class="fas fa-save"></i> Salvar
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div id="tab-adicionais" class="tab-pane">
+        <div class="form-container">
+
+          <!-- 1 - Informações Adicionais -->
+          <div class="form-section">
+            <div class="section-header">
+              <div class="section-number">1</div>
+              <h2>Informações Adicionais</h2>
+            </div>
+
+            <div class="form-row">
+
+              <div class="form-group toggle-group">
+                <div>
+                  <label>Imóvel Mobilhado</label>
+                  <p class="desc-input">Marque se o imóvel já possui móveis.</p>
+                </div>
+                <div>
+                  <label class="switch">
+                    <input type="checkbox" id="imovelMobilhado">
+                    <span class="slider"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+
+              <div class="form-group toggle-group">
+                <div>
+                  <label>Aceitar Animais de Estimação</label>
+                  <p class="desc-input">Marque se animais são permitidos.</p>
+                </div>
+                <div>
+                  <label class="switch">
+                    <input type="checkbox" id="permitidoAnimais">
+                    <span class="slider"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+
+              <div class="form-group toggle-group">
+                <div>
+                  <label>Permitido Fumar</label>
+                  <p class="desc-input">Marque se é permitido fumar no imóvel.</p>
+                </div>
+                <div>
+                  <label class="switch">
+                    <input type="checkbox" id="permitidoFumar">
+                    <span class="slider"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="form-section">
+            <div class="section-header">
+              <div class="section-number">2</div>
+              <h2>Equipamentos e Instalações</h2>
+            </div>
+          
+            <div class="checkbox-grid-section">
+              <h3 class="checkbox-category-title">Lista de Móveis e Equipamento</h3>
+              <div class="checkbox-grid">
+                <div class="checkbox-item">
+                  <input type="checkbox" id="internet">
+                  <label for="internet">Acesso à Internet</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="ar-condicionado">
+                  <label for="ar-condicionado">Ar condicionado</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="antena-tv">
+                  <label for="antena-tv">Antena coletiva de TV</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="terminal-carros">
+                  <label for="terminal-carros">Terminal para carros elétricos</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="cabo-fibra">
+                  <label for="cabo-fibra">Cabo/Fibra</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="aquecimento">
+                  <label for="aquecimento">Sistema de aquecimento central</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="lareira">
+                  <label for="lareira">Lareira</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="detectores">
+                  <label for="detectores">Detectores de fumaça</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="automacao">
+                  <label for="automacao">Automação residencial</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="vidros-duplos">
+                  <label for="vidros-duplos">Vidros duplos</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="agua-quente">
+                  <label for="agua-quente">Água quente coletiva</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="jacuzzi">
+                  <label for="jacuzzi">Jacuzzi</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="mosquiteiros">
+                  <label for="mosquiteiros">Mosquiteiros</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="paineis-solares">
+                  <label for="paineis-solares">Painéis solares</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="estacionamento">
+                  <label for="estacionamento">Estacionamento</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="sauna">
+                  <label for="sauna">Sauna</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="cortinas">
+                  <label for="cortinas">Cortinas</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="cortinas-eletricas">
+                  <label for="cortinas-eletricas">Cortinas elétricas</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="termostato">
+                  <label for="termostato">Termostato inteligente</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="coleta-lixo">
+                  <label for="coleta-lixo">Coleta de lixo</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="renovacao-ar">
+                  <label for="renovacao-ar">Sistema de renovação de ar</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="persianas">
+                  <label for="persianas">Persianas</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="persianas-eletricas">
+                  <label for="persianas-eletricas">Persianas elétricas</label>
+                </div>
+              </div>
+          
+              <h3 class="checkbox-category-title">Áreas Externas</h3>
+              <div class="checkbox-grid">
+                <div class="checkbox-item">
+                  <input type="checkbox" id="area-jogos">
+                  <label for="area-jogos">Área de jogos</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="varanda">
+                  <label for="varanda">Varanda</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="churrasqueira">
+                  <label for="churrasqueira">Churrasqueira</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="area-verde">
+                  <label for="area-verde">Área verde</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="jardim">
+                  <label for="jardim">Jardim</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="terraco">
+                  <label for="terraco">Terraço</label>
+                </div>
+              </div>
+          
+              <h3 class="checkbox-category-title">Edifício</h3>
+              <div class="checkbox-grid">
+                <div class="checkbox-item">
+                  <input type="checkbox" id="acesso-deficientes">
+                  <label for="acesso-deficientes">Acesso para deficientes</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="elevador">
+                  <label for="elevador">Elevador</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="lavanderia-comunitaria">
+                  <label for="lavanderia-comunitaria">Lavanderia comunitária</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="adega">
+                  <label for="adega">Adega</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="cinema">
+                  <label for="cinema">Cinema</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="concierge">
+                  <label for="concierge">Concierge</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="fibra-optica">
+                  <label for="fibra-optica">Fibra óptica</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="garagem">
+                  <label for="garagem">Garagem</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="estacionamento-bicicletas">
+                  <label for="estacionamento-bicicletas">Estacionamento para bicicletas</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="lavanderia">
+                  <label for="lavanderia">Lavanderia</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="casa-zelador">
+                  <label for="casa-zelador">Casa de zelador</label>
+                </div>
+              </div>
+          
+              <h3 class="checkbox-category-title">Segurança</h3>
+              <div class="checkbox-grid">
+                <div class="checkbox-item">
+                  <input type="checkbox" id="alarme">
+                  <label for="alarme">Alarme</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="alarme-incendio">
+                  <label for="alarme-incendio">Alarme de incêndio</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="barras-janela">
+                  <label for="barras-janela">Barras de janela</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="seguro">
+                  <label for="seguro">Seguro</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="porteiro">
+                  <label for="porteiro">Porteiro</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="interfone">
+                  <label for="interfone">Interfone</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="servico-seguranca">
+                  <label for="servico-seguranca">Serviço de segurança</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="sistema-seguranca">
+                  <label for="sistema-seguranca">Sistema de segurança</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="videofone">
+                  <label for="videofone">Videofone</label>
+                </div>
+              </div>
+          
+              <h3 class="checkbox-category-title">Instalações Esportivas</h3>
+              <div class="checkbox-grid">
+                <div class="checkbox-item">
+                  <input type="checkbox" id="academia">
+                  <label for="academia">Academia</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="piscina">
+                  <label for="piscina">Piscina</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="quadra-tenis">
+                  <label for="quadra-tenis">Quadra de Tênis</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-section">
+            <div class="section-header">
+              <div class="section-number">3</div>
+              <h2>Registro Predial</h2>
+            </div>
+          
+            <div class="registro-predial-grid">
+              <div class="registro-item">
+                <label>MATRÍCULA DO IMÓVEL</label>
+                <input type="text" placeholder="">
+              </div>
+          
+              <div class="registro-item">
+                <label>INSCRIÇÃO IMOBILIÁRIA</label>
+                <input type="text" placeholder="">
+              </div>
+          
+              <div class="registro-item">
+                <label>LOTE E QUADRA</label>
+                <input type="text" placeholder="">
+              </div>
+            </div>
+          </div>
+
+
+
+          <!-- AÇÕES -->
+          <div class="form-actions">
+            <button class="btn btn-cancel">
+              <i class="fas fa-times"></i> Cancelar
+            </button>
+
+            <button class="btn btn-primary">
+              <i class="fas fa-save"></i> Salvar
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+
+      <!-- TAB: ANEXOS -->
+      <div id="tab-anexos" class="tab-pane">
+        <div class="form-container">
+
+          <div class="form-section">
+            <div class="section-header">
+              <div class="section-header-title">
+                <div class="section-number">
+                  <i class="fas fa-paperclip"></i>
+                </div>
+                <h2>Gerenciar Anexos</h2>
+              </div>
+
+              <button class="btn btn-primary" id="btnAddAttachment">
+                <i class="fas fa-plus"></i>
+                Adicionar Anexo
+              </button>
+            </div>
+
+            <div class="attachments-list" id="attachmentsList">
+              <div class="empty-attachments">
+                <i class="fas fa-file-excel"></i>
+                <p>Nenhum anexo adicionado</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button class="btn btn-cancel">
+              <i class="fas fa-times"></i>
+              Cancelar
+            </button>
+
+            <button class="btn btn-primary">
+              <i class="fas fa-check"></i>
+              Concluir
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Modal de anexos -->
+  <div class="modal" id="attachmentModal">
+    <div class="modal-content">
+      <button class="modal-close" id="closeModal"><i class="fas fa-times"></i></button>
+      <h3>Adicionar Anexo</h3>
+
+      <div class="upload-area" id="uploadArea">
+        <input type="file" id="fileInput" multiple accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" hidden>
+        <div class="upload-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+        <div class="upload-text">Clique para selecionar ou arraste arquivos aqui</div>
+        <div class="upload-hint">PDF, DOC, DOCX, JPG, PNG (máx. 10MB cada)</div>
+      </div>
+
+      <label for="modalType">Tipo do anexo</label>
+      <input list="modalTypeList" id="modalType" placeholder="Selecionar ou digitar tipo">
+      
+      <datalist id="modalTypeList">
+          <option value="Escritura">
+          <option value="Contrato">
+          <option value="Planta">
+          <option value="Comprovante de IPTU">
+      </datalist>
+      
+
+      <input type="text" id="modalDesc" placeholder="Descrição do anexo">
+
+      <div class="modal-actions">
+        <button class="btn btn-secondary" id="modalCancel">Cancelar</button>
+        <button class="btn btn-primary" id="modalAdd">Adicionar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../assets/js/modal-anexo.js"></script>
+  <script src="../assets/js/sidebar-loader.js"></script>
+  <script src="../assets/js/dark-mode.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlugAki - Criar Imóvel</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../modals/style.css">
+    <link rel="stylesheet" href="../assets/css/novo.css">
+</head>
+
+<body>
+
+    <div id="sidebar-container">
+        <div class="sidebar-loading">Carregando...</div>
+    </div>
+
+    <div class="page-container">
+        <main class="main-principal">
+
+            <!-- Breadcrumb -->
+            <div class="breadcrumb">
+                <a href="#">Imóveis</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>Criar</span>
+            </div>
+
+            <!-- Título -->
+            <div class="page-header">
+                <h1>Criar Imóvel</h1>
+            </div>
+
+            <div class="form-container">
+
+                <!-- ABAS -->
+                <div class="tabs">
+            
+                    <button class="tab active" data-tab="0">
+                        <span class="circle">1</span>
+                        Dados do imóvel
+                    </button>
+            
+                    <button class="tab" data-tab="1">
+                        <span class="circle">2</span>
+                        Características
+                    </button>
+            
+                    <button class="tab" data-tab="2">
+                        <span class="circle">3</span>
+                        Informações sobre aluguel
+                    </button>
+            
+                </div>
+            
+                <!-- TAB 2 — ENDEREÇO -->
+                <div class="tab-content active" data-content="0">
+                    <div class="form-row full">
+                        <div class="form-group">
+                            <label>Proprietário <span class="required">*</span></label>
+                            <p class="desc-input">Selecione o proprietário responsável pelo imóvel.</p>
+                            <select>
+                                <option value="">Selecione o proprietário</option>
+                                <option>João da Silva</option>
+                                <option>Maria Oliveira</option>
+                            </select>
+                        </div>
+                    </div>
+            
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Tipo do Imóvel <span class="required">*</span></label>
+                            <p class="desc-input">Escolha a categoria que melhor representa o imóvel.</p>
+                            <select id="tipoImovel">
+                                <option value="">Selecione o tipo</option>
+                                <option value="casa">Casa</option>
+                                <option value="apartamento">Apartamento</option>
+                                <option value="condominio">Condomínio</option>
+                            </select>
+                            
+                        </div>
+            
+                        <div class="form-group">
+                            <label>Identificação Do Imóvel <span class="required">*</span></label>
+                            <p class="desc-input">Nome ou código para identificar este imóvel.</p>
+                            <input type="text" placeholder="Ex: Casa 02, Apto 45">
+                        </div>
+                    </div>
+            
+                    <div class="cep-group">
+                        <div class="form-group">
+                            <label>CEP <span class="required">*</span></label>
+                            <p class="desc-input">Digite apenas números para buscar o endereço automaticamente.</p>
+                            <input type="text" placeholder="Exemplo: 1234567">
+                        </div>
+            
+                        <button class="btn-search-cep">
+                            <i class="fas fa-search"></i> Buscar
+                        </button>
+                    </div>
+            
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Endereço do imóvel <span class="required">*</span></label>
+                            <p class="desc-input">Informe a rua, avenida ou logradouro completo.</p>
+                            <input type="text" placeholder="Rua, Avenida, etc">
+                        </div>
+            
+                        <div class="form-group">
+                            <label>Número <span class="required">*</span></label>
+                            <p class="desc-input">Número do imóvel. Apenas números.</p>
+                            <input type="text" placeholder="Exemplo: 25">
+                        </div>
+                    </div>
+            
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Complemento</label>
+                            <p class="desc-input">Opcional: bloco, torre, unidade, etc.</p>
+                            <input type="text" placeholder="Exemplo: 22 B">
+                        </div>
+            
+                        <div class="form-group">
+                            <label>Andar</label>
+                            <p class="desc-input">Preencha apenas se for apartamento.</p>
+                            <input type="text" placeholder="Exemplo: 2">
+                        </div>
+                    </div>
+            
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Bairro <span class="required">*</span></label>
+                            <p class="desc-input">Digite o nome completo do bairro.</p>
+                            <input type="text" placeholder="Digite o bairro">
+                        </div>
+            
+                        <div class="form-group">
+                            <label>Cidade <span class="required">*</span></label>
+                            <p class="desc-input">Informe o nome completo da cidade.</p>
+                            <input type="text" placeholder="Digite a cidade">
+                        </div>
+                    </div>
+            
+                    <div class="form-row full">
+                        <div class="form-group">
+                            <label>Estado <span class="required">*</span></label>
+                            <p class="desc-input">Selecione o estado onde o imóvel está localizado.</p>
+                            <select>
+                                <option value="">Selecione</option>
+                                <option>SP</option>
+                                <option>RJ</option>
+                                <option>MG</option>
+                                <option>RS</option>
+                                <option>PR</option>
+                            </select>
+                        </div>
+                    </div>
+            
+                </div>
+            
+                <!-- TAB 3 — INFORMAÇÕES ADICIONAIS -->
+                <div class="tab-content" data-content="1">
+            
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Área útil do imóvel </label>
+                            <p class="desc-input">Informe a área interna aproveitável, sem garagem.</p>
+                            <input type="number" placeholder="Digite a área">
+                        </div>
+                        <div class="form-group">
+                            <label>Vagas de garagem </label>
+                            <p class="desc-input">Quantidade total de vagas disponíveis.</p>
+                            <input type="number" placeholder="Ex: 2">
+                        </div>
+                    </div>
+            
+                    <div class="form-row number">
+                        <div class="form-group">
+                            <label>Banheiros </label>
+                            <p class="desc-input">Inclua suítes. Não conte lavabo e área de serviço.</p>
+                            <input type="number" placeholder="Ex: 2">
+                        </div>
+                        <div class="form-group">
+                            <label>Quartos </label>
+                            <p class="desc-input">Total de dormitórios, incluindo suítes.</p>
+                            <input type="number" placeholder="Ex: 3">
+                        </div>
+                        <div class="form-group">
+                            <label>Suítes </label>
+                            <p class="desc-input">Quantidade de quartos que possuem banheiro próprio.</p>
+                            <input type="number" placeholder="Ex: 3">
+                        </div>
+                    </div>
+            
+                    <div class="form-row number">
+            
+                        <div class="form-group toggle-group">
+                            <div>
+                                <label>Imóvel Mobilhado</label>
+                                <p class="desc-input">Marque se o imóvel já possui móveis.</p>
+                            </div>
+                            <div>
+                                <label class="switch">
+                                    <input type="checkbox" id="imovelMobilhado">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                        </div>
+            
+                        <div class="form-group toggle-group">
+                            <div>
+                                <label>Aceitar Animais de Estimação</label>
+                                <p class="desc-input">Marque se animais são permitidos.</p>
+                            </div>
+                            <div>
+                                <label class="switch">
+                                    <input type="checkbox" id="permitidoAnimais">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                        </div>
+            
+                        <div class="form-group toggle-group">
+                            <div>
+                                <label>Permitido Fumar</label>
+                                <p class="desc-input">Marque se é permitido fumar no imóvel.</p>
+                            </div>
+                            <div>
+                                <label class="switch">
+                                    <input type="checkbox" id="permitidoFumar">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                        </div>
+            
+                    </div>
+            
+                    <div class="form-row full">
+                        <div class="form-group">
+                            <label>Descrição</label>
+                            <p class="desc-input">Adicione detalhes gerais sobre o imóvel.</p>
+                            <textarea placeholder="Descreva detalhes adicionais..." rows="5"></textarea>
+                        </div>
+                    </div>
+            
+                </div>
+            
+                <!-- TAB 4 — Valor e Taxas -->
+                <div class="tab-content" data-content="2">
+                    <div class="form-row">
+            
+                        <div class="form-group">
+                            <label>Status da Alocação <span class="required">*</span></label>
+                            <p class="desc-input">Situação atual do imóvel no processo de locação.</p>
+                            <select>
+                                <option value="">Selecione</option>
+                                <option>Disponível</option>
+                                <option>Alugado</option>
+                                <option>Em manutenção</option>
+                            </select>
+                        </div>
+            
+                        <div class="form-group">
+                            <label>Tipo de Locação <span class="required">*</span></label>
+                            <p class="desc-input">Defina o tipo de contrato que será utilizado.</p>
+                            <select>
+                                <option value="">Selecione</option>
+                                <option>Mensal</option>
+                                <option>Temporada</option>
+                                <option>Anual</option>
+                            </select>
+                        </div>
+            
+                    </div>
+                    <!-- VALOR CONDOMÍNIO -->
+                    <div class="form-row full" id="campoRowCondominio">
+                        <div class="form-group" id="campoCondominio" style="display:none;">
+                            <label>Condomínio </label>
+                            <p class="desc-input">Não incluir despesas pontuais (aluguel de salão ou churrasqueira).</p>
+                            <input type="number" placeholder="R$ 0">
+                        </div>
+
+                    </div>
+                
+                    <!-- IPTU -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>O imóvel paga IPTU?</label>
+                            <p class="desc-input">Informa se o imovel paga IPTU.</p>
+                            <!-- BOTÕES SIM/NÃO -->
+                            <div class="toggle-iptu">
+                                <button type="button" id="iptuSim" class="btn-toggle-iptu">Sim</button>
+                                <button type="button" id="iptuNao" class="btn-toggle-iptu">Não</button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Aluguel excluindo encargos </label>
+                            <p class="desc-input">Valor do aluguel sem condomínio, IPTU e demais encargos.</p>
+                            <input type="number" placeholder="R$ 0">
+                        </div>
+                    </div>
+                    <div class="form-row full">
+                        <div class="form-group">
+                            <div class="form-group" id="campoIPTU" style="display:none;">
+                                <label>Valor total anual do IPTU </label>
+                                <p class="desc-input">Não inclua centavos. Pode arredondar para mais.</p>
+                                <input type="number" placeholder="R$ 0">
+                            </div>
+                        </div>
+                    </div>
+                
+                </div>
+                
+            
+                <!-- AÇÕES -->
+                <div class="form-actions">
+            
+                    <button class="btn btn-primary btn-back">
+                        <i class="fa-solid fa-chevron-left"></i>
+                        Voltar
+                    </button>
+            
+                    <button class="btn btn-cancel">
+                        <i class="fas fa-times"></i>
+                        Cancelar
+                    </button>
+            
+                    <button class="btn btn-primary btn-next">
+                        Próximo
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+            
+                </div>
+            
+            </div>
+            
+        </main>
+    </div>
+
+    <script src="../assets/js/sidebar-loader.js"></script>
+    <script src="../assets/js/dark-mode.js"></script>
+    <script src="../assets/js/novo.js"></script>
+
+</body>
+
+</html>

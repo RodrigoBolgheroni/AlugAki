@@ -16,11 +16,11 @@
     </div>
   
     <nav class="nav-menu">
-      <a href="#" class="nav-item active">
+      <a href="/pages/home.html" class="nav-item">
         <i class="fas fa-globe"></i>
         <span>Central</span>
       </a>
-      <a href="#" class="nav-item">
+      <a href="/pages/proprietarios.html" class="nav-item">
         <i class="fas fa-user"></i>
         <span>Proprietários</span>
       </a>
@@ -28,9 +28,9 @@
         <i class="fas fa-users"></i>
         <span>Inquilinos</span>
       </a>
-      <a href="#" class="nav-item">
+      <a href="/pages/imoveis.html" class="nav-item">
         <i class="fas fa-house"></i>
-        <span>Propriedades</span>
+        <span>Imóveis</span>
       </a>
       <a href="#" class="nav-item">
         <i class="fas fa-key"></i>
@@ -44,9 +44,49 @@
   
   </aside>
   <header class="main-header">
-    <div class="search-wrapper">
-      <i class="fas fa-search"></i>
-      <input type="text" placeholder="Pesquisar..." />
+  
+    <div class="header-left">
+      
+      <div class="company-selector" id="company-selector-trigger">
+        <div class="current-company">
+          <img src="../assets/image/logo-empresa-a.png" alt="Empresa" class="company-img">
+          <div class="company-info">
+            <span class="company-name" id="selected-company-name">Empresa 1</span>
+            <span class="company-status">Filial 01</span>
+          </div>
+          <i class="fas fa-chevron-down arrow-icon"></i>
+        </div>
+  
+        <div class="company-dropdown-menu">
+          <div class="company-option active" onclick="selectCompany('Imobiliária Matriz', 'Filial 01', this)">
+            <img src="../assets/image/logo-empresa-a.png">
+            <div>
+              <span class="opt-name">Empresa 1</span>
+              <span class="opt-role">Filial 01</span>
+            </div>
+            <i class="fas fa-check check-icon"></i>
+          </div>
+  
+          <div class="company-option" onclick="selectCompany('Imobiliária Centro', 'Filial 02', this)">
+            <img src="../assets/image/logo-empresa-b.png"> <div>
+              <span class="opt-name">Imobiliária Centro</span>
+              <span class="opt-role">Filial 02</span>
+            </div>
+          </div>
+          
+          <div class="dropdown-divider"></div>
+          
+          <div class="company-option add-new">
+            <div class="icon-box"><i class="fas fa-plus"></i></div>
+            <span>Adicionar nova empresa</span>
+          </div>
+        </div>
+      </div>
+  
+      <div class="search-wrapper">
+        <i class="fas fa-search"></i>
+        <input type="text" placeholder="Pesquisar..." />
+      </div>
     </div>
   
     <div class="header-right">
@@ -54,48 +94,14 @@
         <i class="fas fa-bell"></i>
         <span class="notif-dot"></span>
       </div>
-  
+      <div class="atalho-icon">
+        <i class="fas fa-bars"></i>
+      </div>
       <div class="user-info-header" id="user-menu-trigger">
-        <img src="" alt="User Avatar" class="user-avatar-header">
+        <img src="https://via.placeholder.com/40" class="user-avatar-header">
         <div class="user-details">
           <span class="user-name">Teste T.</span>
           <span class="user-role">Admin</span>
-        </div>
-      </div>
-
-      <!-- DROPDOWN MENU -->
-      <div class="user-dropdown-menu" id="user-dropdown">
-        <div class="dropdown-item">
-          <i class="fas fa-user"></i>
-          <span>Minha conta</span>
-        </div>
-
-        <div class="dropdown-item">
-          <i class="fas fa-moon"></i>
-          <span>Tema Escuro</span>
-          <label class="toggle-switch">
-            <input type="checkbox" id="dark-mode-toggle">
-            <span class="toggle-slider"></span>
-          </label>
-        </div>
-
-        <div class="dropdown-divider"></div>
-
-        <div class="dropdown-item">
-          <i class="fas fa-question-circle"></i>
-          <span>Ajuda</span>
-        </div>
-
-        <div class="dropdown-item">
-          <i class="fas fa-globe"></i>
-          <span>Suporte</span>  
-        </div>
-
-        <div class="dropdown-divider"></div>
-
-        <div class="dropdown-item logout">
-          <i class="fas fa-sign-out-alt"></i>
-          <span>Sair</span>
         </div>
       </div>
     </div>
