@@ -141,6 +141,11 @@ if (!document.querySelector('.nav-item.active')) {
                 link.classList.add('active');
             }
         }
+        if(/inventario/i.test(window.location.pathname)) {
+            if (href.includes('inventario.html')) {
+                link.classList.add('active');
+            }
+        }
     });
 }
 
