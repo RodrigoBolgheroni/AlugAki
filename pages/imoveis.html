@@ -7,6 +7,365 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="../assets/css/style.css">
   <link rel="stylesheet" href="../modals/style.css">
+  <style>
+    .page-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 12px;
+    }
+
+
+
+
+
+    .btn-secondary {
+      background: var(--color-neutral-400);
+      color: var(--color-neutral-100);
+      border: 1px solid var(--color-neutral-300);
+    }
+
+    .btn-secondary:hover {
+      background: var(--color-neutral-300);
+    }
+
+    /* ==== FILTROS ==== */
+    .filters-section {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 30px;
+    }
+
+    .filters-label {
+      font-size: 12px;
+      color: #ccc;
+      margin-bottom: 12px;
+      display: block;
+      font-weight: 500;
+    }
+
+    .filters-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+    }
+
+    .filter-select {
+      width: 100%;
+      padding: 10px 14px;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 8px;
+      color: #fff;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .filter-select:hover,
+    .filter-select:focus {
+      border-color: var(--color-primary-300);
+      outline: none;
+    }
+
+    /* ==== ESTATÍSTICAS ==== */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .stat-card {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      transition: all 0.3s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+      border-color: var(--color-primary-400);
+    }
+
+    .stat-icon {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, var(--color-primary-400), var(--color-primary-500));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      color: #fff;
+    }
+
+    .stat-content {
+      flex: 1;
+    }
+
+    .stat-label {
+      font-size: 11px;
+      color: #ccc;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+
+    .stat-value {
+      font-size: 24px;
+      font-weight: 700;
+      font-family: 'Poppins', sans-serif;
+      color: #fff;
+    }
+
+    /* ==== TABELA ==== */
+    .table-section {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      overflow: hidden;
+    }
+
+    .table-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .table-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .table-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .icon-btn {
+      width: 32px;
+      height: 32px;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      color: #ccc;
+    }
+
+    .icon-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+    }
+
+    .table-wrapper {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    thead {
+      background: rgba(0, 0, 0, 0.3);
+    }
+
+    th {
+      padding: 14px 16px;
+      text-align: left;
+      font-size: 12px;
+      font-weight: 600;
+      color: #ccc;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    tbody tr {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      transition: all 0.2s;
+    }
+
+    tbody tr:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    td {
+      padding: 16px;
+      font-size: 14px;
+      color: #fff;
+    }
+
+    .property-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .property-avatar {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, var(--color-primary-300), var(--color-primary-400));
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 16px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .property-details {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .property-name {
+      font-weight: 600;
+      color: #fff;
+      font-size: 14px;
+    }
+
+    .property-address {
+      font-size: 11px;
+      color: #ccc;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .badge-success {
+      background: rgba(67, 181, 132, 0.2);
+      color: var(--color-secondary-300);
+      border: 1px solid var(--color-secondary-400);
+    }
+
+    .badge-warning {
+      background: rgba(241, 198, 77, 0.2);
+      color: #F1C64D;
+      border: 1px solid #F1C64D;
+    }
+
+    .badge-info {
+      background: rgba(63, 154, 177, 0.2);
+      color: var(--color-primary-300);
+      border: 1px solid var(--color-primary-400);
+    }
+
+    .price {
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--color-secondary-300);
+    }
+
+    .actions-cell {
+      display: flex;
+      gap: 6px;
+    }
+
+    .action-btn {
+      width: 28px;
+      height: 28px;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      color: #ccc;
+    }
+
+    .action-btn:hover {
+      background: var(--color-primary-400);
+      border-color: var(--color-primary-400);
+      color: #fff;
+    }
+/* ==== BLOCO GERAL (FILTROS + STATS) ==== */
+.filtros-stats {
+  background: rgba(0, 0, 0, 0.2); /* mesma cor dos cards / tabela / filtros */
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
+/* ==== FILTROS ==== */
+.filters-section {
+  background: transparent !important; /* remove fundo diferente */
+  padding-bottom: 25px;
+  margin-bottom: 25px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08); /* divide Filtros x Stats */
+}
+
+/* ==== ESTATÍSTICAS ==== */
+.stat-card {
+  background: rgba(0, 0, 0, 0.2) !important; /* garante MESMA cor do bloco */
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+
+
+    main::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    main::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 10px;
+    }
+
+    main::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+    }
+
+    main::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    @media (max-width: 768px) {
+      .page-header {
+        flex-direction: column;
+        gap: 16px;
+        align-items: flex-start;
+      }
+
+      .filters-row {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
   <div id="sidebar-container">
@@ -20,12 +379,75 @@
           <span>Listar</span>
         </div>
         <div class="page-header">
-          <h1>Imóveis</h1>
-          <a href="novoImovel.html" class="btn-criar">
-            <i class="fas fa-plus"></i>
-            Novo Imóvel
-          </a>
+          <h1 class="page-title">Imóveis</h1>
+          <div class="header-actions">
+            <button class="btn btn-secondary">
+              <i class="fas fa-file-export"></i>
+              Exportar
+            </button>
+            <button class="btn btn-primary">
+              <i class="fas fa-plus"></i>
+              Novo Imóvel
+            </button>
+          </div>
         </div>
+        <div class="filtros-stats">
+          <div class="filters-section">
+            <label class="filters-label">Filtro - Use as opções para filtrar</label>
+            <div class="filters-row">
+              <select class="filter-select">
+                <option>Todos os tipos</option>
+                <option>Apartamento</option>
+                <option>Casa</option>
+                <option>Kitnet</option>
+                <option>Comercial</option>
+              </select>
+              <select class="filter-select">
+                <option>Com e sem aluguel</option>
+                <option>Apenas alugados</option>
+                <option>Apenas disponíveis</option>
+              </select>
+              <select class="filter-select">
+                <option>Todos os status</option>
+                <option>Disponível</option>
+                <option>Alugado</option>
+                <option>Manutenção</option>
+              </select>
+            </div>
+          </div>
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon">
+                <i class="fas fa-home"></i>
+              </div>
+              <div class="stat-content">
+                <div class="stat-label">Alugado / Não Alugado</div>
+                <div class="stat-value">0 / 1</div>
+              </div>
+            </div>
+    
+            <div class="stat-card">
+              <div class="stat-icon">
+                <i class="fas fa-coins"></i>
+              </div>
+              <div class="stat-content">
+                <div class="stat-label">Valor do Aluguel</div>
+                <div class="stat-value">R$ 0,00</div>
+              </div>
+            </div>
+    
+            <div class="stat-card">
+              <div class="stat-icon">
+                <i class="fas fa-chart-line"></i>
+              </div>
+              <div class="stat-content">
+                <div class="stat-label">Valor dos Ativos</div>
+                <div class="stat-value">R$ 0,00</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div class="tabela-container">
           <div class="toolbar">
             <div class="search-box">
@@ -43,66 +465,47 @@
             </div>
           </div>
           <div class="table-wrapper">
-            <table class="data-table">
+            <table>
               <thead>
                 <tr>
                   <th><input type="checkbox"></th>
-                  <th>Proprietário <i class="fas fa-chevron-down"></i></th>
-                  <th>Endereço</th>
-                  <th>Situação <i class="fas fa-chevron-down"></i></th>
-                  <th>Unidade <i class="fas fa-chevron-down"></i></th>
-                  <th>Contrato <i class="fas fa-chevron-down"></i></th>
+                  <th>Unidade</th>
+                  <th>Tipo</th>
+                  <th>Situação</th>
+                  <th>Unidade</th>
+                  <th>Contrato</th>
+                  <th>Aluguel</th>
+                  
                   <th>Ações</th>
                 </tr>
               </thead>
-          
               <tbody>
                 <tr>
                   <td><input type="checkbox"></td>
-                  <td>Mario Bross</td>
-                  <td>Rua Echaporã, nº 44, Vila Carrão, São Paulo - SP</td>
                   <td>
-                    <span class="badge badge-danger">Indisponível</span>
+                    <div class="property-info">
+                      <div class="property-avatar">P1</div>
+                      <div class="property-details">
+                        <span class="property-name">Nova propriedade</span>
+                        <span class="property-address"><i class="fas fa-location-dot"></i> Rua Lourdes Reina - 03438050 São Paulo Brasil</span>
+                      </div>
+                    </div>
                   </td>
-                  <td>Casa 2</td>
-                  <td>DJZJO</td>
+                  <td>Apartamento</td>
+                  <td><span class="badge badge-success">Disponível</span></td>
+                  <td>-</td>
+                  <td>F2TJ-WTH</td>
+                  <td><span class="price">R$ 0,00</span></td>
                   <td>
-                    <a href="editarImovel.html" class="edit-btn">
-                      <i class="fas fa-pen"></i> Editar
-                    </a>
-                  </td>
-                </tr>
-          
-                <tr>
-                  <td><input type="checkbox"></td>
-                  <td>Joana Silva</td>
-                  <td>Av. Paulista, 1000, Bela Vista, São Paulo - SP</td>
-                  <td>
-                    <span class="badge badge-success">Disponível</span>
-                  </td>
-                  <td>Apto 32B</td>
-                  <td>ABX21</td>
-                  <td>
-                    <a href="editarImovel.html" class="edit-btn">
-                      <i class="fas fa-pen"></i> Editar
-                    </a>
+                    <div class="actions-cell">
+                      <div class="action-btn">
+                        <i class="fas fa-ellipsis-v"></i>
+                      </div>
+                    </div>
                   </td>
                 </tr>
               </tbody>
             </table>
-          
-            <div class="table-footer">
-              <span>Exibindo 2 resultados</span>
-          
-              <div class="select-page">
-                <label>por página</label>
-                <select>
-                  <option>10</option>
-                  <option>20</option>
-                  <option>50</option>
-                </select>
-              </div>
-            </div>
           </div>
           
         </div>

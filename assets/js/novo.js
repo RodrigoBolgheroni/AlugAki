@@ -99,3 +99,81 @@ document.addEventListener("DOMContentLoaded", () => {
 
     updateButtons();
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+    const tabs = document.querySelectorAll(".tab");
+    const contents = document.querySelectorAll(".tab-content");
+    const btnNext = document.querySelector(".btn-next");
+    const btnBack = document.querySelector(".btn-back");
+  
+    const btnPFTipo = document.querySelector('input[value="pf"]');
+    const btnPJTipo = document.querySelector('input[value="pj"]');
+  
+    const tabPJ = document.querySelector('.tab-pj');
+  
+    let currentTab = 0;
+    let isPJ = false;
+  
+    // Troca entre tabs
+    function updateTabs() {
+      tabs.forEach(tab => tab.classList.remove("active"));
+      contents.forEach(c => c.classList.remove("active"));
+  
+      // Se PF e usuário tentar ir para tab 3 (que seria a 4), bloquear
+      if (!isPJ && currentTab === 3) {
+        currentTab = 2;
+      }
+  
+      tabs[currentTab].classList.add("active");
+      document.querySelector(`.tab-content[data-content="${currentTab}"]`).classList.add("active");
+    }
+  
+    tabs.forEach(tab => {
+      tab.addEventListener("click", () => {
+        const index = parseInt(tab.getAttribute("data-tab"));
+  
+        if (!isPJ && index === 3) return; // Bloqueia tab PJ quando tipo PF
+  
+        currentTab = index;
+        updateTabs();
+      });
+    });
+  
+    // Botão Próximo
+    btnNext.addEventListener("click", () => {
+      const lastTab = isPJ ? 3 : 2;
+  
+      if (currentTab < lastTab) {
+        currentTab++;
+        updateTabs();
+      }
+    });
+  
+    // Botão Voltar
+    btnBack.addEventListener("click", () => {
+      if (currentTab > 0) {
+        currentTab--;
+        updateTabs();
+      }
+    });
+  
+    // Seleção do tipo de usuário (PF/PJ)
+    btnPFTipo.addEventListener("change", () => {
+      isPJ = false;
+      tabPJ.style.display = "none";
+  
+      // Se estava na tab PJ, volta para a 2
+      if (currentTab === 3) {
+        currentTab = 2;
+        updateTabs();
+      }
+    });
+  
+    btnPJTipo.addEventListener("change", () => {
+      isPJ = true;
+      tabPJ.style.display = "inline-flex";
+    });
+  
+    updateTabs();
+  });
+  

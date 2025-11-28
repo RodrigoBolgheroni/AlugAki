@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AlugAki - Criar Proprietário</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../modals/style.css">
+  <link rel="stylesheet" href="../assets/css/novo.css">
+</head>
+<body>
+  <div id="sidebar-container">
+    <div class="sidebar-loading">Carregando...</div>
+  </div>
+  
+  <div class="page-container">
+    <main class="main-principal">
+      <div class="breadcrumb">
+        <a href="#">Proprietários</a>
+        <i class="fas fa-chevron-right"></i>
+        <span>Criar</span>
+      </div>
+      
+      <div class="page-header">
+        <h1>Criar Proprietário</h1>
+      </div>
+
+      <div class="form-container">
+        <!-- Tabs -->
+        <div class="tabs">
+          <button class="tab active" data-tab="0">
+            <span class="circle">1</span> Tipo de Cadastro
+          </button>
+          <button class="tab" data-tab="1">
+            <span class="circle">2</span> Dados do Proprietário
+          </button>
+          <button class="tab" data-tab="2">
+            <span class="circle">3</span> Endereço
+          </button>
+          <button class="tab tab-pj" data-tab="3" style="display:none;">
+            <span class="circle">4</span> Representante Legal
+          </button>
+        </div>
+
+        <!-- Tab 0: Tipo de Cadastro -->
+        <div class="tab-content active" data-content="0">
+          <div class="tipo-usuario-container">
+            <label class="tipo-opcao">
+              <input type="radio" name="tipo_usuario" value="pf">
+              <div class="option-box">
+                <i class="fa-solid fa-user"></i>
+                <span>Pessoa Física</span>
+              </div>
+            </label>
+          
+            <label class="tipo-opcao">
+              <input type="radio" name="tipo_usuario" value="pj">
+              <div class="option-box">
+                <i class="fa-solid fa-building"></i>
+                <span>Pessoa Jurídica</span>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- Tab 1: Dados do Proprietário -->
+        <div class="tab-content" data-content="1">
+          <div class="form-row full">
+            <div class="form-group">
+              <label>Nome completo <span class="required">*</span></label>
+              <input type="text" placeholder="Digite o nome completo">
+            </div>
+          </div>
+    
+          <div class="form-row">
+            <div class="form-group">
+              <label>CPF <span class="required">*</span></label>
+              <input type="text" placeholder="000.000.000-00">
+            </div>
+            <div class="form-group">
+              <label>E-mail</label>
+              <input type="email" placeholder="exemplo@email.com">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Telefone celular</label>
+              <input type="tel" placeholder="(00) 00000-0000">
+            </div>
+            <div class="form-group">
+              <label>Telefone fixo</label>
+              <input type="tel" placeholder="(00) 0000-0000">
+            </div>
+          </div>
+        </div>
+    
+        <!-- Tab 2: Endereço -->
+        <div class="tab-content" data-content="2">
+          <div class="cep-group">
+            <div class="form-group">
+              <label>CEP <span class="required">*</span></label>
+              <input type="text" id="cep" placeholder="00000-000">
+            </div>
+            <button class="btn-search-cep">
+              <i class="fas fa-search"></i>
+              Buscar
+            </button>
+          </div>
+    
+          <div class="form-row">
+            <div class="form-group">
+              <label>Logradouro <span class="required">*</span></label>
+              <input type="text" placeholder="Rua, Avenida, etc">
+            </div>
+            <div class="form-group">
+              <label>Número <span class="required">*</span></label>
+              <input type="text" placeholder="123">
+            </div>
+          </div>
+    
+          <div class="form-row full">
+            <div class="form-group">
+              <label>Complemento</label>
+              <input type="text" placeholder="Apartamento, Bloco, etc">
+            </div>
+          </div>
+    
+          <div class="form-row">
+            <div class="form-group">
+              <label>Bairro <span class="required">*</span></label>
+              <input type="text" placeholder="Digite o bairro">
+            </div>
+            <div class="form-group">
+              <label>Cidade <span class="required">*</span></label>
+              <input type="text" placeholder="Digite a cidade">
+            </div>
+          </div>
+    
+          <div class="form-row full">
+            <div class="form-group">
+              <label>Estado <span class="required">*</span></label>
+              <select>
+                <option value="">Selecione o estado</option>
+                <option value="AC">Acre</option>
+                <option value="AL">Alagoas</option>
+                <option value="AP">Amapá</option>
+                <option value="AM">Amazonas</option>
+                <option value="BA">Bahia</option>
+                <option value="CE">Ceará</option>
+                <option value="DF">Distrito Federal</option>
+                <option value="ES">Espírito Santo</option>
+                <option value="GO">Goiás</option>
+                <option value="MA">Maranhão</option>
+                <option value="MT">Mato Grosso</option>
+                <option value="MS">Mato Grosso do Sul</option>
+                <option value="MG">Minas Gerais</option>
+                <option value="PA">Pará</option>
+                <option value="PB">Paraíba</option>
+                <option value="PR">Paraná</option>
+                <option value="PE">Pernambuco</option>
+                <option value="PI">Piauí</option>
+                <option value="RJ">Rio de Janeiro</option>
+                <option value="RN">Rio Grande do Norte</option>
+                <option value="RS">Rio Grande do Sul</option>
+                <option value="RO">Rondônia</option>
+                <option value="RR">Roraima</option>
+                <option value="SC">Santa Catarina</option>
+                <option value="SP">São Paulo</option>
+                <option value="SE">Sergipe</option>
+                <option value="TO">Tocantins</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 3: Representante Legal (PJ apenas) -->
+        <div class="tab-content" data-content="3">
+          <div class="form-row full">
+            <div class="form-group">
+              <label>Nome completo do representante <span class="required">*</span></label>
+              <input type="text" placeholder="Digite o nome completo">
+            </div>
+          </div>
+        
+          <div class="form-row">
+            <div class="form-group">
+              <label>CPF <span class="required">*</span></label>
+              <input type="text" placeholder="000.000.000-00">
+            </div>
+            <div class="form-group">
+              <label>E-mail</label>
+              <input type="email" placeholder="exemplo@email.com">
+            </div>
+          </div>
+        
+          <div class="form-row">
+            <div class="form-group">
+              <label>Telefone</label>
+              <input type="tel" placeholder="(00) 00000-0000">
+            </div>
+            <div class="form-group">
+              <label>Cargo</label>
+              <input type="text" placeholder="Diretor, Gerente, etc">
+            </div>
+          </div>
+        </div>
+        
+        <!-- Botões de Ação -->
+        <div class="form-actions">
+          <button class="btn btn-primary btn-back">
+            <i class="fa-solid fa-chevron-left"></i>
+            Voltar
+          </button>
+          <button class="btn btn-cancel">
+            <i class="fas fa-times"></i>
+            Cancelar
+          </button>
+          <button class="btn btn-primary btn-next">
+            <i class="fa-solid fa-chevron-right"></i>
+            Próximo
+          </button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="../assets/js/sidebar-loader.js"></script>
+  <script src="../assets/js/dark-mode.js"></script>
+  <script src="../assets/js/novo.js"></script>
+</body>
+</html>

@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AlugAki - Novo Inventário</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/novo.css">
+  <link rel="stylesheet" href="../modals/style.css">
+
+  <style>
+    
+
+    /* Page Header */
+    .page-header {
+      margin-bottom: 30px;
+    }
+
+    .page-header h1 {
+      font-family: var(--font-primary);
+      font-size: 36px;
+      font-weight: 600;
+      color: var(--color-neutral-100);
+    }
+
+    /* Tabs Navigation */
+    .tabs-nav {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 24px;
+      border-bottom: 2px solid var(--color-neutral-400);
+      flex-wrap: wrap;
+    }
+
+    .tab-nav-btn {
+      padding: 14px 24px;
+      background: transparent;
+      border: none;
+      color: var(--color-neutral-200);
+      font-family: var(--font-primary);
+      font-weight: 600;
+      font-size: 15px;
+      cursor: pointer;
+      transition: all 0.2s;
+      position: relative;
+      border-radius: 8px 8px 0 0;
+      white-space: nowrap;
+    }
+
+    .tab-nav-btn:hover {
+      color: var(--color-neutral-100);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .tab-nav-btn.active {
+      color: var(--color-primary-300);
+    }
+
+    .tab-nav-btn.active::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--color-primary-300);
+    }
+
+    .tab-nav-btn i {
+      margin-right: 8px;
+    }
+
+    #tabsDivisoes {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    /* Tab Panes */
+    .tab-pane {
+      display: none;
+    }
+
+    .tab-pane.active {
+      display: block;
+    }
+
+    /* Form Container */
+    .form-container {
+      background: #2a2a2a;
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 20px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .form-row.full {
+      grid-template-columns: 1fr;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group label {
+      font-family: var(--font-primary);
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--color-neutral-100);
+      margin-bottom: 8px;
+    }
+
+    .form-group label .required {
+      color: var(--color-feedback-error);
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 2px solid var(--color-neutral-400);
+      border-radius: 8px;
+      background: var(--color-neutral-500);
+      color: var(--color-neutral-100);
+      font-family: var(--font-secondary);
+      font-size: 14px;
+      outline: none;
+      transition: all 0.2s;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--color-primary-300);
+      background: var(--color-neutral-400);
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: var(--color-neutral-300);
+    }
+
+    /* Divisão Container */
+    .divisao-container {
+      padding: 20px;
+      background: #2b2b2b;
+      border-radius: 12px;
+      border: 1px solid var(--color-neutral-400);
+      margin-bottom: 20px;
+    }
+
+    .divisao-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .divisao-header h2 {
+      font-family: var(--font-primary);
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--color-neutral-100);
+    }
+
+    .btn-delete-division {
+      background: #b63434;
+      padding: 8px 14px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      color: white;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-family: var(--font-primary);
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .btn-delete-division:hover {
+      background: #942929;
+      transform: translateY(-1px);
+    }
+
+    /* Items */
+    .itensContainer {
+      margin-bottom: 20px;
+    }
+
+    .item-row {
+      display: grid;
+      grid-template-columns: 1.5fr 0.7fr 1fr 1fr 2fr 60px 40px;
+      gap: 12px;
+      margin-bottom: 12px;
+      align-items: center;
+    }
+
+
+
+    .item-row input:focus,
+    .item-row select:focus {
+      border-color: var(--color-primary-300);
+      background: var(--color-neutral-400);
+    }
+    /* 1. Padronizar a altura dos Inputs e Selects */
+.item-row input,
+.item-row select {
+    height: 40px;          /* Altura fixa */
+    padding: 0 12px;       /* Remove padding vertical para não somar na altura */
+    line-height: 40px;     /* Centraliza o texto verticalmente */
+    box-sizing: border-box; /* Garante que a borda não aumente o tamanho total */
+    
+    /* Mantém o resto do seu estilo visual */
+    border: 2px solid var(--color-neutral-400);
+    border-radius: 8px;
+    background: var(--color-neutral-500);
+    color: var(--color-neutral-100);
+    outline: none;
+    width: 100%;
+}
+
+/* 2. Arrumar o Botão da Câmera */
+.btn-upload-image {
+    height: 40px;          /* Mesma altura do input */
+    width: 100%;           /* Ocupa a célula inteira do grid */
+    padding: 0;            /* Remove padding interno */
+    box-sizing: border-box; 
+    
+    /* Centralização do ícone */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    /* Seus estilos visuais */
+    background: var(--color-neutral-400);
+    border: 2px solid var(--color-neutral-300);
+    border-radius: 8px;
+    cursor: pointer;
+    color: var(--color-neutral-200);
+    transition: all 0.2s;
+    position: relative;
+}
+
+/* 3. Arrumar o Botão da Lixeira */
+.btn-remove-item {
+    height: 40px;          /* Mesma altura do input */
+    width: 100%;           /* Ocupa a célula inteira do grid */
+    padding: 0;            /* Remove padding interno */
+    box-sizing: border-box;
+    
+    /* Centralização do ícone */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* Seus estilos visuais */
+    background: #b63434;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    color: white;
+}
+
+
+    .btn-remove-item:hover {
+      background: #942929;
+      transform: translateY(-1px);
+    }
+
+
+
+    .btn-upload-image:hover {
+      background: var(--color-neutral-300);
+      border-color: var(--color-primary-300);
+      color: var(--color-primary-300);
+    }
+
+    .btn-upload-image.has-image {
+      background: var(--color-primary-300);
+      border-color: var(--color-primary-400);
+      color: white;
+    }
+
+    .btn-upload-image.has-image:hover {
+      background: var(--color-primary-400);
+    }
+
+    .btn-upload-image input[type="file"] {
+      display: none;
+    }
+
+    .image-preview {
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      margin-bottom: 8px;
+      padding: 8px;
+      background: #1a1a1a;
+      border: 2px solid var(--color-neutral-400);
+      border-radius: 8px;
+      display: none;
+      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    }
+
+    .btn-upload-image:hover .image-preview {
+      display: block;
+    }
+
+    .image-preview img {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+
+    .image-preview-text {
+      text-align: center;
+      margin-top: 8px;
+      font-size: 12px;
+      color: var(--color-neutral-200);
+    }
+
+    .btn-add-item {
+      background: var(--color-primary-300);
+      border: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      color: white;
+      font-size: 14px;
+      font-family: var(--font-primary);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .btn-add-item:hover {
+      background: var(--color-primary-400);
+      transform: translateY(-1px);
+    }
+
+    /* Form Actions */
+    .form-actions {
+      display: flex;
+      gap: 12px;
+      padding: 24px 32px;
+      background: #222;
+      border-radius: 12px;
+      margin-top: 20px;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-family: var(--font-primary);
+      font-weight: 600;
+      font-size: 15px;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-cancel {
+      background: transparent;
+      color: var(--color-neutral-200);
+      border: 2px solid var(--color-neutral-400);
+      margin-left: auto;
+    }
+
+    .btn-cancel:hover {
+      background: var(--color-neutral-400);
+      color: var(--color-neutral-100);
+    }
+
+    .btn-primary {
+      background: var(--color-primary-300);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--color-primary-400);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(63, 154, 177, 0.3);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .main-principal {
+        padding: 20px;
+      }
+
+      .tabs-nav {
+        overflow-x: auto;
+      }
+
+      .form-row,
+      .item-row {
+        grid-template-columns: 1fr;
+      }
+
+      .form-actions {
+        flex-direction: column;
+        padding: 20px;
+      }
+
+      .btn-cancel {
+        margin-left: 0;
+      }
+    }
+    /* --- CORREÇÃO DEFINITIVA DE ALINHAMENTO --- */
+
+    /* 1. Configuração da Grid */
+    .item-row {
+      display: grid;
+      grid-template-columns: 1.5fr 0.7fr 1fr 1fr 2fr 60px 40px;
+      gap: 12px;
+      margin-bottom: 12px;
+      align-items: center; /* Alinha o CENTRO vertical de todos os itens */
+    }
+
+    /* 2. Resetar margens de TODOS os itens dentro da linha */
+    .item-row > * {
+      margin: 0 !important; /* Remove margens externas que causam desalinhamento */
+      align-self: center;   /* Reforça o alinhamento vertical */
+    }
+
+    /* 3. Inputs e Selects */
+    .item-row input,
+    .item-row select {
+      height: 42px !important;       /* Altura Total */
+      line-height: 38px !important;  /* Altura da linha (42px - 4px de borda) para centralizar texto */
+      padding: 0 12px !important;
+      background: var(--color-neutral-500);
+      color: var(--color-neutral-100);
+      border: 2px solid var(--color-neutral-400) !important;
+      border-radius: 8px;
+      box-sizing: border-box !important;
+      width: 100%;
+      outline: none;
+      display: block; /* Evita comportamento de linha de base de texto */
+    }
+
+    /* 4. Botão de Upload (Câmera) */
+    .btn-upload-image {
+      height: 42px !important;      /* Mesma altura exata do input */
+      width: 100%;
+      padding: 0 !important;
+      margin: 0 !important;
+      background: var(--color-neutral-400);
+      border: 2px solid var(--color-neutral-300) !important; /* Tem borda de 2px */
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex !important;     /* Flexbox para centralizar o ícone */
+      align-items: center;
+      justify-content: center;
+      color: var(--color-neutral-200);
+      box-sizing: border-box !important;
+      position: relative;
+    }
+
+    /* 5. Botão de Remover (Lixeira) */
+    .btn-remove-item {
+      height: 42px !important;      /* Mesma altura exata */
+      width: 100%;
+      padding: 0 !important;
+      margin: 0 !important;
+      background: #b63434;
+      /* TRUQUE: Adicionar borda transparente de 2px para ocupar o mesmo espaço físico dos outros */
+      border: 2px solid transparent !important; 
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex !important;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      box-sizing: border-box !important;
+    }
+
+    /* Hover effects */
+    .btn-remove-item:hover { background: #942929; }
+    .btn-upload-image:hover { background: var(--color-neutral-300); }
+    /* --- ESTILOS DO BOTÃO DE UPLOAD (Novos) --- */
+
+    .btn-upload-image {
+      height: 42px !important;
+      width: 100%;
+      padding: 0 !important;
+      margin: 0 !important;
+      background: var(--color-neutral-400);
+      border: 2px solid var(--color-neutral-300) !important;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex !important;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-neutral-200);
+      box-sizing: border-box !important;
+      position: relative;
+      overflow: hidden; /* Importante para a imagem não vazar */
+      transition: all 0.2s;
+    }
+
+    /* Estado Hover padrão (sem imagem) */
+    .btn-upload-image:not(.has-image):hover {
+      background: var(--color-neutral-300);
+      border-color: var(--color-primary-300) !important;
+      color: var(--color-primary-300);
+    }
+
+    /* --- QUANDO TIVER UMA IMAGEM SELECIONADA --- */
+    .btn-upload-image.has-image {
+      /* Remove estilos de botão padrão */
+      background-color: transparent !important;
+      border: none !important;
+      /* Configura a imagem de fundo */
+      background-size: cover !important;
+      background-position: center center !important;
+      background-repeat: no-repeat !important;
+    }
+
+    /* Esconde o ícone de câmera original quando tem imagem */
+    .btn-upload-image.has-image i {
+      display: none;
+    }
+
+    /* Cria uma sobreposição ao passar o mouse na miniatura */
+    .btn-upload-image.has-image::after {
+      content: '\f021'; /* Código do ícone de "Sync/Trocar" do FontAwesome */
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6); /* Fundo escuro transparente */
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0; /* Invisível por padrão */
+      transition: opacity 0.2s;
+    }
+
+    /* Mostra a sobreposição ao passar o mouse */
+    .btn-upload-image.has-image:hover::after {
+      opacity: 1;
+    }
+
+
+    /* --- O PREVIEW FLUTUANTE (Tooltip) --- */
+    /* Mantivemos isso para caso o usuário queira ver a imagem maior ao passar o mouse */
+    .image-preview {
+      position: absolute;
+      bottom: 110%; /* Um pouco mais para cima */
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 8px;
+      background: #1a1a1a;
+      border: 2px solid var(--color-neutral-400);
+      border-radius: 8px;
+      display: none;
+      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+      pointer-events: none; /* Evita que o mouse trave no preview */
+    }
+
+    /* Só mostra o preview flutuante se TIVER imagem e passar o mouse */
+    .btn-upload-image.has-image:hover .image-preview {
+      display: block;
+    }
+
+    .image-preview img {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 6px;
+      display: block; /* Garante que não tenha espaços extras */
+    }
+
+    .image-preview-text {
+        /* Ocultamos o texto do nome do arquivo para ficar mais limpo, 
+           já que a miniatura já mostra a imagem */
+        display: none; 
+    }
+    
+  </style>
+</head>
+
+<body>
+
+<div id="sidebar-container">
+    <div class="sidebar-loading">Carregando...</div>
+</div>
+
+<div class="page-container">
+<main class="main-principal">
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <a href="#">Inventários</a>
+        <i class="fas fa-chevron-right"></i>
+        <span>Novo</span>
+    </div>
+
+    <div class="page-header">
+        <h1>Novo Inventário</h1>
+    </div>
+
+    <!-- NAV TABS -->
+    <div class="tabs-nav" id="tabsNav">
+        <button class="tab-nav-btn active" data-tab="geral">
+            <i class="fas fa-list"></i> Informações Gerais
+        </button>
+        <button class="tab-nav-btn" data-tab="nota">
+            <i class="fas fa-sticky-note"></i> Notas
+        </button>
+
+        <!-- Divisões aparecem aqui -->
+        <div id="tabsDivisoes" style="display:flex; gap:10px;"></div>
+
+        <button id="btnAddDivisao" class="tab-nav-btn" style="background: var(--color-primary-300);">
+            <i class="fas fa-plus"></i> Nova Divisão
+        </button>
+    </div>
+
+    <!-- TABS CONTENT -->
+    <div id="tab-geral" class="tab-pane active">
+        <div class="form-container">
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Identificação do Inventário <span class="required">*</span></label>
+                    <input type="text" placeholder="Ex: Inventário de Entrada 2025">
+                </div>
+
+                <div class="form-group">
+                    <label>Propriedade <span class="required">*</span></label>
+                    <select>
+                        <option value="">Selecione...</option>
+                        <option>Apartamento 01</option>
+                        <option>Apartamento 02</option>
+                        <option>Casa 14</option>
+                    </select>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- TAB NOTAS -->
+    <div id="tab-nota" class="tab-pane">
+        <div class="form-container">
+            <div class="form-row full">
+                <div class="form-group">
+                    <label>Notas Gerais</label>
+                    <textarea rows="6"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Container para divisões -->
+    <div id="divisoesContainer"></div>
+
+    <!-- Ações -->
+    <div class="form-actions">
+        <button class="btn btn-cancel">
+            <i class="fas fa-times"></i> Cancelar
+        </button>
+        <button class="btn btn-primary">
+            <i class="fas fa-check"></i> Salvar Inventário
+        </button>
+    </div>
+
+</main>
+</div>
+
+<script src="../assets/js/sidebar-loader.js"></script>
+<script src="../assets/js/dark-mode.js"></script>
+
+<script>
+    /* ---------------------- SISTEMA DE TABS ---------------------- */
+    document.addEventListener("click", (e) => {
+        // Ignorar clique no botão "Nova Divisão"
+        if (e.target.id === "btnAddDivisao" || e.target.closest("#btnAddDivisao")) {
+            return;
+        }
+    
+        if (e.target.classList.contains("tab-nav-btn") || e.target.closest(".tab-nav-btn")) {
+            const btn = e.target.classList.contains("tab-nav-btn") ? e.target : e.target.closest(".tab-nav-btn");
+            
+            document.querySelectorAll(".tab-nav-btn").forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+    
+            const tab = btn.getAttribute("data-tab");
+    
+            document.querySelectorAll(".tab-pane").forEach(pane => {
+                pane.classList.remove("active");
+            });
+    
+            const content = document.getElementById("tab-" + tab);
+            if (content) content.classList.add("active");
+        }
+    });
+    
+    /* ---------------------- DIVISÕES ---------------------- */
+    let divisaoIndex = 0;
+    
+    function criarDivisao() {
+        divisaoIndex++;
+        const idTab = "divisao" + divisaoIndex;
+    
+        /* Criar TAB */
+        const tabBtn = document.createElement("button");
+        tabBtn.classList.add("tab-nav-btn");
+        tabBtn.setAttribute("data-tab", idTab);
+        tabBtn.innerHTML = `<i class="fas fa-layer-group"></i> Divisão ${divisaoIndex}`;
+        document.getElementById("tabsDivisoes").appendChild(tabBtn);
+    
+        /* Criar conteúdo da divisão */
+        const div = document.createElement("div");
+        div.classList.add("tab-pane");
+        div.id = "tab-" + idTab;
+    
+        div.innerHTML = `
+            <div class="divisao-container">
+                <div class="divisao-header">
+                    <h2>Divisão ${divisaoIndex}</h2>
+                    <button class="btn-delete-division">
+                        <i class="fas fa-trash"></i> Excluir
+                    </button>
+                </div>
+    
+                <div class="form-row full">
+                    <div class="form-group">
+                        <label>Nome da Divisão</label>
+                        <input type="text" class="inputNomeDivisao" placeholder="Ex: Sala de Estar...">
+                    </div>
+                </div>
+    
+                <div class="itensContainer"></div>
+    
+                <button class="btn-add-item btnAddItem">
+                    <i class="fas fa-plus"></i> Adicionar Item
+                </button>
+            </div>
+        `;
+    
+        document.getElementById("divisoesContainer").appendChild(div);
+    
+        /* Alterar nome da tab quando digitar */
+        div.querySelector(".inputNomeDivisao").addEventListener("input", (e) => {
+            tabBtn.innerHTML = `<i class="fas fa-layer-group"></i> ${e.target.value || "Divisão " + divisaoIndex}`;
+        });
+    
+        /* Excluir divisão */
+        div.querySelector(".btn-delete-division").onclick = () => {
+            tabBtn.remove();
+            div.remove();
+            document.querySelector('[data-tab="geral"]').click();
+        };
+    
+        /* Adicionar item */
+        div.querySelector(".btnAddItem").onclick = () => adicionarItem(div.querySelector(".itensContainer"));
+    
+        // Ativar a tab nova
+        tabBtn.click();
+    }
+    
+    function adicionarItem(container) {
+        const row = document.createElement("div");
+        row.classList.add("item-row");
+
+        const imageId = `img-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+    
+        row.innerHTML = `
+            <input type="text" placeholder="Item">
+            <input type="number" placeholder="Qtd" min="0">
+            <select>
+                <option>Não verificado</option>
+                <option>Ok</option>
+                <option>Danificado</option>
+            </select>
+            <input type="text" placeholder="Preço (R$)">
+            <input type="text" placeholder="Comentários">
+            <label class="btn-upload-image" for="${imageId}">
+                <i class="fas fa-camera"></i>
+                <input type="file" id="${imageId}" accept="image/*">
+                <div class="image-preview">
+                    <img src="" alt="Preview" style="display:none;">
+                    <div class="image-preview-text">Nenhuma imagem</div>
+                </div>
+            </label>
+            <button class="btn-remove-item"><i class="fas fa-trash"></i></button>
+        `;
+
+        const fileInput = row.querySelector('input[type="file"]');
+        const uploadBtn = row.querySelector('.btn-upload-image');
+        const previewImg = row.querySelector('.image-preview img');
+        const previewText = row.querySelector('.image-preview-text');
+
+        fileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    previewImg.src = event.target.result;
+                    previewImg.style.display = 'block';
+                    previewText.textContent = file.name;
+                    uploadBtn.classList.add('has-image');
+                    uploadBtn.querySelector('i').classList.remove('fa-camera');
+                    uploadBtn.querySelector('i').classList.add('fa-check');
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    
+        row.querySelector(".btn-remove-item").onclick = () => row.remove();
+    
+        container.appendChild(row);
+    }
+    
+    /* Botão add divisão */
+    document.getElementById("btnAddDivisao").onclick = criarDivisao;
+    
+    /* Criar a primeira divisão automaticamente */
+    criarDivisao();
+    function adicionarItem(container) {
+        const row = document.createElement("div");
+        row.classList.add("item-row");
+
+        const imageId = `img-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+    
+        row.innerHTML = `
+            <input type="text" placeholder="Item">
+            <input type="number" placeholder="Qtd" min="0">
+            <select>
+                <option>Não verificado</option>
+                <option>Ok</option>
+                <option>Danificado</option>
+            </select>
+            <input type="text" placeholder="Preço (R$)">
+            <input type="text" placeholder="Comentários">
+            <label class="btn-upload-image" for="${imageId}">
+                <i class="fas fa-camera"></i>
+                <input type="file" id="${imageId}" accept="image/*">
+                
+                <div class="image-preview">
+                    <img src="" alt="Preview">
+                </div>
+            </label>
+            <button class="btn-remove-item"><i class="fas fa-trash"></i></button>
+        `;
+
+        const fileInput = row.querySelector('input[type="file"]');
+        const uploadBtn = row.querySelector('.btn-upload-image');
+        const previewImg = row.querySelector('.image-preview img');
+
+        fileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    const imageUrl = event.target.result;
+
+                    // 1. Define a imagem como fundo do botão (Thumbnail)
+                    uploadBtn.style.backgroundImage = `url('${imageUrl}')`;
+                    
+                    // 2. Adiciona a classe que ativa os estilos de thumbnail
+                    uploadBtn.classList.add('has-image');
+
+                    // 3. Atualiza também o preview flutuante maior (caso queira manter)
+                    previewImg.src = imageUrl;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    
+        row.querySelector(".btn-remove-item").onclick = () => row.remove();
+    
+        container.appendChild(row);
+    }
+    </script>
+
+</body>
+</html>

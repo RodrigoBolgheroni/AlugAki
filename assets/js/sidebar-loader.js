@@ -136,6 +136,11 @@ if (!document.querySelector('.nav-item.active')) {
                 link.classList.add('active');
             }
         }
+        if (/proprietario/i.test(window.location.pathname)) {
+            if (href.includes('proprietarios.html')) {
+                link.classList.add('active');
+            }
+        }
     });
 }
 

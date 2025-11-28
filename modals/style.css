@@ -5,7 +5,7 @@
   /* Curva de animação mais "premium" (cubic-bezier) ao invés de 'ease' */
   transition: width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
   background: var(--color-neutral-500);
-  padding: 24px;
+  padding: 5px 24px 5px 24px;
   color: #fff;
   display: flex;
   flex-direction: column;
@@ -362,7 +362,7 @@
     .header-right {
       display: flex;
       align-items: center;
-      gap: 24px;
+      gap: 30px;
     }
     
     /* ===== NOTIFICATION ===== */
