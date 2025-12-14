@@ -150,8 +150,8 @@
       color: var(--color-neutral-300);
     }
 
-    /* Divisão Container */
-    .divisao-container {
+    /* Ambiente Container */
+    .ambiente-container {
       padding: 20px;
       background: #2b2b2b;
       border-radius: 12px;
@@ -159,14 +159,14 @@
       margin-bottom: 20px;
     }
 
-    .divisao-header {
+    .ambiente-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 20px;
     }
 
-    .divisao-header h2 {
+    .ambiente-header h2 {
       font-family: var(--font-primary);
       font-size: 24px;
       font-weight: 600;
@@ -628,15 +628,12 @@
         <button class="tab-nav-btn active" data-tab="geral">
             <i class="fas fa-list"></i> Informações Gerais
         </button>
-        <button class="tab-nav-btn" data-tab="nota">
-            <i class="fas fa-sticky-note"></i> Notas
-        </button>
 
         <!-- Divisões aparecem aqui -->
         <div id="tabsDivisoes" style="display:flex; gap:10px;"></div>
 
-        <button id="btnAddDivisao" class="tab-nav-btn" style="background: var(--color-primary-300);">
-            <i class="fas fa-plus"></i> Nova Divisão
+        <button id="btnAddAmbiente" class="tab-nav-btn" style="background: var(--color-primary-300);color: white;">
+            <i class="fas fa-plus"></i> Nova Ambiente
         </button>
     </div>
 
@@ -660,21 +657,16 @@
                     </select>
                 </div>
             </div>
-
-        </div>
-    </div>
-
-    <!-- TAB NOTAS -->
-    <div id="tab-nota" class="tab-pane">
-        <div class="form-container">
             <div class="form-row full">
-                <div class="form-group">
-                    <label>Notas Gerais</label>
-                    <textarea rows="6"></textarea>
-                </div>
-            </div>
+              <div class="form-group">
+                  <label>Notas Gerais</label>
+                  <textarea rows="6"></textarea>
+              </div>
+          </div>
+
         </div>
     </div>
+
 
     <!-- Container para divisões -->
     <div id="divisoesContainer"></div>
@@ -698,8 +690,8 @@
 <script>
     /* ---------------------- SISTEMA DE TABS ---------------------- */
     document.addEventListener("click", (e) => {
-        // Ignorar clique no botão "Nova Divisão"
-        if (e.target.id === "btnAddDivisao" || e.target.closest("#btnAddDivisao")) {
+        // Ignorar clique no botão "Nova Ambiente"
+        if (e.target.id === "btnAddAmbiente" || e.target.closest("#btnAddAmbiente")) {
             return;
         }
     
@@ -721,28 +713,28 @@
     });
     
     /* ---------------------- DIVISÕES ---------------------- */
-    let divisaoIndex = 0;
+    let ambienteIndex = 0;
     
-    function criarDivisao() {
-        divisaoIndex++;
-        const idTab = "divisao" + divisaoIndex;
+    function criarAmbiente() {
+        ambienteIndex++;
+        const idTab = "ambiente" + ambienteIndex;
     
         /* Criar TAB */
         const tabBtn = document.createElement("button");
         tabBtn.classList.add("tab-nav-btn");
         tabBtn.setAttribute("data-tab", idTab);
-        tabBtn.innerHTML = `<i class="fas fa-layer-group"></i> Divisão ${divisaoIndex}`;
+        tabBtn.innerHTML = `<i class="fas fa-layer-group"></i> Ambiente ${ambienteIndex}`;
         document.getElementById("tabsDivisoes").appendChild(tabBtn);
     
-        /* Criar conteúdo da divisão */
+        /* Criar conteúdo da ambiente */
         const div = document.createElement("div");
         div.classList.add("tab-pane");
         div.id = "tab-" + idTab;
     
         div.innerHTML = `
-            <div class="divisao-container">
-                <div class="divisao-header">
-                    <h2>Divisão ${divisaoIndex}</h2>
+            <div class="ambiente-container">
+                <div class="ambiente-header">
+                    <h2>Ambiente ${ambienteIndex}</h2>
                     <button class="btn-delete-division">
                         <i class="fas fa-trash"></i> Excluir
                     </button>
@@ -750,8 +742,8 @@
     
                 <div class="form-row full">
                     <div class="form-group">
-                        <label>Nome da Divisão</label>
-                        <input type="text" class="inputNomeDivisao" placeholder="Ex: Sala de Estar...">
+                        <label>Nome da Ambiente</label>
+                        <input type="text" class="inputNomeAmbiente" placeholder="Ex: Sala de Estar...">
                     </div>
                 </div>
     
@@ -766,11 +758,11 @@
         document.getElementById("divisoesContainer").appendChild(div);
     
         /* Alterar nome da tab quando digitar */
-        div.querySelector(".inputNomeDivisao").addEventListener("input", (e) => {
-            tabBtn.innerHTML = `<i class="fas fa-layer-group"></i> ${e.target.value || "Divisão " + divisaoIndex}`;
+        div.querySelector(".inputNomeAmbiente").addEventListener("input", (e) => {
+            tabBtn.innerHTML = `<i class="fas fa-layer-group"></i> ${e.target.value || "Ambiente " + ambienteIndex}`;
         });
     
-        /* Excluir divisão */
+        /* Excluir ambiente */
         div.querySelector(".btn-delete-division").onclick = () => {
             tabBtn.remove();
             div.remove();
@@ -837,11 +829,11 @@
         container.appendChild(row);
     }
     
-    /* Botão add divisão */
-    document.getElementById("btnAddDivisao").onclick = criarDivisao;
+    /* Botão add ambiente */
+    document.getElementById("btnAddAmbiente").onclick = criarAmbiente;
     
-    /* Criar a primeira divisão automaticamente */
-    criarDivisao();
+    /* Criar a primeira ambiente automaticamente */
+    criarAmbiente();
     function adicionarItem(container) {
         const row = document.createElement("div");
         row.classList.add("item-row");
