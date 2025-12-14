@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AlugAki - Laudos De Vistorias</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../modals/style.css">
+  <link rel="stylesheet" href="../assets/css/inventario.css">
+</head>
+<body>
+  <div id="sidebar-container">
+    <div class="sidebar-loading">Carregando...</div>
+  </div>
+  
+  <div class="page-container">
+    <main class="main-principal">
+      <div class="breadcrumb">
+        <a href="#">Laudos De Vistorias</a>
+        <i class="fas fa-chevron-right"></i>
+        <span>Listar</span>
+      </div>
+
+      <div class="page-header">
+        <h1>Laudos De Vistorias</h1>
+        <a href="novoLaudoVistoria.html" class="btn-criar">
+          <i class="fas fa-plus"></i>
+          Novo Laudo De Vistoria
+        </a>
+      </div>
+
+      <div class="tabela-container">
+        <div class="toolbar">
+          <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Pesquisar inventário...">
+          </div>
+          <div class="toolbar-actions">
+            <button class="filter-btn">
+              <i class="fas fa-filter"></i>
+              <span class="filter-count">0</span>
+            </button>
+            <button class="view-btn">
+              <i class="fas fa-th-large"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th><input type="checkbox"></th>
+                <th>Identificação <i class="fas fa-chevron-down"></i></th>
+                <th>Tipo</th>
+                <th>Propriedade</th>
+                <th>Inquilino <i class="fas fa-chevron-down"></i></th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            
+            <tbody>
+            </tbody>
+          </table>
+          
+          <div class="table-footer">
+            <span>Exibindo 2 resultados</span>
+            
+            <div class="select-page">
+              <label>por página</label>
+              <select>
+                <option>10</option>
+                <option>20</option>
+                <option>50</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="../assets/js/sidebar-loader.js"></script>
+  <script src="../assets/js/dark-mode.js"></script>
+  <script src="../assets/js/acoes-dropdown.js"></script>
+  
+  
+
+    
+</body>
+</html>

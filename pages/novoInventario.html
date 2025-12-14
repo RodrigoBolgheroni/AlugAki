@@ -10,6 +10,71 @@
   <link rel="stylesheet" href="../assets/css/novo.css">
   <link rel="stylesheet" href="../modals/style.css">
   <link rel="stylesheet" href="../assets/css/inventario.css">
+  
+  <style>
+    /* ===================================================================== */
+    /* DRAG HANDLE - BOTÃO DE ARRASTAR                                      */
+    /* ===================================================================== */
+    
+    .drag-handle {
+        height: 40px !important;
+        width: 100%;
+        padding: 0 !important;
+        margin: 0 !important;
+        background: var(--color-neutral-400);
+        border: 2px solid var(--color-neutral-300) !important;
+        border-radius: 8px;
+        cursor: grab;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        color: var(--color-neutral-200);
+        box-sizing: border-box !important;
+        transition: all 0.2s;
+    }
+    
+    .drag-handle:hover {
+        background: var(--color-neutral-300);
+        border-color: var(--color-primary-300) !important;
+        color: var(--color-primary-300);
+    }
+    
+    .drag-handle:active {
+        cursor: grabbing;
+    }
+    
+    /* Efeito visual ao arrastar - Item fica transparente */
+        /* Efeito de arrastar - Item fica semi-transparente */
+        /* Efeito de arrastar - Item fica semi-transparente */
+        .dragging {
+            opacity: 0.5 !important;
+            cursor: grabbing !important;
+        }
+        
+        /* Indicador sutil de onde o item será solto */
+        .drag-over {
+            position: relative;
+        }
+        
+        .drag-over::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--color-primary-300);
+            border-radius: 2px;
+            box-shadow: 0 0 8px rgba(63, 154, 177, 0.6);
+        }
+        
+        /* Atualização do Grid para incluir coluna de drag */
+        .item-row {
+          display: grid;
+          grid-template-columns: 40px 1.5fr 0.7fr 1fr 1fr 2fr 60px 40px;
+          gap: 12px;
+    }
+  </style>
 </head>
 
 <body>
@@ -252,68 +317,14 @@
     function adicionarItem(container) {
         const row = document.createElement("div");
         row.classList.add("item-row");
+        row.setAttribute("draggable", "true");
 
         const imageId = `img-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
     
         row.innerHTML = `
-            <input type="text" placeholder="Item">
-            <input type="number" placeholder="Qtd" min="0">
-            <select>
-                <option>Não verificado</option>
-                <option>Ok</option>
-                <option>Danificado</option>
-            </select>
-            <input type="text" placeholder="Preço (R$)">
-            <input type="text" placeholder="Comentários">
-            <label class="btn-upload-image" for="${imageId}">
-                <i class="fas fa-camera"></i>
-                <input type="file" id="${imageId}" accept="image/*">
-                <div class="image-preview">
-                    <img src="" alt="Preview" style="display:none;">
-                    <div class="image-preview-text">Nenhuma imagem</div>
-                </div>
-            </label>
-            <button class="btn-remove-item"><i class="fas fa-trash"></i></button>
-        `;
-
-        const fileInput = row.querySelector('input[type="file"]');
-        const uploadBtn = row.querySelector('.btn-upload-image');
-        const previewImg = row.querySelector('.image-preview img');
-        const previewText = row.querySelector('.image-preview-text');
-
-        fileInput.addEventListener('change', (e) => {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = (event) => {
-                    previewImg.src = event.target.result;
-                    previewImg.style.display = 'block';
-                    previewText.textContent = file.name;
-                    uploadBtn.classList.add('has-image');
-                    uploadBtn.querySelector('i').classList.remove('fa-camera');
-                    uploadBtn.querySelector('i').classList.add('fa-check');
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-    
-        row.querySelector(".btn-remove-item").onclick = () => row.remove();
-    
-        container.appendChild(row);
-    }
-    
-    /* Botão add ambiente */
-    document.getElementById("btnAddAmbiente").onclick = criarAmbiente;
-    
-    /* Criar a primeira ambiente automaticamente */
-    criarAmbiente();
-    function adicionarItem(container) {
-        const row = document.createElement("div");
-        row.classList.add("item-row");
-
-        const imageId = `img-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
-    
-        row.innerHTML = `
+            <div class="drag-handle">
+                <i class="fas fa-arrows-up-down-left-right"></i>
+            </div>
             <input type="text" placeholder="Item">
             <input type="number" placeholder="Qtd" min="0">
             <select>
@@ -361,7 +372,97 @@
         row.querySelector(".btn-remove-item").onclick = () => row.remove();
     
         container.appendChild(row);
+        setupDragAndDrop(row);
     }
+    
+    /* Botão add ambiente */
+    document.getElementById("btnAddAmbiente").onclick = criarAmbiente;
+    
+    /* Criar a primeira ambiente automaticamente */
+    criarAmbiente();
+    
+    /* ---------------------- DRAG AND DROP FUNCTIONALITY ---------------------- */
+    
+    let draggedElement = null;
+    
+    function setupDragAndDrop(element) {
+        element.addEventListener('dragstart', handleDragStart);
+        element.addEventListener('dragend', handleDragEnd);
+        element.addEventListener('dragover', handleDragOver);
+        element.addEventListener('drop', handleDrop);
+        element.addEventListener('dragenter', handleDragEnter);
+        element.addEventListener('dragleave', handleDragLeave);
+    }
+    
+    function handleDragStart(e) {
+        draggedElement = this;
+        this.classList.add('dragging');
+        e.dataTransfer.effectAllowed = 'move';
+        e.dataTransfer.setData('text/html', this.innerHTML);
+    }
+    
+    function handleDragEnd(e) {
+        this.classList.remove('dragging');
+        
+        // Remove todos os drag-over highlights
+        document.querySelectorAll('.drag-over').forEach(el => {
+            el.classList.remove('drag-over');
+        });
+    }
+    
+    function handleDragOver(e) {
+        if (e.preventDefault) {
+            e.preventDefault();
+        }
+        e.dataTransfer.dropEffect = 'move';
+        
+        // Adiciona visual em tempo real enquanto arrasta
+        if (this !== draggedElement && this.classList.contains('item-row')) {
+            // Remove de todos primeiro
+            document.querySelectorAll('.drag-over').forEach(el => {
+                if (el !== this) el.classList.remove('drag-over');
+            });
+            this.classList.add('drag-over');
+        }
+        
+        return false;
+    }
+    
+    function handleDragEnter(e) {
+        // Lógica movida para handleDragOver para melhor responsividade
+    }
+    
+    function handleDragLeave(e) {
+        // Só remove se realmente saiu (não é um elemento filho)
+        if (!this.contains(e.relatedTarget)) {
+            this.classList.remove('drag-over');
+        }
+    }
+    
+    function handleDrop(e) {
+        if (e.stopPropagation) {
+            e.stopPropagation();
+        }
+        
+        if (draggedElement !== this && this.classList.contains('item-row')) {
+            // Sempre insere antes do elemento alvo (mais previsível)
+            this.parentNode.insertBefore(draggedElement, this);
+        }
+        
+        // Remove todos os indicadores
+        document.querySelectorAll('.drag-over').forEach(el => {
+            el.classList.remove('drag-over');
+        });
+        
+        return false;
+    }
+    
+    // Setup drag and drop para elementos iniciais
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.item-row[draggable="true"]').forEach(element => {
+            setupDragAndDrop(element);
+        });
+    });
 </script>
 
 </body>
