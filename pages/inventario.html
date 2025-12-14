@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="../assets/css/style.css">
   <link rel="stylesheet" href="../modals/style.css">
+  <link rel="stylesheet" href="../assets/css/inventario.css">
 </head>
 <body>
   <div id="sidebar-container">
@@ -63,22 +64,6 @@
             <tbody>
               <tr>
                 <td><input type="checkbox"></td>
-                <td>INV-2024-001</td>
-                <td>Casa 2</td>
-                <td>Rua Echaporã, nº 44, Vila Carrão</td>
-                <td>15/01/2024</td>
-                <td>
-                  <span class="badge badge-success">Completo</span>
-                </td>
-                <td>
-                  <a href="editarInventario.html" class="edit-btn">
-                    <i class="fas fa-pen"></i> Editar
-                  </a>
-                </td>
-              </tr>
-
-              <tr>
-                <td><input type="checkbox"></td>
                 <td>INV-2024-002</td>
                 <td>Apto 32B</td>
                 <td>Av. Paulista, 1000, Bela Vista</td>
@@ -86,11 +71,41 @@
                 <td>
                   <span class="badge badge-danger">Pendente</span>
                 </td>
-                <td>
-                  <a href="editarInventario.html" class="edit-btn">
-                    <i class="fas fa-pen"></i> Editar
-                  </a>
+                <td class="table-actions">
+
+                  <div class="dropdown">
+                    <button class="btn-modelo" onclick="openAnyDropdown(this, 'modelo', event)">
+                      Modelo <i class="fas fa-chevron-down"></i>
+                    </button>
+                    
+                
+                    <div class="dropdown-menu">
+                      <button>
+                        <i class="fas fa-download"></i>
+                        Baixar inventário da propriedade
+                      </button>
+                    </div>
+                  </div>
+                
+                  <div class="dropdown">
+                    <button class="btn-acoes" onclick="openAnyDropdown(this, 'acoes', event)">
+                      <i class="fas fa-ellipsis-h"></i>
+                    </button>
+                    
+                  
+                    <div class="dropdown-menu dropdown-fixed">
+                      <button><i class="fas fa-pen"></i> Editar</button>
+                      <button><i class="fas fa-archive"></i> Arquivar</button>
+                      <button><i class="fas fa-copy"></i> Duplicar</button>
+                      <button><i class="fas fa-file-alt"></i> Transferência para Laudo de Vistoria</button>
+                      <button class="danger"><i class="fas fa-trash"></i> Excluir</button>
+                    </div>
+                  </div>
+                  
+                
                 </td>
+                
+                
               </tr>
             </tbody>
           </table>
@@ -114,5 +129,10 @@
 
   <script src="../assets/js/sidebar-loader.js"></script>
   <script src="../assets/js/dark-mode.js"></script>
+  <script src="../assets/js/acoes-dropdown.js"></script>
+  
+  
+
+    
 </body>
 </html>
