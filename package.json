@@ -1,0 +1,27 @@
+{
+  "name": "alugaki",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RodrigoBolgheroni/AlugAki.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RodrigoBolgheroni/AlugAki/issues"
+  },
+  "homepage": "https://github.com/RodrigoBolgheroni/AlugAki#readme",
+  "dependencies": {
+    "express": "^4.22.1",
+    "node-fetch": "^3.3.2"
+  }
+}

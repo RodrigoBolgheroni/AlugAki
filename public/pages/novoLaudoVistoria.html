@@ -1,0 +1,1508 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlugAki - Novo Laudo de Vistoria</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/novo.css">
+    <link rel="stylesheet" href="../components/style.css">
+    <link rel="stylesheet" href="../assets/css/inventario.css">
+    
+    <style>
+        /* ===================================================================== */
+        /* CORREÇÃO COMPLETA - ALINHAMENTO COM INVENTARIO.CSS                   */
+        /* ===================================================================== */
+
+        /* Info do Ambiente */
+.form-row.ambiente-info {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 20px;
+}
+
+/* Nome do ambiente um pouco menor */
+.ambiente-nome input {
+    max-width: 420px;
+}
+
+/* Textbox grande de comentários */
+.ambiente-comentarios textarea {
+    width: 100%;
+    min-height: 110px;
+    resize: vertical;
+}
+
+        
+        /* 1. Form Container - Identico ao inventario */
+        .form-container {
+            background: #2a2a2a;
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 20px;
+        }
+        
+        /* 2. Form Section - Padronização */
+        .form-section {
+            padding-bottom: 32px;
+            margin-bottom: 32px;
+            border-bottom: 1px solid var(--color-neutral-400);
+        }
+        
+        .form-section:last-of-type {
+            border-bottom: none;
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
+        
+        /* Section Header */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        
+        .section-number {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--color-primary-300);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+        
+        .section-header h2 {
+            font-family: var(--font-primary);
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--color-neutral-100);
+            margin: 0;
+        }
+        
+        /* 3. Ambiente Container - Identico ao inventario */
+        .ambiente-container {
+            padding: 20px;
+            background: #2b2b2b;
+            border-radius: 12px;
+            border: 1px solid var(--color-neutral-400);
+            margin-bottom: 20px;
+        }
+        
+        .ambiente-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .ambiente-header h2 {
+            font-family: var(--font-primary);
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--color-neutral-100);
+            margin: 0;
+        }
+        
+        /* 4. Botão Excluir Ambiente */
+        .btn-delete-division {
+            background: #b63434;
+            padding: 8px 14px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            color: white;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            font-family: var(--font-primary);
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        
+        .btn-delete-division:hover {
+            background: #942929;
+            transform: translateY(-1px);
+        }
+        
+        /* 5. List Container para seções 2-6 */
+        .list-container {
+            margin-bottom: 15px;
+        }
+        
+        /* 6. Form Row para as seções 2-6 */
+        .list-container .form-row {
+            display: grid;
+            gap: 12px;
+            margin-bottom: 12px;
+            align-items: center;
+        }
+        
+        /* Reset de margens */
+        .list-container .form-row > * {
+            margin: 0 !important;
+        }
+        
+        /* Form Groups dentro do list-container */
+        .list-container .form-group {
+            margin-bottom: 0 !important;
+        }
+        
+        .list-container .form-group label {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--color-neutral-200);
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Inputs e Selects dentro das listas */
+        .list-container input,
+        .list-container select {
+            height: 40px !important;
+            line-height: 36px !important;
+            padding: 0 12px !important;
+            background: var(--color-neutral-500);
+            color: var(--color-neutral-100);
+            border: 2px solid var(--color-neutral-400) !important;
+            border-radius: 8px;
+            box-sizing: border-box !important;
+            width: 100%;
+            outline: none;
+            font-size: 14px;
+            display: block;
+        }
+        
+        .list-container input:focus,
+        .list-container select:focus {
+            border-color: var(--color-primary-300);
+            background: var(--color-neutral-400);
+        }
+        
+        /* 7. Botões Adicionar (Secundários) - Identico ao inventario */
+        .btn-secondary {
+            background: transparent !important;
+            border: none !important;
+            color: var(--color-primary-300) !important;
+            font-family: var(--font-primary) !important;
+            font-weight: 600 !important;
+            font-size: 15px !important;
+            cursor: pointer;
+            padding: 10px 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+        
+        .btn-secondary:hover {
+            color: var(--color-primary-400) !important;
+        }
+        
+        .btn-secondary i {
+            font-size: 16px;
+        }
+        
+        /* 8. Títulos H3 dentro das seções */
+        .form-section h3 {
+            font-family: var(--font-primary);
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--color-neutral-100);
+            margin: 30px 0 20px 0;
+        }
+        
+        /* ===================================================================== */
+        /* VISTORIA ITEMS (Ambientes) - Alinhamento perfeito com inventario     */
+        /* ===================================================================== */
+        
+        /* Container da tabela de vistoria */
+        .vistoria-table {
+            margin-bottom: 20px;
+        }
+        
+        /* Linha de Item de Vistoria */
+        .vistoria-item-row {
+            display: grid;
+            gap: 12px;
+            padding: 0;
+            margin-bottom: 12px;
+            align-items: center;
+            border-bottom: none;
+        }
+        
+        /* Header da tabela (labels) */
+        .vistoria-item-row:first-child {
+            font-weight: bold;
+            border-bottom: 2px solid var(--color-neutral-300);
+            padding-bottom: 12px;
+            margin-bottom: 16px;
+        }
+        
+        .vistoria-item-row:first-child > div {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--color-neutral-200);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Reset de margens */
+        .vistoria-item-row > * {
+            margin: 0 !important;
+            align-self: center;
+        }
+        
+        /* Inputs dentro da tabela de vistoria */
+        .vistoria-item-row input,
+        .vistoria-item-row select {
+            height: 40px !important;
+            line-height: 36px !important;
+            padding: 0 12px !important;
+            background: var(--color-neutral-500);
+            color: var(--color-neutral-100);
+            border: 2px solid var(--color-neutral-400) !important;
+            border-radius: 8px;
+            box-sizing: border-box !important;
+            width: 100%;
+            outline: none;
+            font-size: 14px;
+            display: block;
+        }
+        
+        .vistoria-item-row input:focus,
+        .vistoria-item-row select:focus {
+            border-color: var(--color-primary-300);
+            background: var(--color-neutral-400);
+        }
+        
+        /* 9. Botão Upload (Câmera) - Identico ao inventario */
+        .btn-upload-image {
+            height: 40px !important;
+            width: 100%;
+            padding: 0 !important;
+            margin: 0 !important;
+            background: var(--color-neutral-400);
+            border: 2px solid var(--color-neutral-300) !important;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-neutral-200);
+            box-sizing: border-box !important;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.2s;
+        }
+        
+        .btn-upload-image:not(.has-image):hover {
+            background: var(--color-neutral-300);
+            border-color: var(--color-primary-300) !important;
+            color: var(--color-primary-300);
+        }
+        
+        /* Quando tiver imagem */
+        .btn-upload-image.has-image {
+            background-color: transparent !important;
+            border: none !important;
+            background-size: cover !important;
+            background-position: center center !important;
+            background-repeat: no-repeat !important;
+        }
+        
+        .btn-upload-image.has-image i {
+            display: none;
+        }
+        
+        .btn-upload-image.has-image::after {
+            content: '\f021';
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        
+        .btn-upload-image.has-image:hover::after {
+            opacity: 1;
+        }
+        
+        .btn-upload-image input[type="file"] {
+            display: none;
+        }
+        
+        /* Preview Tooltip */
+        .image-preview {
+            position: absolute;
+            bottom: 110%;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 8px;
+            background: #1a1a1a;
+            border: 2px solid var(--color-neutral-400);
+            border-radius: 8px;
+            display: none;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+            pointer-events: none;
+        }
+        
+        .btn-upload-image.has-image:hover .image-preview {
+            display: block;
+        }
+        
+        .image-preview img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 6px;
+            display: block;
+        }
+        
+        .image-preview-text {
+            display: none;
+        }
+        
+        /* 10. Botão Remover (Lixeira) - Identico ao inventario */
+        .btn-remove-item {
+            height: 40px !important;
+            width: 100%;
+            padding: 0 !important;
+            margin: 0 !important;
+            background: #b63434;
+            border: 2px solid transparent !important;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            box-sizing: border-box !important;
+            transition: all 0.2s;
+        }
+        
+        .btn-remove-item:hover {
+            background: #942929;
+            transform: translateY(-1px);
+        }
+        
+        /* 11. Botão Adicionar Item - Identico ao inventario */
+        .btn-add-item {
+            background: var(--color-primary-300);
+            border: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            color: white;
+            font-size: 14px;
+            font-family: var(--font-primary);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+            margin-top: 15px;
+        }
+        
+        .btn-add-item:hover {
+            background: var(--color-primary-400);
+            transform: translateY(-1px);
+        }
+        
+        /* ===================================================================== */
+        /* DRAG HANDLE - BOTÃO DE ARRASTAR                                      */
+        /* ===================================================================== */
+        
+        .drag-handle {
+            height: 40px !important;
+            width: 100%;
+            padding: 0 !important;
+            margin: 0 !important;
+            background: var(--color-neutral-400);
+            border: 2px solid var(--color-neutral-300) !important;
+            border-radius: 8px;
+            cursor: grab;
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-neutral-200);
+            box-sizing: border-box !important;
+            transition: all 0.2s;
+        }
+        
+        .drag-handle:hover {
+            background: var(--color-neutral-300);
+            border-color: var(--color-primary-300) !important;
+            color: var(--color-primary-300);
+        }
+        
+        .drag-handle:active {
+            cursor: grabbing;
+        }
+        
+        /* Efeito de arrastar - Item fica semi-transparente */
+        .dragging {
+            opacity: 0.5 !important;
+            cursor: grabbing !important;
+        }
+        
+        /* Indicador sutil de onde o item será solto */
+        .drag-over {
+            position: relative;
+        }
+        
+        .drag-over::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--color-primary-300);
+            border-radius: 2px;
+            box-shadow: 0 0 8px rgba(63, 154, 177, 0.6);
+        }
+
+        
+        .drop-indicator.top::before {
+            top: -8px;
+        }
+        
+        .drop-indicator.bottom::before {
+            bottom: -8px;
+        }
+        
+        /* 12. Botão Nova Ambiente */
+        #btnAddAmbiente {
+            background: var(--color-primary-300) !important;
+            color: white !important;
+        }
+        
+        #btnAddAmbiente:hover {
+            background: var(--color-primary-400) !important;
+        }
+        
+        /* 13. Descrição dos inputs */
+        .desc-input {
+            font-size: 12px;
+            color: var(--color-neutral-300);
+            margin-top: 5px;
+            display: block;
+        }
+        
+        /* ===================================================================== */
+        /* GRIDS ESPECÍFICOS PARA CADA SEÇÃO                                    */
+        /* ===================================================================== */
+        
+        /* Seção 2 e 3: Leituras (6 colunas: Drag + 5 campos) */
+        #leituras-agua-gas-container .form-row,
+        #leituras-energia-container .form-row,
+        #aquecimento-container .form-row {
+            grid-template-columns: 40px 1fr 1fr 1fr 1fr 2fr;
+        }
+        
+        /* Seção 4: Água Quente (5 colunas: Drag + 4 campos) */
+        #agua-quente-container .form-row {
+            grid-template-columns: 40px 1fr 1fr 1fr 2fr;
+        }
+        
+        /* Seção 5: Outras Instalações (6 colunas: Drag + 5 campos) */
+        #outras-instalacoes-container .form-row {
+            grid-template-columns: 40px 2fr 1fr 1fr 1fr 2fr;
+        }
+        
+        /* Seção 6: Chaves (6 colunas: Drag + 5 campos) */
+        #chaves-container .form-row {
+            grid-template-columns: 40px 2fr 1fr 1fr 1fr 2fr;
+        }
+        
+        /* Ambientes - Paredes/Teto/Chão (7 colunas: Drag + Item, Condição, Operação, Comentários, Foto, Remover) */
+        .vistoria-table[id^="paredes-teto-chao-container"] .vistoria-item-row {
+            grid-template-columns: 40px 2fr 1fr 1fr 2fr 50px 40px;
+        }
+        
+        /* Ambientes - Equipamentos (8 colunas: Drag + Item, Material, Condição, Operação, Comentários, Foto, Remover) */
+        .vistoria-table[id^="equipamentos-container"] .vistoria-item-row {
+            grid-template-columns: 40px 1.5fr 1fr 1fr 1fr 2fr 50px 40px;
+        }
+        
+        /* ===================================================================== */
+        /* RESPONSIVO                                                            */
+        /* ===================================================================== */
+        
+        @media (max-width: 768px) {
+            .main-principal {
+                padding: 20px;
+            }
+            
+            .tabs-nav {
+                overflow-x: auto;
+            }
+            
+            .form-row,
+            .vistoria-item-row,
+            .list-container .form-row {
+                grid-template-columns: 1fr !important;
+            }
+            
+            .form-actions {
+                flex-direction: column;
+                padding: 20px;
+            }
+            
+            .btn-cancel {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="sidebar-container">
+    <div class="sidebar-loading">Carregando...</div>
+</div>
+
+<div class="page-container">
+<main class="main-principal">
+
+    <div class="breadcrumb">
+        <a href="#">Laudos de Vistoria</a>
+        <i class="fas fa-chevron-right"></i>
+        <span>Novo</span>
+    </div>
+
+    <div class="page-header">
+        <h1>Novo Laudo de Vistoria</h1>
+    </div>
+
+    <div class="tabs-nav" id="tabsNav">
+        <button class="tab-nav-btn active" data-tab="geral">
+            <i class="fas fa-clipboard-check"></i> Informações Gerais
+        </button>
+
+        <div id="tabsDivisoes" style="display:flex; gap:10px;"></div>
+
+        <button id="btnAddAmbiente" class="tab-nav-btn" style="background: var(--color-primary-300);color: white;">
+            <i class="fas fa-plus"></i> Nova Ambiente
+        </button>
+
+        <button class="tab-nav-btn" data-tab="assinatura">
+          <i class="fas fa-signature"></i> Assinatura
+        </button>
+    </div>
+
+    <div id="tab-geral" class="tab-pane active">
+        <div class="form-container">
+            
+            <div class="form-section">
+                <div class="section-header">
+                    <div class="section-number">1</div>
+                    <h2>Atribuição e Identificação</h2>
+                </div>
+                <div class="form-group full">
+                    <label for="aluguel">Aluguel</label>
+                    <select id="aluguel" name="aluguel">
+                        <option value="nao-vinculado" selected>Não vinculado a um aluguel ou reserva</option>
+                    </select>
+                    <span class="desc-input">Escolha um aluguel ou uma reserva.</span>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="tipo">Tipo</label>
+                        <select id="tipo" name="tipo">
+                            <option value="entrada" selected>Laudo de vistoria de entrada</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="id">ID <span class="required">*</span></label>
+                        <input type="text" id="id" name="id" value="Novo laudo de vistoria" required>
+                        <span class="desc-input">Atribua um identificador exclusivo para o seu inventário.</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-section">
+                <div class="section-header">
+                    <div class="section-number">2</div>
+                    <h2>Medidor de leituras (Água, Gás, Energia)</h2>
+                </div>
+                <div class="list-container" id="leituras-agua-gas-container">
+                    <div class="form-row" draggable="true">
+                        <div class="drag-handle">
+                            <i class="fas fa-arrows-up-down-left-right"></i>
+                        </div>
+                        <div class="form-group">
+                            <label for="medida-tipo-1">TIPO DE MEDIDA</label>
+                            <input type="text" id="medida-tipo-1" name="medida_tipo[]">
+                        </div>
+                        <div class="form-group">
+                            <label for="medida-serie-1">NÚMERO DE SÉRIE</label>
+                            <input type="text" id="medida-serie-1" name="medida_serie[]">
+                        </div>
+                        <div class="form-group">
+                            <label for="medida-m3-1">M3</label>
+                            <input type="number" id="medida-m3-1" name="medida_m3[]">
+                        </div>
+                        <div class="form-group">
+                            <label for="medida-operacao-1">OPERAÇÃO</label>
+                            <select id="medida-operacao-1" name="medida_operacao[]">
+                                <option value="nao-verificado" selected>Não verificado</option>
+                                <option value="funciona">Funciona</option>
+                                <option value="fora-servico">Fora de serviço</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="medida-comentarios-1">COMENTÁRIOS</label>
+                            <input type="text" id="medida-comentarios-1" name="medida_comentarios[]">
+                        </div>
+                    </div>
+                </div>
+                
+                <button id="btnAddLeituraAguaGas" class="btn btn-secondary">
+                    <i class="fas fa-plus-circle"></i> Adicionar outro contador de leitura de água, gás
+                </button>
+                
+                <h3>Leitura do medidor de energia elétrica</h3>
+
+                <div class="list-container" id="leituras-energia-container">
+                    <div class="form-row" draggable="true">
+                        <div class="drag-handle">
+                            <i class="fas fa-arrows-up-down-left-right"></i>
+                        </div>
+                        <div class="form-group">
+                            <label for="energia-tipo-1">TIPO DE MEDIDA</label>
+                            <input type="text" id="energia-tipo-1" name="energia_tipo[]">
+                        </div>
+                        <div class="form-group">
+                            <label for="energia-serie-1">NÚMERO DE SÉRIE</label>
+                            <input type="text" id="energia-serie-1" name="energia_serie[]">
+                        </div>
+                        <div class="form-group">
+                            <label for="energia-kwh-1">KWH</label>
+                            <input type="number" id="energia-kwh-1" name="energia_kwh[]">
+                        </div>
+                        <div class="form-group">
+                            <label for="energia-operacao-1">OPERAÇÃO</label>
+                            <select id="energia-operacao-1" name="energia_operacao[]">
+                                <option value="nao-verificado" selected>Não verificado</option>
+                                <option value="funciona">Funciona</option>
+                                <option value="fora-servico">Fora de serviço</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="energia-comentarios-1">COMENTÁRIOS</label>
+                            <input type="text" id="energia-comentarios-1" name="energia_comentarios[]">
+                        </div>
+                    </div>
+                </div>
+                <button id="btnAddLeituraEnergia" class="btn btn-secondary">
+                    <i class="fas fa-plus-circle"></i> Adicionar outro contador de leitura de energia
+                </button>
+            </div>
+
+            <div class="form-section">
+                <div class="section-header">
+                    <div class="section-number">3</div>
+                    <h2>Tipo de aquecimento</h2>
+                </div>
+                <div class="list-container" id="aquecimento-container">
+                    <div class="form-row" draggable="true">
+                        <div class="drag-handle">
+                            <i class="fas fa-arrows-up-down-left-right"></i>
+                        </div>
+                        <div class="form-group">
+                            <label for="aquecimento-sistema-1">SISTEMA DE AQUECIMENTO</label>
+                            <input type="text" id="aquecimento-sistema-1" name="aquecimento_sistema[]">
+                        </div>
+                        <div class="form-group">
+                            <label for="aquecimento-serie-1">NÚMERO DE SÉRIE</label>
+                            <input type="text" id="aquecimento-serie-1" name="aquecimento_serie[]">
+                        </div>
+                        <div class="form-group">
+                            <label for="aquecimento-m3kwh-1">M3/KWH</label>
+                            <input type="text" id="aquecimento-m3kwh-1" name="aquecimento_m3kwh[]">
+                        </div>
+                        <div class="form-group">
+                            <label for="aquecimento-operacao-1">OPERAÇÃO</label>
+                            <select id="aquecimento-operacao-1" name="aquecimento_operacao[]">
+                                <option value="nao-verificado" selected>Não verificado</option>
+                                <option value="funciona">Funciona</option>
+                                <option value="fora-servico">Fora de serviço</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="aquecimento-comentarios-1">COMENTÁRIOS</label>
+                            <input type="text" id="aquecimento-comentarios-1" name="aquecimento_comentarios[]">
+                        </div>
+                    </div>
+                </div>
+                
+                <button id="btnAddAquecimento" class="btn btn-secondary">
+                    <i class="fas fa-plus-circle"></i> Adicionar outra calefação
+                </button>
+            </div>
+
+            <div class="form-section">
+                <div class="section-header">
+                    <div class="section-number">4</div>
+                    <h2>Produção de água quente</h2>
+                </div>
+
+                <div class="list-container" id="agua-quente-container">
+                    <div class="form-row" draggable="true">
+                        <div class="drag-handle">
+                            <i class="fas fa-arrows-up-down-left-right"></i>
+                        </div>
+                        <div class="form-group">
+                            <label for="agua-tipo-1">TIPO DE PRODUÇÃO</label>
+                            <input type="text" id="agua-tipo-1" name="agua_tipo[]">
+                        </div>
+                        <div class="form-group">
+                            <label for="agua-condicao-1">CONDIÇÃO</label>
+                            <select id="agua-condicao-1" name="agua_condicao[]">
+                                <option value="nao-verificado" selected>Não verificado</option>
+                                <option value="novo">Novo</option>
+                                <option value="muito-bom">Muito bom estado</option>
+                                <option value="bom">Bom estado</option>
+                                <option value="medio">Estado médio</option>
+                                <option value="mau">Mau estado</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="agua-operacao-1">OPERAÇÃO</label>
+                            <select id="agua-operacao-1" name="agua_operacao[]">
+                                <option value="nao-verificado" selected>Não verificado</option>
+                                <option value="funciona">Funciona</option>
+                                <option value="fora-servico">Fora de serviço</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="agua-comentarios-1">COMENTÁRIOS</label>
+                            <input type="text" id="agua-comentarios-1" name="agua_comentarios[]">
+                        </div>
+                    </div>
+                </div>
+
+                <button id="btnAddAguaQuente" class="btn btn-secondary">
+                    <i class="fas fa-plus-circle"></i> Adicionar outro item
+                </button>
+            </div>
+
+            <div class="form-section">
+                <div class="section-header">
+                    <div class="section-number">5</div>
+                    <h2>Outras instalações</h2>
+                </div>
+
+                <div class="list-container" id="outras-instalacoes-container">
+                    <div class="form-row" draggable="true">
+                        <div class="drag-handle">
+                            <i class="fas fa-arrows-up-down-left-right"></i>
+                        </div>
+                        <div class="form-group">
+                            <label for="outras-item-1">ITEM</label>
+                            <input type="text" id="outras-item-1" name="outras_item[]">
+                        </div>
+                        <div class="form-group">
+                            <label for="outras-material-1">MATERIAL</label>
+                            <input type="text" id="outras-material-1" name="outras_material[]">
+                        </div>
+                        <div class="form-group">
+                            <label for="outras-condicao-1">CONDIÇÃO</label>
+                            <select id="outras-condicao-1" name="outras_condicao[]">
+                                <option value="nao-verificado" selected>Não verificado</option>
+                                <option value="novo">Novo</option>
+                                <option value="muito-bom">Muito bom estado</option>
+                                <option value="bom">Bom estado</option>
+                                <option value="medio">Estado médio</option>
+                                <option value="mau">Mau estado</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="outras-operacao-1">OPERAÇÃO</label>
+                            <select id="outras-operacao-1" name="outras_operacao[]">
+                                <option value="nao-verificado" selected>Não verificado</option>
+                                <option value="funciona">Funciona</option>
+                                <option value="fora-servico">Fora de serviço</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="outras-comentarios-1">COMENTÁRIOS</label>
+                            <input type="text" id="outras-comentarios-1" name="outras_comentarios[]">
+                        </div>
+                    </div>
+                </div>
+
+                <button id="btnAddOutrasInstalacoes" class="btn btn-secondary">
+                    <i class="fas fa-plus-circle"></i> Adicionar outro item
+                </button>
+            </div>
+            
+            <div class="form-section">
+                <div class="section-header">
+                    <div class="section-number">6</div>
+                    <h2>Entrega das chaves</h2>
+                </div>
+                <div class="list-container" id="chaves-container">
+                    <div class="form-row" draggable="true">
+                        <div class="drag-handle">
+                            <i class="fas fa-arrows-up-down-left-right"></i>
+                        </div>
+                        <div class="form-group">
+                            <label for="chave-tipo-1">TIPO DE CHAVE</label>
+                            <input type="text" id="chave-tipo-1" name="chave_tipo[]">
+                        </div>
+                        <div class="form-group">
+                            <label for="chave-numero-1">NÚMERO</label>
+                            <input type="number" id="chave-numero-1" name="chave_numero[]">
+                        </div>
+                        <div class="form-group">
+                            <label for="chave-entregue-1">ENTREGUE</label>
+                            <input type="text" id="chave-entregue-1" name="chave_entregue[]">
+                        </div>
+                        <div class="form-group">
+                            <label for="chave-data-1">DATA</label>
+                            <input type="text" id="chave-data-1" name="chave_data[]" placeholder="DD/MM/AAAA">
+                        </div>
+                        <div class="form-group">
+                            <label for="chave-comentarios-1">COMENTÁRIOS</label>
+                            <input type="text" id="chave-comentarios-1" name="chave_comentarios[]">
+                        </div>
+                    </div>
+                </div>
+
+                <button id="btnAddChave" class="btn btn-secondary">
+                    <i class="fas fa-plus-circle"></i> Adicionar outra chave
+                </button>
+            </div>
+
+        </div>
+    </div>
+    
+    <div id="tab-assinatura" class="tab-pane">
+      <div class="form-container">
+
+        <h2 style="margin-bottom:20px;">Signatários</h2>
+
+        <div class="assinatura-aviso">
+          <h4><i class="fas fa-exclamation-triangle"></i> Aviso!</h4>
+
+          <p>
+            Por favor, verifique a integridade do documento antes de assinar.
+            Quando o documento é assinado, poderá fechá-lo. Este será bloqueado
+            e já não será capaz de modificá-lo.
+          </p>
+
+          <p>
+            Dependendo do tipo de contrato legal, existem três tipos de assinatura
+            eletrônica: simples, avançada e qualificada.
+          </p>
+
+          <p>
+            As assinaturas que oferecemos correspondem a assinaturas simples,
+            com verificações adicionais de identidade:
+          </p>
+
+          <ul>
+            <li>Verificação do e-mail do signatário.</li>
+            <li>Verificação de número de celular via SMS.</li>
+          </ul>
+
+          <p>
+            Cabe ao signatário e à organização provar que o processo de assinatura
+            utilizado é confiável.
+          </p>
+        </div>
+
+        <div class="assinatura-lista">
+
+          <div class="assinatura-item">
+            <span class="assinatura-titulo">PROPRIETÁRIO</span>
+            <span class="assinatura-status">
+              Sem signatários. Escolha um aluguel ou uma reserva.
+            </span>
+          </div>
+
+          <div class="assinatura-item">
+            <span class="assinatura-titulo">INQUILINO</span>
+            <span class="assinatura-status">
+              Sem signatários. Escolha um aluguel ou uma reserva.
+            </span>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+
+    <div id="divisoesContainer"></div>
+
+    <div class="form-actions">
+        <button class="btn btn-cancel">
+            <i class="fas fa-times"></i> Cancelar
+        </button>
+        <button class="btn btn-primary">
+            <i class="fas fa-check"></i> Salvar Laudo
+        </button>
+    </div>
+
+</main>
+</div>
+
+<script src="../assets/js/sidebar-loader.js"></script>
+<script src="../assets/js/dark-mode.js"></script>
+
+<script>
+    /* ---------------------- VARIÁVEIS E CONSTANTES ---------------------- */
+    let ambienteIndex = 0;
+    const CONDICAO_OPTIONS = `
+        <option value="nao-verificado" selected>Não verificado</option>
+        <option value="novo">Novo</option>
+        <option value="muito-bom">Muito bom estado</option>
+        <option value="bom">Bom estado</option>
+        <option value="medio">Estado médio</option>
+        <option value="mau">Mau estado</option>
+    `;
+    const OPERACAO_OPTIONS = `
+        <option value="nao-verificado" selected>Não verificado</option>
+        <option value="funciona">Funciona</option>
+        <option value="fora-servico">Fora de serviço</option>
+    `;
+
+    /* ---------------------- SISTEMA DE TABS ---------------------- */
+    document.addEventListener("click", (e) => {
+        const btn = e.target.closest(".tab-nav-btn");
+        
+        if (e.target.id === "btnAddAmbiente" || e.target.closest("#btnAddAmbiente")) {
+            return;
+        }
+
+        if (btn) {
+            document.querySelectorAll(".tab-nav-btn").forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+
+            const tab = btn.getAttribute("data-tab");
+
+            document.querySelectorAll(".tab-pane").forEach(pane => {
+                pane.classList.remove("active");
+            });
+
+            const content = document.getElementById("tab-" + tab);
+            if (content) content.classList.add("active");
+        }
+    });
+    
+    /* ---------------------- FUNÇÕES DE ADIÇÃO DE LINHAS (Seções 2 a 6) ---------------------- */
+    
+    function addLeituraAguaGas() {
+        const container = document.getElementById("leituras-agua-gas-container");
+        const newRow = document.createElement("div");
+        newRow.classList.add("form-row");
+        newRow.setAttribute("draggable", "true");
+        
+        newRow.innerHTML = `
+            <div class="drag-handle">
+                <i class="fas fa-arrows-up-down-left-right"></i>
+            </div>
+            <div class="form-group">
+                <label>TIPO DE MEDIDA</label>
+                <input type="text" name="medida_tipo[]">
+            </div>
+            <div class="form-group">
+                <label>NÚMERO DE SÉRIE</label>
+                <input type="text" name="medida_serie[]">
+            </div>
+            <div class="form-group">
+                <label>M3</label>
+                <input type="number" name="medida_m3[]">
+            </div>
+            <div class="form-group">
+                <label>OPERAÇÃO</label>
+                <select name="medida_operacao[]">${OPERACAO_OPTIONS}</select>
+            </div>
+            <div class="form-group">
+                <label>COMENTÁRIOS</label>
+                <input type="text" name="medida_comentarios[]">
+            </div>
+        `;
+        container.appendChild(newRow);
+        setupDragAndDrop(newRow);
+    }
+    
+    function addLeituraEnergia() {
+        const container = document.getElementById("leituras-energia-container");
+        const newRow = document.createElement("div");
+        newRow.classList.add("form-row");
+        newRow.setAttribute("draggable", "true");
+        
+        newRow.innerHTML = `
+            <div class="drag-handle">
+                <i class="fas fa-arrows-up-down-left-right"></i>
+            </div>
+            <div class="form-group">
+                <label>TIPO DE MEDIDA</label>
+                <input type="text" name="energia_tipo[]">
+            </div>
+            <div class="form-group">
+                <label>NÚMERO DE SÉRIE</label>
+                <input type="text" name="energia_serie[]">
+            </div>
+            <div class="form-group">
+                <label>KWH</label>
+                <input type="number" name="energia_kwh[]">
+            </div>
+            <div class="form-group">
+                <label>OPERAÇÃO</label>
+                <select name="energia_operacao[]">${OPERACAO_OPTIONS}</select>
+            </div>
+            <div class="form-group">
+                <label>COMENTÁRIOS</label>
+                <input type="text" name="energia_comentarios[]">
+            </div>
+        `;
+        container.appendChild(newRow);
+        setupDragAndDrop(newRow);
+    }
+    
+    function addAquecimento() {
+        const container = document.getElementById("aquecimento-container");
+        const newRow = document.createElement("div");
+        newRow.classList.add("form-row");
+        newRow.setAttribute("draggable", "true");
+        
+        newRow.innerHTML = `
+            <div class="drag-handle">
+                <i class="fas fa-arrows-up-down-left-right"></i>
+            </div>
+            <div class="form-group">
+                <label>SISTEMA DE AQUECIMENTO</label>
+                <input type="text" name="aquecimento_sistema[]">
+            </div>
+            <div class="form-group">
+                <label>NÚMERO DE SÉRIE</label>
+                <input type="text" name="aquecimento_serie[]">
+            </div>
+            <div class="form-group">
+                <label>M3/KWH</label>
+                <input type="text" name="aquecimento_m3kwh[]">
+            </div>
+            <div class="form-group">
+                <label>OPERAÇÃO</label>
+                <select name="aquecimento_operacao[]">${OPERACAO_OPTIONS}</select>
+            </div>
+            <div class="form-group">
+                <label>COMENTÁRIOS</label>
+                <input type="text" name="aquecimento_comentarios[]">
+            </div>
+        `;
+        container.appendChild(newRow);
+        setupDragAndDrop(newRow);
+    }
+    
+    function addAguaQuente() {
+        const container = document.getElementById("agua-quente-container");
+        const newRow = document.createElement("div");
+        newRow.classList.add("form-row");
+        newRow.setAttribute("draggable", "true");
+        
+        newRow.innerHTML = `
+            <div class="drag-handle">
+                <i class="fas fa-arrows-up-down-left-right"></i>
+            </div>
+            <div class="form-group">
+                <label>TIPO DE PRODUÇÃO</label>
+                <input type="text" name="agua_tipo[]">
+            </div>
+            <div class="form-group">
+                <label>CONDIÇÃO</label>
+                <select name="agua_condicao[]">${CONDICAO_OPTIONS}</select>
+            </div>
+            <div class="form-group">
+                <label>OPERAÇÃO</label>
+                <select name="agua_operacao[]">${OPERACAO_OPTIONS}</select>
+            </div>
+            <div class="form-group">
+                <label>COMENTÁRIOS</label>
+                <input type="text" name="agua_comentarios[]">
+            </div>
+        `;
+        container.appendChild(newRow);
+        setupDragAndDrop(newRow);
+    }
+    
+    function addOutrasInstalacoes() {
+        const container = document.getElementById("outras-instalacoes-container");
+        const newRow = document.createElement("div");
+        newRow.classList.add("form-row");
+        newRow.setAttribute("draggable", "true");
+        
+        newRow.innerHTML = `
+            <div class="drag-handle">
+                <i class="fas fa-arrows-up-down-left-right"></i>
+            </div>
+            <div class="form-group">
+                <label>ITEM</label>
+                <input type="text" name="outras_item[]">
+            </div>
+            <div class="form-group">
+                <label>MATERIAL</label>
+                <input type="text" name="outras_material[]">
+            </div>
+            <div class="form-group">
+                <label>CONDIÇÃO</label>
+                <select name="outras_condicao[]">${CONDICAO_OPTIONS}</select>
+            </div>
+            <div class="form-group">
+                <label>OPERAÇÃO</label>
+                <select name="outras_operacao[]">${OPERACAO_OPTIONS}</select>
+            </div>
+            <div class="form-group">
+                <label>COMENTÁRIOS</label>
+                <input type="text" name="outras_comentarios[]">
+            </div>
+        `;
+        container.appendChild(newRow);
+        setupDragAndDrop(newRow);
+    }
+    
+    function addChave() {
+        const container = document.getElementById("chaves-container");
+        const newRow = document.createElement("div");
+        newRow.classList.add("form-row");
+        newRow.setAttribute("draggable", "true");
+        
+        newRow.innerHTML = `
+            <div class="drag-handle">
+                <i class="fas fa-arrows-up-down-left-right"></i>
+            </div>
+            <div class="form-group">
+                <label>TIPO DE CHAVE</label>
+                <input type="text" name="chave_tipo[]">
+            </div>
+            <div class="form-group">
+                <label>NÚMERO</label>
+                <input type="number" name="chave_numero[]">
+            </div>
+            <div class="form-group">
+                <label>ENTREGUE</label>
+                <input type="text" name="chave_entregue[]">
+            </div>
+            <div class="form-group">
+                <label>DATA</label>
+                <input type="text" name="chave_data[]" placeholder="DD/MM/AAAA">
+            </div>
+            <div class="form-group">
+                <label>COMENTÁRIOS</label>
+                <input type="text" name="chave_comentarios[]">
+            </div>
+        `;
+        container.appendChild(newRow);
+        setupDragAndDrop(newRow);
+    }
+    
+    // Event Listeners para os botões
+    document.getElementById("btnAddLeituraAguaGas").onclick = addLeituraAguaGas;
+    document.getElementById("btnAddLeituraEnergia").onclick = addLeituraEnergia;
+    document.getElementById("btnAddAquecimento").onclick = addAquecimento;
+    document.getElementById("btnAddAguaQuente").onclick = addAguaQuente;
+    document.getElementById("btnAddOutrasInstalacoes").onclick = addOutrasInstalacoes;
+    document.getElementById("btnAddChave").onclick = addChave;
+
+
+    /* ---------------------- SISTEMA DE AMBIENTES (DIVISÕES) ---------------------- */
+    
+    function criarAmbiente() {
+        ambienteIndex++;
+        const idTab = "ambiente" + ambienteIndex;
+
+        /* Criar TAB */
+        const tabBtn = document.createElement("button");
+        tabBtn.classList.add("tab-nav-btn");
+        tabBtn.setAttribute("data-tab", idTab);
+        tabBtn.innerHTML = `<i class="fas fa-layer-group"></i> Ambiente ${ambienteIndex}`;
+        document.getElementById("tabsDivisoes").appendChild(tabBtn);
+
+        /* Criar conteúdo da ambiente */
+        const div = document.createElement("div");
+        div.classList.add("tab-pane");
+        div.id = "tab-" + idTab;
+
+        div.innerHTML = `
+            <div class="ambiente-container">
+                <div class="ambiente-header">
+                    <h2>Ambiente ${ambienteIndex}</h2>
+                    <button class="btn-delete-division">
+                        <i class="fas fa-trash"></i> Excluir Ambiente
+                    </button>
+                </div>
+    
+<div class="form-row ambiente-info">
+    <div class="form-group ambiente-nome">
+        <label>Nome da Ambiente</label>
+        <input type="text"
+               class="inputNomeAmbiente"
+               placeholder="Ex: Sala de Estar, Banheiro Suíte, Varanda...">
+    </div>
+
+    <div class="form-group ambiente-comentarios">
+        <label>Comentários</label>
+        <textarea
+            placeholder="Observações gerais sobre o ambiente"
+            rows="4"></textarea>
+    </div>
+</div>
+
+
+                <div class="form-section" style="padding: 0; margin: 0; border: none;">
+                    <h3 style="margin-top:20px;">Paredes, Teto e Chão</h3>
+                    <div class="vistoria-table" id="paredes-teto-chao-container-${ambienteIndex}">
+                        <div class="vistoria-item-row">
+                            <div></div>
+                            <div>ITEM</div>
+                            <div>CONDIÇÃO</div>
+                            <div>OPERAÇÃO</div>
+                            <div>COMENTÁRIOS</div>
+                            <div>FOTO</div>
+                            <div></div>
+                        </div>
+                    </div>
+                    <button class="btn-add-item btnAddItemParedes">
+                        <i class="fas fa-plus"></i> Adicionar Item (Paredes/Teto/Chão)
+                    </button>
+                </div>
+                
+                <div class="form-section" style="padding: 0; margin: 0; border: none;">
+                    <h3 style="margin-top:30px;">Equipamentos e Mobiliário</h3>
+                    <div class="vistoria-table" id="equipamentos-container-${ambienteIndex}">
+                        <div class="vistoria-item-row">
+                            <div></div>
+                            <div>ITEM</div>
+                            <div>MATERIAL</div>
+                            <div>CONDIÇÃO</div>
+                            <div>OPERAÇÃO</div>
+                            <div>COMENTÁRIOS</div>
+                            <div>FOTO</div>
+                            <div></div>
+                        </div>
+                    </div>
+                    <button class="btn-add-item btnAddItemEquipamentos">
+                        <i class="fas fa-plus"></i> Adicionar Item (Equipamento/Mobiliário)
+                    </button>
+                </div>
+
+            </div>
+        `;
+
+        document.getElementById("divisoesContainer").appendChild(div);
+
+        /* Alterar nome da tab quando digitar */
+        div.querySelector(".inputNomeAmbiente").addEventListener("input", (e) => {
+            tabBtn.innerHTML = `<i class="fas fa-layer-group"></i> ${e.target.value || "Ambiente " + ambienteIndex}`;
+        });
+
+        /* Excluir ambiente */
+        div.querySelector(".btn-delete-division").onclick = () => {
+            tabBtn.remove();
+            div.remove();
+            document.querySelector('[data-tab="geral"]').click();
+        };
+
+        // Adicionar item para Paredes/Teto/Chão
+        div.querySelector(".btnAddItemParedes").onclick = () => adicionarItemVistoria(
+            div.querySelector(`#paredes-teto-chao-container-${ambienteIndex}`), 
+            'padrao'
+        );
+
+        // Adicionar item para Equipamentos/Mobiliário
+        div.querySelector(".btnAddItemEquipamentos").onclick = () => adicionarItemVistoria(
+            div.querySelector(`#equipamentos-container-${ambienteIndex}`), 
+            'completo'
+        );
+
+        // Ativar a tab nova
+        tabBtn.click();
+    }
+    
+    function adicionarItemVistoria(container, tipo) {
+        const row = document.createElement("div");
+        row.classList.add("vistoria-item-row");
+        row.setAttribute("draggable", "true");
+        const imageId = `img-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+        
+        let fields = '';
+        if (tipo === 'completo') {
+            // Layout para Equipamentos/Mobiliário (7 colunas)
+            fields = `
+                <div class="drag-handle">
+                    <i class="fas fa-arrows-up-down-left-right"></i>
+                </div>
+                <input type="text" placeholder="Item">
+                <input type="text" placeholder="Material">
+                <select>${CONDICAO_OPTIONS}</select>
+                <select>${OPERACAO_OPTIONS}</select>
+                <input type="text" placeholder="Comentários">
+            `;
+        } else {
+            // Layout para Paredes, Teto, Chão (6 colunas)
+            fields = `
+                <div class="drag-handle">
+                    <i class="fas fa-arrows-up-down-left-right"></i>
+                </div>
+                <input type="text" placeholder="Item (Ex: Parede Norte, Teto, Piso)">
+                <select>${CONDICAO_OPTIONS}</select>
+                <select>${OPERACAO_OPTIONS}</select>
+                <input type="text" placeholder="Comentários">
+            `;
+        }
+
+        row.innerHTML = `
+            ${fields}
+            <label class="btn-upload-image" for="${imageId}">
+                <i class="fas fa-camera"></i>
+                <input type="file" id="${imageId}" accept="image/*">
+            </label>
+            <button class="btn-remove-item"><i class="fas fa-trash"></i></button>
+        `;
+
+        const fileInput = row.querySelector('input[type="file"]');
+        const uploadBtn = row.querySelector('.btn-upload-image');
+
+        fileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    const imageUrl = event.target.result;
+                    uploadBtn.style.backgroundImage = `url('${imageUrl}')`;
+                    uploadBtn.classList.add('has-image');
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        row.querySelector(".btn-remove-item").onclick = () => row.remove();
+
+        container.appendChild(row);
+        setupDragAndDrop(row);
+    }
+    
+    /* Botão add ambiente */
+    document.getElementById("btnAddAmbiente").onclick = criarAmbiente;
+    
+    /* Criar a primeira ambiente automaticamente */
+    criarAmbiente();
+    
+    /* ---------------------- DRAG AND DROP FUNCTIONALITY ---------------------- */
+    
+    let draggedElement = null;
+    
+    function setupDragAndDrop(element) {
+        element.addEventListener('dragstart', handleDragStart);
+        element.addEventListener('dragend', handleDragEnd);
+        element.addEventListener('dragover', handleDragOver);
+        element.addEventListener('drop', handleDrop);
+        element.addEventListener('dragenter', handleDragEnter);
+        element.addEventListener('dragleave', handleDragLeave);
+    }
+    
+    function handleDragStart(e) {
+        draggedElement = this;
+        this.classList.add('dragging');
+        e.dataTransfer.effectAllowed = 'move';
+        e.dataTransfer.setData('text/html', this.innerHTML);
+    }
+    
+    function handleDragEnd(e) {
+        this.classList.remove('dragging');
+        
+        // Remove todos os estilos de drag-over
+        document.querySelectorAll('.drag-over-top, .drag-over-bottom').forEach(el => {
+            el.classList.remove('drag-over-top', 'drag-over-bottom');
+        });
+    }
+    
+    function handleDragOver(e) {
+        if (e.preventDefault) {
+            e.preventDefault();
+        }
+        e.dataTransfer.dropEffect = 'move';
+        
+        // Adiciona visual em tempo real enquanto arrasta
+        if (this !== draggedElement && (this.classList.contains('form-row') || this.classList.contains('vistoria-item-row'))) {
+            // Remove de todos primeiro
+            document.querySelectorAll('.drag-over').forEach(el => {
+                if (el !== this) el.classList.remove('drag-over');
+            });
+            this.classList.add('drag-over');
+        }
+        
+        return false;
+    }
+    
+    function handleDragEnter(e) {
+        // Lógica movida para handleDragOver para melhor responsividade
+    }
+    
+    function handleDragLeave(e) {
+        // Só remove se realmente saiu (não é um elemento filho)
+        if (!this.contains(e.relatedTarget)) {
+            this.classList.remove('drag-over');
+        }
+    }
+    
+    function handleDrop(e) {
+        if (e.stopPropagation) {
+            e.stopPropagation();
+        }
+        
+        if (draggedElement !== this && (this.classList.contains('form-row') || this.classList.contains('vistoria-item-row'))) {
+            // Sempre insere antes do elemento alvo (mais previsível)
+            this.parentNode.insertBefore(draggedElement, this);
+        }
+        
+        // Remove todos os indicadores
+        document.querySelectorAll('.drag-over').forEach(el => {
+            el.classList.remove('drag-over');
+        });
+        
+        return false;
+    }
+    
+    // Setup drag and drop para elementos iniciais
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.form-row[draggable="true"], .vistoria-item-row[draggable="true"]').forEach(element => {
+            setupDragAndDrop(element);
+        });
+    });
+    
+    // Setup drag and drop imediato para os elementos que já existem
+    document.querySelectorAll('.form-row[draggable="true"], .vistoria-item-row[draggable="true"]').forEach(element => {
+        setupDragAndDrop(element);
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,68 @@
+# ===============================
+# Dependências
+# ===============================
+node_modules/
+
+# ===============================
+# Logs
+# ===============================
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ===============================
+# Variáveis de ambiente
+# ===============================
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# ===============================
+# Arquivos do sistema
+# ===============================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ===============================
+# Cache e temporários
+# ===============================
+.cache/
+.tmp/
+temp/
+*.tmp
+*.swp
+
+# ===============================
+# Build / dist (caso use no futuro)
+# ===============================
+dist/
+build/
+
+# ===============================
+# IDEs / Editores
+# ===============================
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# ===============================
+# Arquivos auxiliares do projeto
+# ===============================
+estrutura.txt
+
+# ===============================
+# Coverage / testes
+# ===============================
+coverage/
+
+# ===============================
+# Outros
+# ===============================
+*.log

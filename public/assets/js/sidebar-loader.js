@@ -4,7 +4,7 @@
 
     // Carregar o header
     function loadSidebar() {
-        fetch('/modals/header.html')
+        fetch('/components/header.html')
             .then(response => response.text())
             .then(html => {
                 const container = document.getElementById('sidebar-container');
