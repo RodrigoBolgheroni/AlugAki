@@ -169,6 +169,35 @@
       color: var(--color-neutral-300);
       background: #1f1f1f;
     }
+    .pagination-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 24px;
+      background: #1f1f1f;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    .pagination-btns {
+      display: flex;
+      gap: 10px;
+    }
+    .pagination-btns button {
+      background: rgba(255,255,255,0.1);
+      border: none;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .pagination-btns button:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+    .pagination-btns button:hover:not(:disabled) {
+      background: var(--color-primary-300);
+      color: black;
+    }
   </style>
 </head>
 
@@ -250,6 +279,13 @@
           </thead>
           <tbody id="table-body"></tbody>
         </table>
+        <div class="pagination-container">
+          <div id="pagination-info">Página 1 de --</div>
+          <div class="pagination-btns">
+            <button id="prev-page" disabled><i class="fas fa-chevron-left"></i> Anterior</button>
+            <button id="next-page">Próximo <i class="fas fa-chevron-right"></i></button>
+          </div>
+        </div>
 
         <div class="table-footer">
           Mostrando os últimos 12 meses disponíveis
