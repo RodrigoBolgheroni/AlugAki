@@ -7,6 +7,7 @@ import cron from 'node-cron';
 import bcbRoutes from './backend/routes/bcb.routes.js';
 import ufRoutes from './backend/routes/uf.routes.js';
 import cepRoutes from './backend/routes/cep.routes.js';
+import tipoimovelRoutes from './backend/routes/tipoimovel.routes.js';
 import { fetchAndStoreAllIndices } from './backend/services/bcb.service.js';
 import { testConnection } from './backend/config/database.js';
 
@@ -32,6 +33,8 @@ app.use('/api/bcb', bcbRoutes);
 app.use('/api/uf', ufRoutes);
 
 app.use('/api/cep', cepRoutes);
+
+app.use('/api/tipoimovel', tipoimovelRoutes);
 
 // 2️⃣ ARQUIVOS ESTÁTICOS
 app.use(express.static(path.join(__dirname, 'public')));
