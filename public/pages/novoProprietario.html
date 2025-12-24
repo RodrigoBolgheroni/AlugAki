@@ -103,77 +103,42 @@
               <label>CEP <span class="required">*</span></label>
               <input type="text" id="cep" placeholder="00000-000">
             </div>
-            <button class="btn-search-cep">
+            <button type="button" class="btn-search-cep" id="btn-buscar-cep">
               <i class="fas fa-search"></i>
               Buscar
             </button>
           </div>
-    
+        
           <div class="form-row">
             <div class="form-group">
               <label>Logradouro <span class="required">*</span></label>
-              <input type="text" placeholder="Rua, Avenida, etc">
+              <input type="text" id="logradouro" placeholder="Rua, Avenida, etc">
             </div>
             <div class="form-group">
               <label>Número <span class="required">*</span></label>
-              <input type="text" placeholder="123">
+              <input type="text" id="numero" placeholder="123">
             </div>
           </div>
-    
+        
           <div class="form-row full">
             <div class="form-group">
               <label>Complemento</label>
-              <input type="text" placeholder="Apartamento, Bloco, etc">
+              <input type="text" id="complemento" placeholder="Apartamento, Bloco, etc">
             </div>
           </div>
-    
+        
           <div class="form-row">
             <div class="form-group">
               <label>Bairro <span class="required">*</span></label>
-              <input type="text" placeholder="Digite o bairro">
+              <input type="text" id="bairro" placeholder="Digite o bairro">
             </div>
             <div class="form-group">
               <label>Cidade <span class="required">*</span></label>
-              <input type="text" placeholder="Digite a cidade">
+              <input type="text" id="cidade" placeholder="Digite a cidade">
             </div>
           </div>
-    
-          <div class="form-row full">
-            <div class="form-group">
-              <label>Estado <span class="required">*</span></label>
-              <select>
-                <option value="">Selecione o estado</option>
-                <option value="AC">Acre</option>
-                <option value="AL">Alagoas</option>
-                <option value="AP">Amapá</option>
-                <option value="AM">Amazonas</option>
-                <option value="BA">Bahia</option>
-                <option value="CE">Ceará</option>
-                <option value="DF">Distrito Federal</option>
-                <option value="ES">Espírito Santo</option>
-                <option value="GO">Goiás</option>
-                <option value="MA">Maranhão</option>
-                <option value="MT">Mato Grosso</option>
-                <option value="MS">Mato Grosso do Sul</option>
-                <option value="MG">Minas Gerais</option>
-                <option value="PA">Pará</option>
-                <option value="PB">Paraíba</option>
-                <option value="PR">Paraná</option>
-                <option value="PE">Pernambuco</option>
-                <option value="PI">Piauí</option>
-                <option value="RJ">Rio de Janeiro</option>
-                <option value="RN">Rio Grande do Norte</option>
-                <option value="RS">Rio Grande do Sul</option>
-                <option value="RO">Rondônia</option>
-                <option value="RR">Roraima</option>
-                <option value="SC">Santa Catarina</option>
-                <option value="SP">São Paulo</option>
-                <option value="SE">Sergipe</option>
-                <option value="TO">Tocantins</option>
-              </select>
-            </div>
+          
           </div>
-        </div>
 
         <!-- Tab 3: Representante Legal (PJ apenas) -->
         <div class="tab-content" data-content="3">
@@ -229,5 +194,7 @@
   <script src="../assets/js/sidebar-loader.js"></script>
   <script src="../assets/js/dark-mode.js"></script>
   <script src="../assets/js/novo.js"></script>
+  <script src="../assets/js/carregar-estados.js"></script>
+  <script src="../assets/js/buscar-cep.js"></script>
 </body>
 </html>

@@ -105,14 +105,14 @@ process.on('SIGTERM', async () => {
   process.exit(0);
 });
 
-export async function executeQuery(query, params = []) { // O parâmetro chama-query
+export async function executeQuery(query, params = []) {
     try {
-      const [rows] = await pool.query(query, params); 
+      const [rows] = await pool.query(query, params);
       return rows;
     } catch (error) {
       console.error('   Erro ao executar query:', error.message);
       console.error('   Query:', query);
-      console.error('   Params:', JSON.stringify(params).substring(0, 200) + "..."); // Simplificado para o log não ficar gigante
+      console.error('   Params:', JSON.stringify(params).substring(0, 200) + "..."); 
       throw error;
     }
   }

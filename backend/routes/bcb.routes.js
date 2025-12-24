@@ -62,7 +62,7 @@ router.get('/db/:indice', async (req, res) => {
 
     try {
         const sql = `
-            SELECT MesAnoReferencia as data, ValorMensal as valor, ValorAcumulado as acumulado
+            SELECT Indice as indice,MesAnoReferencia as data, ValorMensal as valor, ValorAcumulado as acumulado
             FROM tblindicesinflacao
             WHERE CodIndice = ?
             ORDER BY MesAnoReferencia DESC
@@ -79,8 +79,6 @@ router.get('/db/:indice', async (req, res) => {
         ]);
 
         const totalRegistros = totalResult[0].total;
-
-        console.log(`Resultado: ${registros.length} linhas encontradas. Total: ${totalRegistros}`);
 
         const formatados = registros.map(r => ({
             data: new Date(r.data).toLocaleDateString('pt-BR', { month: '2-digit', year: 'numeric' }),

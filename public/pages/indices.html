@@ -198,6 +198,124 @@
       background: var(--color-primary-300);
       color: black;
     }
+    /* Container da tabela como referência para posicionamento absoluto */
+#tabela-container {
+  position: relative;
+  overflow: hidden; /* evita vazamento do overlay */
+}
+
+/* Overlay de loading que cobre TUDO */
+.table-loading-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(42, 42, 42, 0.85);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  border-radius: 16px;
+  color: #ccc;
+  font-family: var(--font-primary);
+  font-size: 1.1rem;
+}
+
+.table-loading-overlay .spinner {
+  width: 56px;
+  height: 56px;
+  border: 6px solid #3a3a3a;
+  border-top: 6px solid var(--color-primary-300);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 16px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+input[type=number]::-webkit-inner-spin-button { 
+    -webkit-appearance: none;
+    
+}
+input[type=number] { 
+   -moz-appearance: textfield;
+   appearance: textfield;
+
+}
+
+/* Fade suave de entrada/saída */
+.table-loading-overlay {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+#tabela-container.loading .table-loading-overlay {
+  opacity: 1;
+  pointer-events: all;
+}
+.search-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 8px 12px;
+  border-radius: 8px;
+  flex-wrap: wrap;
+}
+
+.search-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+}
+
+.search-group i {
+  color: var(--color-neutral-300);
+  font-size: 14px;
+}
+
+.search-group input {
+  background: none;
+  border: none;
+  outline: none;
+  color: white;
+  font-size: 14px;
+  width: 170px;
+  padding: 4px 0;
+}
+
+.search-group input::placeholder {
+  color: var(--color-neutral-400);
+}
+
+.clear-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: var(--color-neutral-300);
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.clear-btn.visible {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.clear-btn:hover {
+  background: rgba(255, 100, 100, 0.3);
+  color: #ff6b6b;
+}
   </style>
 </head>
 
@@ -260,37 +378,49 @@
       </div>
 
       <!-- Tabela -->
-      <div class="tabela-indices">
-        <div class="toolbar">
-          <div class="table-title">Histórico recente</div>
-          <div class="search-box">
-            <i class="fas fa-search"></i>
-            <input type="text" id="table-search" placeholder="Buscar por mês ou ano">
-          </div>
+<!-- Substitua o <div class="tabela-indices"> atual por isso -->
+  <div class="tabela-indices" id="tabela-container">
+    <div class="toolbar">
+      <div class="table-title">Histórico recente</div>
+      <div class="search-container">
+        <div class="search-group">
+          <i class="fas fa-calendar-alt"></i>
+          <input type="text" id="search-mes" placeholder="Digite o Mês (ex: jan,01)" maxlength="10">
         </div>
-
-        <table>
-          <thead>
-            <tr>
-              <th>Mês/Ano</th>
-              <th>Variação Mensal</th>
-              <th>Acumulado 12 Meses</th>
-            </tr>
-          </thead>
-          <tbody id="table-body"></tbody>
-        </table>
-        <div class="pagination-container">
-          <div id="pagination-info">Página 1 de --</div>
-          <div class="pagination-btns">
-            <button id="prev-page" disabled><i class="fas fa-chevron-left"></i> Anterior</button>
-            <button id="next-page">Próximo <i class="fas fa-chevron-right"></i></button>
-          </div>
+        <div class="search-group">
+          <i class="fas fa-calendar"></i>
+          <input type="number" id="search-ano" placeholder="DIgite o Ano (ex: 2025,25)" maxlength="4">
         </div>
-
-        <div class="table-footer">
-          Mostrando os últimos 12 meses disponíveis
-        </div>
+        <button id="clear-search" class="clear-btn" title="Limpar filtros">
+          <i class="fas fa-times"></i>
+        </button>
       </div>
+    </div>
+  
+    <table>
+      <thead>
+        <tr>
+          <th>Índice</th>
+          <th>Mês/Ano</th>
+          <th>Variação Mensal</th>
+          <th>Acumulado 12 Meses</th>
+        </tr>
+      </thead>
+      <tbody id="table-body"></tbody>
+    </table>
+  
+    <div class="pagination-container">
+      <div id="pagination-info">Página 1 de --</div>
+      <div class="pagination-btns">
+        <button id="prev-page" disabled><i class="fas fa-chevron-left"></i> Anterior</button>
+        <button id="next-page">Próximo <i class="fas fa-chevron-right"></i></button>
+      </div>
+    </div>
+  
+    <div class="table-footer">
+      Mostrando os últimos 12 meses disponíveis
+    </div>
+  </div>
 
     </main>
   </div>

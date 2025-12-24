@@ -5,6 +5,8 @@ import cron from 'node-cron';
 
 // Rotas e Serviços
 import bcbRoutes from './backend/routes/bcb.routes.js';
+import ufRoutes from './backend/routes/uf.routes.js';
+import cepRoutes from './backend/routes/cep.routes.js';
 import { fetchAndStoreAllIndices } from './backend/services/bcb.service.js';
 import { testConnection } from './backend/config/database.js';
 
@@ -26,6 +28,10 @@ app.use(express.json());
 
 // 1️⃣ API
 app.use('/api/bcb', bcbRoutes);
+
+app.use('/api/uf', ufRoutes);
+
+app.use('/api/cep', cepRoutes);
 
 // 2️⃣ ARQUIVOS ESTÁTICOS
 app.use(express.static(path.join(__dirname, 'public')));

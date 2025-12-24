@@ -1562,29 +1562,58 @@ body {
 .select-page select:hover {
   background: #252525;
 }
-/* Container para centralizar o loader na tabela */
-.loading-container {
+/* Loader centralizado ocupando toda a tabela */
+#table-body.loading {
+  position: relative;
+  min-height: 300px; /* Altura mínima para centralizar bem */
+}
+
+#table-body.loading::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(42, 42, 42, 0.6); /* Fundo semi-transparente escuro (combina com sua tabela) */
+  border-radius: 0 0 16px 16px; /* Respeita o border-radius da tabela */
+  z-index: 1;
+}
+
+.loading-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 200px; /* Ajuste conforme a altura da sua tabela */
-  color: #666;
+  color: #aaa;
+  font-family: var(--font-primary);
   font-size: 1.1rem;
+  z-index: 2;
 }
 
-/* Spinner puro CSS */
-.spinner {
+.loading-overlay .spinner {
   width: 50px;
   height: 50px;
-  border: 6px solid #f3f3f3;     /* Cor de fundo do círculo */
-  border-top: 6px solid #3498db; /* Cor principal do spinner (azul bonito) */
+  border: 6px solid #3a3a3a;
+  border-top: 6px solid var(--color-primary-300); /* Usa sua cor primária */
   border-radius: 50%;
   animation: spin 1s linear infinite;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+#table-body.loading::before,
+.loading-overlay {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+#table-body:not(.loading)::before,
+#table-body:not(.loading) .loading-overlay {
+    opacity: 0;
+    pointer-events: none; /* evita clique acidental */
 }
