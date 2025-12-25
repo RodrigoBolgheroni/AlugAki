@@ -1,0 +1,338 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  thead {
+    background: rgba(0, 0, 0, 0.3);
+  }
+  
+  th {
+    padding: 14px 16px;
+    text-align: left;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--color-neutral-300);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  tbody tr {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.2s;
+  }
+  
+  tbody tr:hover {
+    background: rgba(255, 255, 255, 0.05);
+  }
+  
+  td {
+    padding: 16px;
+    font-size: 14px;
+    color: var(--color-neutral-100);
+  }
+  
+  .table-section, .tabela-indices {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: var(--border-radius-lg);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+  }
+  
+  .table-header, .toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .table-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-neutral-100);
+  }
+  .property-info { display: flex; align-items: center; gap: 12px; }
+.property-avatar {
+  width: 44px; height: 44px;
+  background: linear-gradient(135deg, var(--color-primary-300), var(--color-primary-400));
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700; font-size: 16px; color: #fff;
+}
+
+.badge-success {
+  background: rgba(67, 181, 132, 0.2);
+  color: var(--color-secondary-300);
+  border: 1px solid var(--color-secondary-400);
+}
+
+.price {
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--color-secondary-300);
+}
+
+.actions-cell { display: flex; gap: 6px; }
+
+.tabela-container {
+  background: #2a2a2a;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+th {
+  padding: 14px 16px;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 600;
+  color: #ccc;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+tbody tr {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.2s;
+}
+
+tbody tr:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+td {
+  padding: 16px;
+  font-size: 14px;
+  color: var(--color-neutral-100);
+}
+
+/* Property info na tabela */
+.property-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.property-avatar {
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(135deg, var(--color-primary-300), var(--color-primary-400));
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 16px;
+  color: #fff;
+}
+
+/* Badges */
+.badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.badge-success {
+  background: rgba(67, 181, 132, 0.2);
+  color: var(--color-secondary-300);
+  border: 1px solid var(--color-secondary-400);
+}
+
+.price {
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--color-secondary-300);
+}
+
+/* Actions dropdown */
+.actions-cell {
+  text-align: right;
+}
+
+.action-btn {
+  width: 28px;
+  height: 28px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #ccc;
+}
+
+.action-btn:hover {
+  background: var(--color-primary-400);
+  color: white;
+}
+
+/* Loading overlay na tabela */
+#table-body.loading {
+  position: relative;
+  min-height: 300px;
+}
+
+#table-body.loading::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(42, 42, 42, 0.6);
+  border-radius: 0 0 14px 14px;
+  z-index: 1;
+}
+
+.loading-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #aaa;
+  z-index: 2;
+}
+
+.loading-overlay .spinner {
+  width: 50px;
+  height: 50px;
+  border: 6px solid #3a3a3a;
+  border-top: 6px solid var(--color-primary-300);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+.property-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.property-avatar {
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(135deg, var(--color-primary-300), var(--color-primary-400));
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 16px;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.property-details {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.property-name {
+  font-weight: 600;
+  color: #fff;
+  font-size: 14px;
+}
+
+.property-address {
+  font-size: 11px;
+  color: #ccc;
+}
+
+.badge-success {
+  background: rgba(67, 181, 132, 0.2);
+  color: var(--color-secondary-300);
+  border: 1px solid var(--color-secondary-400);
+}
+
+.price {
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--color-secondary-300);
+}
+
+.actions-cell .action-btn {
+  width: 28px;
+  height: 28px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #ccc;
+}
+
+.actions-cell .action-btn:hover {
+  background: var(--color-primary-400);
+  border-color: var(--color-primary-400);
+  color: #fff;
+}
+.tabela-container {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  margin-top: 30px;
+}
+
+
+
+/* Checkbox na tabela */
+td input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--color-secondary-300);
+}
+/* Table footer */
+.table-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: #1E1E1E;
+  color: var(--color-neutral-300);
+  font-size: 14px;
+  border-top: 1px solid var(--color-neutral-400);
+}
+
+.select-page select {
+  background: var(--color-neutral-500);
+  border: 1px solid var(--color-neutral-400);
+  border-radius: 8px;
+  color: var(--color-neutral-100);
+  padding: 6px 12px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.select-page select:hover {
+  background: var(--color-neutral-400);
+}
+
+/* Badge danger */
+.badge-danger {
+  background: rgba(233, 108, 108, 0.2);
+  color: #e96c6c;
+  border: 1px solid #e96c6c;
+}

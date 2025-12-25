@@ -1,0 +1,507 @@
+.form-container {
+    background: #2a2a2a;
+    border-radius: 16px;
+    padding: 0; /* Remove padding geral para as tabs funcionarem */
+    margin-bottom: 20px;
+}
+
+/* Tabs Container */
+.tabs {
+    display: flex;
+    border-bottom: 2px solid var(--color-neutral-400);
+    background: #2a2a2a;
+    border-radius: 16px 16px 0 0;
+}
+
+.tab {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+    padding: 18px 24px;
+    background: transparent;
+    border: none;
+    color: var(--color-neutral-200);
+    font-family: var(--font-primary);
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+}
+
+.tab .circle {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 2px solid var(--color-primary-400);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 0; /* Remove margin específica */
+    flex-shrink: 0;
+}
+
+.tab:hover {
+    color: var(--color-neutral-100);
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.tab.active {
+    color: var(--color-primary-300);
+}
+
+.tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--color-primary-300);
+}
+
+/* Tab Content */
+.tab-content {
+    display: none;
+    padding: 32px;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Form Rows dentro do Form Container */
+.form-container .form-row {
+    display: grid;
+    grid-template-columns: 2fr 2fr;
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+.form-container .form-row.number {
+    grid-template-columns: 3fr 3fr 3fr;
+}
+
+.form-container .form-row.full {
+    grid-template-columns: 1fr;
+}
+
+/* Labels dentro do Form Container */
+.form-container label {
+    display: block;
+    font-family: var(--font-primary);
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--color-neutral-100);
+    margin-bottom: 8px;
+    text-transform: none;
+    letter-spacing: normal;
+}
+
+.form-container label .required {
+    color: var(--color-feedback-error);
+}
+
+/* Inputs dentro do Form Container */
+.form-container input[type="text"],
+.form-container input[type="number"],
+.form-container input[type="email"],
+.form-container input[type="tel"],
+.form-container textarea,
+.form-container select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 2px solid var(--color-neutral-400);
+    border-radius: 8px;
+    background: var(--color-neutral-500);
+    color: var(--color-neutral-100);
+    font-family: var(--font-secondary);
+    font-size: 14px;
+    outline: none;
+    transition: all 0.2s;
+    height: auto;
+    line-height: normal;
+}
+
+.form-container input:focus,
+.form-container select:focus,
+.form-container textarea:focus {
+    border-color: var(--color-primary-300);
+    background: var(--color-neutral-400);
+}
+
+.form-container input::placeholder,
+.form-container textarea::placeholder {
+    color: var(--color-neutral-300);
+}
+
+/* ===== FORM ACTIONS ===== */
+.form-actions {
+    display: flex;
+    gap: 12px;
+    padding: 24px 32px;
+    background: #222;
+    border-top: 1px solid var(--color-neutral-400);
+    border-radius: 0 0 16px 16px;
+}
+
+.form-actions .btn {
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-family: var(--font-primary);
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.form-actions .btn-primary {
+    background: var(--color-primary-300);
+    color: white;
+}
+
+.form-actions .btn-primary:hover {
+    background: var(--color-primary-400);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(63, 154, 177, 0.3);
+}
+
+.form-actions .btn-cancel {
+    background: transparent;
+    color: var(--color-neutral-200);
+    border: 2px solid var(--color-neutral-400);
+    margin-left: auto;
+}
+
+.form-actions .btn-cancel:hover {
+    background: var(--color-neutral-400);
+    color: var(--color-neutral-100);
+}
+
+/* ===== DESCRIÇÕES DE INPUT ===== */
+.desc-input {
+    font-size: 12px;
+    color: var(--color-neutral-300);
+    margin-top: 5px;
+    margin-bottom: 8px;
+    display: block;
+    font-weight: normal;
+    text-transform: none;
+    letter-spacing: normal;
+}
+
+/* ===== CEP GROUP ===== */
+.cep-group {
+    display: flex;
+    gap: 12px;
+    align-items: flex-end;
+}
+
+.cep-group .form-group {
+    flex: 1;
+    margin-bottom: 0;
+}
+
+.btn-search-cep {
+    padding: 12px 20px;
+    background: var(--color-neutral-400);
+    border: 2px solid var(--color-neutral-300);
+    border-radius: 8px;
+    color: var(--color-neutral-100);
+    font-family: var(--font-primary);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 40px;
+}
+
+.btn-search-cep:hover {
+    background: var(--color-neutral-300);
+    border-color: var(--color-primary-300);
+}
+
+/* ===== RESPONSIVO ===== */
+@media (max-width: 768px) {
+    .form-container .form-row,
+    .form-container .form-row.number {
+        grid-template-columns: 1fr;
+    }
+
+    .tabs {
+        flex-direction: column;
+    }
+
+    .tab {
+        text-align: left;
+    }
+
+    .form-actions {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .form-actions .btn-cancel {
+        margin-left: 0;
+    }
+
+    .cep-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .btn-search-cep {
+        width: 100%;
+        justify-content: center;
+    }
+}
+/* ==========================================
+   ARQUIVO: ./pages/novo.css
+   Estilos específicos para Novo Inventário e Novo Laudo Vistoria
+   ========================================== */
+
+/* ===== AMBIENTE INFO (Nome + Comentários) ===== */
+.form-row.ambiente-info {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 20px;
+}
+
+.ambiente-nome input {
+    max-width: 420px;
+}
+
+.ambiente-comentarios textarea {
+    width: 100%;
+    min-height: 110px;
+    resize: vertical;
+}
+
+/* ===== LIST CONTAINER (Seções 2-6 do Laudo) ===== */
+.list-container {
+    margin-bottom: 15px;
+}
+
+.list-container .form-row {
+    display: grid;
+    gap: 12px;
+    margin-bottom: 12px;
+    align-items: center;
+}
+
+.list-container .form-row > * {
+    margin: 0 !important;
+}
+
+.list-container .form-group {
+    margin-bottom: 0 !important;
+}
+
+.list-container .form-group label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--color-neutral-200);
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.list-container input,
+.list-container select {
+    height: 40px !important;
+    line-height: 36px !important;
+    padding: 0 12px !important;
+    background: var(--color-neutral-500);
+    color: var(--color-neutral-100);
+    border: 2px solid var(--color-neutral-400) !important;
+    border-radius: 8px;
+    box-sizing: border-box !important;
+    width: 100%;
+    outline: none;
+    font-size: 14px;
+    display: block;
+}
+
+.list-container input:focus,
+.list-container select:focus {
+    border-color: var(--color-primary-300);
+    background: var(--color-neutral-400);
+}
+
+/* ===== GRIDS ESPECÍFICOS (Laudo Vistoria) ===== */
+
+/* Seção 2 e 3: Leituras (6 colunas) */
+#leituras-agua-gas-container .form-row,
+#leituras-energia-container .form-row,
+#aquecimento-container .form-row {
+    grid-template-columns: 40px 1fr 1fr 1fr 1fr 2fr;
+}
+
+/* Seção 4: Água Quente (5 colunas) */
+#agua-quente-container .form-row {
+    grid-template-columns: 40px 1fr 1fr 1fr 2fr;
+}
+
+/* Seção 5 e 6: Outras Instalações e Chaves (6 colunas) */
+#outras-instalacoes-container .form-row,
+#chaves-container .form-row {
+    grid-template-columns: 40px 2fr 1fr 1fr 1fr 2fr;
+}
+
+/* Ambientes - Paredes/Teto/Chão (7 colunas) */
+.vistoria-table[id^="paredes-teto-chao-container"] .vistoria-item-row {
+    grid-template-columns: 40px 2fr 1fr 1fr 2fr 50px 40px;
+}
+
+/* Ambientes - Equipamentos (8 colunas) */
+.vistoria-table[id^="equipamentos-container"] .vistoria-item-row {
+    grid-template-columns: 40px 1.5fr 1fr 1fr 1fr 2fr 50px 40px;
+}
+
+/* ===== VISTORIA TABLE ===== */
+.vistoria-table {
+    margin-bottom: 20px;
+}
+
+.vistoria-item-row {
+    display: grid;
+    gap: 12px;
+    padding: 0;
+    margin-bottom: 12px;
+    align-items: center;
+    border-bottom: none;
+}
+
+.vistoria-item-row:first-child {
+    font-weight: bold;
+    border-bottom: 2px solid var(--color-neutral-300);
+    padding-bottom: 12px;
+    margin-bottom: 16px;
+}
+
+.vistoria-item-row:first-child > div {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--color-neutral-200);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.vistoria-item-row > * {
+    margin: 0 !important;
+    align-self: center;
+}
+
+.vistoria-item-row input,
+.vistoria-item-row select {
+    height: 40px !important;
+    line-height: 36px !important;
+    padding: 0 12px !important;
+    background: var(--color-neutral-500);
+    color: var(--color-neutral-100);
+    border: 2px solid var(--color-neutral-400) !important;
+    border-radius: 8px;
+    box-sizing: border-box !important;
+    width: 100%;
+    outline: none;
+    font-size: 14px;
+    display: block;
+}
+
+.vistoria-item-row input:focus,
+.vistoria-item-row select:focus {
+    border-color: var(--color-primary-300);
+    background: var(--color-neutral-400);
+}
+
+/* ===== ASSINATURA (Laudo Vistoria) ===== */
+.assinatura-aviso {
+    background: #2a2416;
+    border-left: 6px solid #f0a500;
+    padding: 20px 24px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    color: #f3e6c8;
+}
+
+.assinatura-aviso h4 {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #f0a500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.assinatura-aviso p {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+.assinatura-aviso ul {
+    padding-left: 20px;
+    margin-bottom: 10px;
+}
+
+.assinatura-aviso li {
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+
+.assinatura-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.assinatura-item {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    border-bottom: 1px solid var(--color-neutral-400);
+    padding-bottom: 14px;
+}
+
+.assinatura-titulo {
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--color-neutral-200);
+    min-width: 120px;
+}
+
+.assinatura-status {
+    font-size: 14px;
+    color: var(--color-neutral-300);
+}
+
+/* ===== BOTÃO NOVA AMBIENTE ===== */
+#btnAddAmbiente {
+    background: var(--color-primary-300) !important;
+    color: white !important;
+}
+
+#btnAddAmbiente:hover {
+    background: var(--color-primary-400) !important;
+}
+
+/* ===== RESPONSIVO ===== */
+@media (max-width: 768px) {
+    .form-row,
+    .vistoria-item-row,
+    .list-container .form-row {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .ambiente-nome input {
+        max-width: 100%;
+    }
+}

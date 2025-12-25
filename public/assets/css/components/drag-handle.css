@@ -1,0 +1,35 @@
+.drag-handle {
+    height: 40px !important;
+    width: 100%;
+    background: var(--color-neutral-400);
+    border: 2px solid var(--color-neutral-300) !important;
+    border-radius: var(--border-radius-md);
+    cursor: grab;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-neutral-200);
+    transition: all 0.2s;
+  }
+  
+  .drag-handle:hover {
+    background: var(--color-neutral-300);
+    border-color: var(--color-primary-300) !important;
+    color: var(--color-primary-300);
+  }
+  
+  .drag-handle:active { cursor: grabbing; }
+  
+  .dragging { opacity: 0.5 !important; }
+  
+  .drag-over::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: 0; right: 0;
+    height: 3px;
+    background: var(--color-primary-300);
+    border-radius: 2px;
+    box-shadow: 0 0 8px rgba(63, 154, 177, 0.6);
+  }
+  

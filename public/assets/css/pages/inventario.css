@@ -1,0 +1,102 @@
+.assinatura-aviso, .assinatura-lista {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: var(--border-radius-lg);
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255, 215, 0, 0.3);
+  }
+  
+  
+  .dragging {
+    opacity: 0.5 !important;
+    cursor: grabbing !important;
+  }
+  
+  .drag-over {
+    position: relative;
+  }
+  
+  .drag-over::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--color-primary-300);
+    border-radius: 2px;
+    box-shadow: 0 0 8px rgba(63, 154, 177, 0.6);
+  }
+  
+  .drop-indicator.top::before {
+    top: -8px;
+  }
+  
+  .drop-indicator.bottom::before {
+    bottom: -8px;
+  }
+  
+  .item-row {
+    display: grid;
+    grid-template-columns: 40px 1.5fr 0.7fr 1fr 1fr 2fr 60px 40px;
+    gap: 12px;
+  }
+  
+  .vistoria-table {
+    margin-bottom: 20px;
+  }
+  
+  .vistoria-item-row {
+    display: grid;
+    gap: 12px;
+    padding: 0;
+    margin-bottom: 12px;
+    align-items: center;
+    border-bottom: none;
+  }
+  
+  .vistoria-item-row:first-child {
+    font-weight: bold;
+    border-bottom: 2px solid var(--color-neutral-300);
+    padding-bottom: 12px;
+    margin-bottom: 16px;
+  }
+  
+  .vistoria-item-row:first-child > div {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--color-neutral-200);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  .vistoria-item-row > * {
+    margin: 0 !important;
+    align-self: center;
+  }
+  
+  #leituras-agua-gas-container .form-row,
+  #leituras-energia-container .form-row,
+  #aquecimento-container .form-row {
+    grid-template-columns: 40px 1fr 1fr 1fr 1fr 2fr;
+  }
+  
+  #agua-quente-container .form-row {
+    grid-template-columns: 40px 1fr 1fr 1fr 2fr;
+  }
+  
+  #outras-instalacoes-container .form-row {
+    grid-template-columns: 40px 2fr 1fr 1fr 1fr 2fr;
+  }
+  
+  #chaves-container .form-row {
+    grid-template-columns: 40px 2fr 1fr 1fr 1fr 2fr;
+  }
+  
+  .vistoria-table[id^="paredes-teto-chao-container"] .vistoria-item-row {
+    grid-template-columns: 40px 2fr 1fr 1fr 2fr 50px 40px;
+  }
+  
+  .vistoria-table[id^="equipamentos-container"] .vistoria-item-row {
+    grid-template-columns: 40px 1.5fr 1fr 1fr 1fr 2fr 50px 40px;
+  }

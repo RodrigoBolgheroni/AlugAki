@@ -1,0 +1,70 @@
+/* ==========================================
+   ARQUIVO: ./components/checkbox.css 
+   ========================================== */
+
+/* Container do Checkbox Customizado */
+.checkbox-wrapper {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+  }
+  
+  /* Esconde o checkbox nativo */
+  .checkbox-wrapper input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  /* O quadrado do checkbox (Estado Desmarcado) */
+  .checkmark {
+    height: 20px;
+    width: 20px;
+    background-color: var(--color-neutral-500);
+    border: 2px solid var(--color-neutral-400);
+    border-radius: var(--border-radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease-in-out;
+    margin-right: 8px; /* Espaço para o texto, se houver */
+  }
+  
+  /* Efeito de Hover */
+  .checkbox-wrapper:hover input ~ .checkmark {
+    border-color: var(--color-primary-300);
+    background-color: var(--color-neutral-400);
+  }
+  
+  /* Estado Marcado (Checked) */
+  .checkbox-wrapper input:checked ~ .checkmark {
+    background-color: var(--color-secondary-300); /* Verde Menta */
+    border-color: var(--color-secondary-400);
+  }
+  
+  /* O ícone de "check" (V) - Criado com CSS */
+  .checkmark::after {
+    content: "";
+    display: none;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2.5px 2.5px 0;
+    transform: rotate(45deg);
+    margin-bottom: 2px;
+  }
+  
+  /* Mostra o ícone quando marcado */
+  .checkbox-wrapper input:checked ~ .checkmark::after {
+    display: block;
+  }
+  
+  /* Foco para Acessibilidade (Navegação via teclado) */
+  .checkbox-wrapper input:focus-visible ~ .checkmark {
+    box-shadow: 0 0 0 3px rgba(67, 181, 132, 0.3);
+    border-color: var(--color-secondary-300);
+  }

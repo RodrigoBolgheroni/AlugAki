@@ -1,0 +1,297 @@
+/* ===== LAYOUT PRINCIPAL - FLEX (SIDEBAR + CONTENT) ===== */
+body {
+  display: flex;
+  min-height: 100vh;
+  margin: 0;
+  background: var(--color-neutral-500);
+  font-family: var(--font-primary);
+  color: var(--color-neutral-100);
+}
+
+/* Sidebar container */
+#sidebar-container {
+  width: 320px;
+  height: 100vh;
+  background: #252525;
+  flex-shrink: 0;
+  transition: width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  overflow: hidden;
+}
+
+/* Sidebar recolhida */
+#sidebar-container.collapsed {
+  width: 80px;
+}
+
+/* Conteúdo principal */
+.page-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Main content - com espaço para header fixo */
+.main-principal {
+  flex: 1;
+  background: var(--color-neutral-400);
+  border-radius: 24px 24px 0 0;
+  padding: 40px;
+  margin: 90px 20px 20px 20px; /* top = header height + gap */
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.05);
+  overflow-y: auto;
+}
+
+/* Scrollbar customizada */
+.main-principal::-webkit-scrollbar {
+  width: 8px;
+}
+.main-principal::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+.main-principal::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+}
+.main-principal::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* ===== BREADCRUMB ===== */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--color-neutral-200);
+  margin-bottom: 10px;
+}
+
+.breadcrumb a {
+  color: var(--color-neutral-200);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.breadcrumb a:hover {
+  color: var(--color-neutral-100);
+}
+
+.breadcrumb i {
+  font-size: 12px;
+  color: var(--color-neutral-300);
+}
+
+/* ===== PAGE HEADER ===== */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.page-title,
+.page-header h1 {
+  font-family: var(--font-primary);
+  font-size: 36px;
+  font-weight: 600;
+  color: var(--color-neutral-100);
+  margin: 0;
+}
+
+.header-actions {
+  display: flex;
+  gap: 12px;
+}
+
+/* Botões do header */
+.btn-criar {
+  background: var(--color-primary-300);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-family: var(--font-primary);
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s;
+  text-decoration: none;
+  border: none;
+}
+
+.btn-criar:hover {
+  background: var(--color-primary-400);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(63, 154, 177, 0.3);
+}
+
+.btn-secondary {
+  background: var(--color-neutral-400);
+  color: var(--color-neutral-100);
+  border: 1px solid var(--color-neutral-300);
+  padding: 12px 24px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-secondary:hover {
+  background: var(--color-neutral-300);
+}
+
+/* ===== TOOLBAR (pesquisa na tabela) ===== */
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  background: #2a2a2a;
+  border-bottom: 1px solid var(--color-neutral-400);
+}
+
+.search-box {
+  position: relative;
+  width: 300px;
+}
+
+.search-box i {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-neutral-200);
+}
+
+.search-box input {
+  width: 100%;
+  padding: 10px 14px 10px 40px;
+  border: 1px solid var(--color-neutral-400);
+  border-radius: 10px;
+  background: var(--color-neutral-500);
+  color: var(--color-neutral-100);
+  outline: none;
+}
+
+.search-box input:focus {
+  border-color: var(--color-primary-300);
+}
+
+/* ===== RESPONSIVO ===== */
+@media (max-width: 768px) {
+  .page-header,
+  .toolbar {
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+  }
+
+  .search-box {
+    width: 100%;
+  }
+
+  .main-principal {
+    padding: 20px;
+    margin-top: 90px;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-radius: 20px;
+  }
+}
+
+/* Mobile - sidebar sobrepõe */
+@media (max-width: 1024px) {
+  body {
+    flex-direction: column;
+  }
+
+  #sidebar-container {
+    position: fixed;
+    left: -320px;
+    z-index: 1000;
+    transition: left 0.4s ease;
+  }
+
+  #sidebar-container.open {
+    left: 0;
+  }
+
+  .page-container {
+    margin-left: 0;
+  }
+
+  .main-principal {
+    margin: 90px 10px 10px 10px;
+    border-radius: 20px;
+  }
+}
+.ambiente-container {
+  padding: 20px;
+  background: #2b2b2b;
+  border-radius: 12px;
+  border: 1px solid var(--color-neutral-400);
+  margin-bottom: 20px;
+}
+.ambiente-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.ambiente-header h2 {
+  font-family: var(--font-primary);
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--color-neutral-100);
+}
+.form-row.ambiente-info {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+/* Nome do ambiente um pouco menor */
+.ambiente-nome input {
+  max-width: 420px;
+}
+
+/* Textbox grande de comentários */
+.ambiente-comentarios textarea {
+  width: 100%;
+  min-height: 110px;
+  resize: vertical;
+}
+.item-row {
+  display: grid;
+  grid-template-columns: 1.5fr 0.7fr 1fr 1fr 2fr 60px 40px;
+  gap: 12px;
+  margin-bottom: 12px;
+  align-items: center; /* Alinha o CENTRO vertical de todos os itens */
+}
+
+/* 2. Resetar margens de TODOS os itens dentro da linha */
+.item-row > * {
+  margin: 0 !important; /* Remove margens externas que causam desalinhamento */
+  align-self: center;   /* Reforça o alinhamento vertical */
+}
+
+/* 3. Inputs e Selects */
+.item-row input,
+.item-row select {
+  height: 42px !important;       /* Altura Total */
+  line-height: 38px !important;  /* Altura da linha (42px - 4px de borda) para centralizar texto */
+  padding: 0 12px !important;
+  background: var(--color-neutral-500);
+  color: var(--color-neutral-100);
+  border: 2px solid var(--color-neutral-400) !important;
+  border-radius: 8px;
+  box-sizing: border-box !important;
+  width: 100%;
+  outline: none;
+  display: block; /* Evita comportamento de linha de base de texto */
+}

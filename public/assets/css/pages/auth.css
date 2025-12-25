@@ -1,0 +1,443 @@
+  .main-login {
+    width: 100%;
+    min-height: 100vh; 
+    background-color: var(--color-neutral-500);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px; 
+    overflow-x: hidden; 
+    overflow-y: auto; 
+}
+
+
+.div-login {
+    background-color: var(--color-neutral-400);
+    border-radius: 16px;
+    padding: 40px;
+    width: 90%;
+    max-width: 420px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.logo-login {
+    width: 100px;
+    max-width: 100%;
+    height: auto;
+}
+
+
+.login-box {
+    width: 100%;
+    text-align: center;
+}
+
+.logo-login {
+    width: 100px;
+}
+
+/* ----------- TÍTULOS E TEXTOS ----------- */
+
+.titulo-login {
+    font-family: var(--font-primary);
+    color: var(--color-neutral-100);
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.subtitulo-login {
+    font-family: var(--font-secondary);
+    color: var(--color-neutral-200);
+    margin-top: 20px;
+    text-align: center;
+}
+/* ----------- CAMPO SENHA ----------- */
+
+.campo-senha {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.link-esqueci {
+  font-family: var(--font-secondary);
+  color: var(--color-secondary-300);
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
+.link-esqueci:hover {
+  color: var(--color-secondary-100);
+}
+
+/* ----------- CHECKBOX ----------- */
+
+.lembrar {
+  display: flex;
+  align-items: center;
+  margin: 14px 0;
+  color: var(--color-neutral-200);
+  font-family: var(--font-secondary);
+}
+
+.lembrar input {
+  margin-right: 6px;
+}
+
+/* ----------- BOTÕES ----------- */
+
+/* Container divisor "ou" */
+.ou-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1.5rem 0;
+  color: #777;
+  font-size: 0.9rem;
+}
+
+.ou-container .linha {
+  height: 1px;
+  width: 30%;
+  background-color: #ddd;
+  margin: 0 10px;
+}
+
+
+
+.google-icon {
+  width: 20px;
+  height: 20px;
+}
+.tipo-usuario {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  color: var(--color-neutral-100);
+  font-family: var(--font-secondary);
+}
+
+.tipo-usuario input {
+  margin-right: 6px;
+}
+
+
+
+.divisor {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-neutral-200);
+  margin: 15px 0;
+  font-size: 0.9rem;
+}
+
+.divisor::before, .divisor::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid var(--color-neutral-300);
+  margin: 0 10px;
+}
+
+
+
+.link-criar-conta {
+  font-family: var(--font-secondary);
+  color: var(--color-secondary-300);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.link-criar-conta:hover {
+
+  color: var(--color-secondary-100);
+}
+
+
+
+/* AUTH/EMPRESA /*
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 20px;
+    font-weight: 600;
+    position: relative;
+    height: 45px; 
+  }
+  
+  .logo-icone-img {
+    width: 50px;
+    height: 45px;
+    flex-shrink: 0;
+    display: block; 
+    object-fit: contain; 
+  }
+  
+  .logo-escrita-img {
+    width: 130px;
+    height: 45px;
+    padding-top: 30px;
+    transition: all 0.3s ease;
+  }
+
+/* ===== LAYOUT ===== */
+.body-empresa  {
+  background: #1a1a1a;
+  font-family: var(--font-primary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.container-cadastro {
+  display: flex;
+  width: 100%;
+  max-width: 1100px;
+  background: var(--color-bg-dark);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+
+/* ===== SIDEBAR ===== */
+.sidebar-steps {
+  width: 320px;
+  background: #1f1f1f;
+  padding: 40px 30px;
+  color: var(--color-text-light);
+}
+
+.logo-empresa-login {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 40px;
+}
+
+.steps-list {
+  list-style: none;
+  padding: 0;
+}
+
+.steps-list li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 25px;
+  color: var(--color-text-medium);
+  font-family: var(--font-secondary);
+  font-size: 0.95rem;
+}
+
+.steps-list li .circle {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid var(--color-text-medium);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 12px;
+}
+
+.steps-list li.active {
+  color: var(--color-primary);
+}
+
+.steps-list li.active .circle {
+  border-color: var(--color-primary);
+}
+
+/* ===== ÁREA DO FORMULÁRIO ===== */
+.content {
+  flex: 1;
+  padding: 50px 60px;
+  color: var(--color-text-light);
+}
+
+.content h1 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.descricao {
+  color: var(--color-text-medium);
+  margin-bottom: 40px;
+}
+
+/* ===== CAMPOS ===== */
+.formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.campo label {
+  font-weight: 600;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.campo span {
+  color: #E96C6C;
+}
+
+.campo input,
+.campo select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  background: var(--color-bg-light);
+  border: 2px solid #3d3d3d;
+  color: var(--color-text-light);
+  font-family: var(--font-secondary);
+}
+
+.campo input:focus,
+.campo select:focus {
+  border-color: var(--color-primary);
+}
+
+/* ===== CAMPOS DUPLOS ===== */
+.campo-duplo {
+  display: flex;
+  gap: 40px;
+}
+
+.campo-duplo .campo {
+  flex: 1;
+}
+
+/* ===== BOTÃO ===== */
+.btn-proximo {
+  padding: 14px;
+  border: none;
+  background: var(--color-primary);
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background .2s ease;
+}
+
+.btn-proximo:hover {
+  background: var(--color-primary-dark);
+}
+
+/* ===== CARDS DE TIPO DE USUÁRIO ===== */
+/* ===== SELETOR: PESSOA FÍSICA / PESSOA JURÍDICA ===== */
+.tipo-usuario-container {
+  display: flex;
+  gap: 25px;
+  margin: 30px 0 40px;
+}
+
+.tipo-opcao {
+  flex: 1;
+  cursor: pointer;
+}
+
+.tipo-opcao input {
+  display: none;
+}
+
+.option-box {
+  background: var(--color-bg-light);
+  border: 2px solid #3d3d3d;
+  border-radius: 14px;
+
+  padding: 35px 25px;
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+
+  transition: 0.25s ease;
+}
+
+/* Ícones */
+.option-box i {
+  font-size: 2.5rem;
+  color: var(--color-primary);
+}
+
+/* Texto */
+.option-box span {
+  font-size: 1.1rem;
+  font-weight: 600;
+  font-family: var(--font-secondary);
+  color: var(--color-text-light);
+}
+
+/* Hover (melhora a UX) */
+.tipo-opcao:hover .option-box {
+  border-color: var(--color-primary);
+  background: #3a3a3a;
+  transform: translateY(-3px);
+}
+
+/* Quando selecionado */
+.tipo-opcao input:checked + .option-box {
+  border-color: var(--color-primary);
+  background: #2f2f2f;
+  box-shadow: 0 0 12px rgba(67, 181, 132, 0.4);
+  transform: translateY(-5px);
+}
+
+.upload-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.upload-area {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: #161616; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  overflow: hidden;
+  padding: 10px;
+  transition: .2s;
+}
+
+.upload-area:hover {
+  border-color: #3ecf83;
+  background: #1e1e1e;
+}
+.upload-area:hover .clique-aqui{
+  color: #3ecf83;
+}
+
+.upload-text {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.upload-text strong {
+  color: #fff;
+}
+
+.preview-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
