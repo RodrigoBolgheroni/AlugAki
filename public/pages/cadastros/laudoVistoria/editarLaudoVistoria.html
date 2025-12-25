@@ -3,578 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AlugAki - Novo Laudo de Vistoria</title>
+    <title>AlugAki - Editar Laudo de Vistoria</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <link rel="stylesheet" href="../assets/css/novo.css">
-    <link rel="stylesheet" href="../components/style.css">
-    <link rel="stylesheet" href="../assets/css/inventario.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
     
-    <style>
-        /* ===================================================================== */
-        /* CORREÇÃO COMPLETA - ALINHAMENTO COM INVENTARIO.CSS                   */
-        /* ===================================================================== */
 
-        /* Info do Ambiente */
-.form-row.ambiente-info {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    margin-bottom: 20px;
-}
-
-/* Nome do ambiente um pouco menor */
-.ambiente-nome input {
-    max-width: 420px;
-}
-
-/* Textbox grande de comentários */
-.ambiente-comentarios textarea {
-    width: 100%;
-    min-height: 110px;
-    resize: vertical;
-}
-
-        
-        /* 1. Form Container - Identico ao inventario */
-        .form-container {
-            background: #2a2a2a;
-            border-radius: 16px;
-            padding: 32px;
-            margin-bottom: 20px;
-        }
-        
-        /* 2. Form Section - Padronização */
-        .form-section {
-            padding-bottom: 32px;
-            margin-bottom: 32px;
-            border-bottom: 1px solid var(--color-neutral-400);
-        }
-        
-        .form-section:last-of-type {
-            border-bottom: none;
-            padding-bottom: 0;
-            margin-bottom: 0;
-        }
-        
-        /* Section Header */
-        .section-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 24px;
-        }
-        
-        .section-number {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background: var(--color-primary-300);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            font-size: 18px;
-            flex-shrink: 0;
-        }
-        
-        .section-header h2 {
-            font-family: var(--font-primary);
-            font-size: 20px;
-            font-weight: 600;
-            color: var(--color-neutral-100);
-            margin: 0;
-        }
-        
-        /* 3. Ambiente Container - Identico ao inventario */
-        .ambiente-container {
-            padding: 20px;
-            background: #2b2b2b;
-            border-radius: 12px;
-            border: 1px solid var(--color-neutral-400);
-            margin-bottom: 20px;
-        }
-        
-        .ambiente-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        
-        .ambiente-header h2 {
-            font-family: var(--font-primary);
-            font-size: 24px;
-            font-weight: 600;
-            color: var(--color-neutral-100);
-            margin: 0;
-        }
-        
-        /* 4. Botão Excluir Ambiente */
-        .btn-delete-division {
-            background: #b63434;
-            padding: 8px 14px;
-            border-radius: 8px;
-            border: none;
-            cursor: pointer;
-            display: flex;
-            color: white;
-            align-items: center;
-            gap: 6px;
-            font-size: 13px;
-            font-family: var(--font-primary);
-            font-weight: 600;
-            transition: all 0.2s;
-        }
-        
-        .btn-delete-division:hover {
-            background: #942929;
-            transform: translateY(-1px);
-        }
-        
-        /* 5. List Container para seções 2-6 */
-        .list-container {
-            margin-bottom: 15px;
-        }
-        
-        /* 6. Form Row para as seções 2-6 */
-        .list-container .form-row {
-            display: grid;
-            gap: 12px;
-            margin-bottom: 12px;
-            align-items: center;
-        }
-        
-        /* Reset de margens */
-        .list-container .form-row > * {
-            margin: 0 !important;
-        }
-        
-        /* Form Groups dentro do list-container */
-        .list-container .form-group {
-            margin-bottom: 0 !important;
-        }
-        
-        .list-container .form-group label {
-            font-size: 11px;
-            font-weight: 700;
-            color: var(--color-neutral-200);
-            margin-bottom: 6px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        
-        /* Inputs e Selects dentro das listas */
-        .list-container input,
-        .list-container select {
-            height: 40px !important;
-            line-height: 36px !important;
-            padding: 0 12px !important;
-            background: var(--color-neutral-500);
-            color: var(--color-neutral-100);
-            border: 2px solid var(--color-neutral-400) !important;
-            border-radius: 8px;
-            box-sizing: border-box !important;
-            width: 100%;
-            outline: none;
-            font-size: 14px;
-            display: block;
-        }
-        
-        .list-container input:focus,
-        .list-container select:focus {
-            border-color: var(--color-primary-300);
-            background: var(--color-neutral-400);
-        }
-        
-        /* 7. Botões Adicionar (Secundários) - Identico ao inventario */
-        .btn-secondary {
-            background: transparent !important;
-            border: none !important;
-            color: var(--color-primary-300) !important;
-            font-family: var(--font-primary) !important;
-            font-weight: 600 !important;
-            font-size: 15px !important;
-            cursor: pointer;
-            padding: 10px 0;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            transition: all 0.2s;
-        }
-        
-        .btn-secondary:hover {
-            color: var(--color-primary-400) !important;
-        }
-        
-        .btn-secondary i {
-            font-size: 16px;
-        }
-        
-        /* 8. Títulos H3 dentro das seções */
-        .form-section h3 {
-            font-family: var(--font-primary);
-            font-size: 18px;
-            font-weight: 600;
-            color: var(--color-neutral-100);
-            margin: 30px 0 20px 0;
-        }
-        
-        /* ===================================================================== */
-        /* VISTORIA ITEMS (Ambientes) - Alinhamento perfeito com inventario     */
-        /* ===================================================================== */
-        
-        /* Container da tabela de vistoria */
-        .vistoria-table {
-            margin-bottom: 20px;
-        }
-        
-        /* Linha de Item de Vistoria */
-        .vistoria-item-row {
-            display: grid;
-            gap: 12px;
-            padding: 0;
-            margin-bottom: 12px;
-            align-items: center;
-            border-bottom: none;
-        }
-        
-        /* Header da tabela (labels) */
-        .vistoria-item-row:first-child {
-            font-weight: bold;
-            border-bottom: 2px solid var(--color-neutral-300);
-            padding-bottom: 12px;
-            margin-bottom: 16px;
-        }
-        
-        .vistoria-item-row:first-child > div {
-            font-size: 11px;
-            font-weight: 700;
-            color: var(--color-neutral-200);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        
-        /* Reset de margens */
-        .vistoria-item-row > * {
-            margin: 0 !important;
-            align-self: center;
-        }
-        
-        /* Inputs dentro da tabela de vistoria */
-        .vistoria-item-row input,
-        .vistoria-item-row select {
-            height: 40px !important;
-            line-height: 36px !important;
-            padding: 0 12px !important;
-            background: var(--color-neutral-500);
-            color: var(--color-neutral-100);
-            border: 2px solid var(--color-neutral-400) !important;
-            border-radius: 8px;
-            box-sizing: border-box !important;
-            width: 100%;
-            outline: none;
-            font-size: 14px;
-            display: block;
-        }
-        
-        .vistoria-item-row input:focus,
-        .vistoria-item-row select:focus {
-            border-color: var(--color-primary-300);
-            background: var(--color-neutral-400);
-        }
-        
-        /* 9. Botão Upload (Câmera) - Identico ao inventario */
-        .btn-upload-image {
-            height: 40px !important;
-            width: 100%;
-            padding: 0 !important;
-            margin: 0 !important;
-            background: var(--color-neutral-400);
-            border: 2px solid var(--color-neutral-300) !important;
-            border-radius: 8px;
-            cursor: pointer;
-            display: flex !important;
-            align-items: center;
-            justify-content: center;
-            color: var(--color-neutral-200);
-            box-sizing: border-box !important;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.2s;
-        }
-        
-        .btn-upload-image:not(.has-image):hover {
-            background: var(--color-neutral-300);
-            border-color: var(--color-primary-300) !important;
-            color: var(--color-primary-300);
-        }
-        
-        /* Quando tiver imagem */
-        .btn-upload-image.has-image {
-            background-color: transparent !important;
-            border: none !important;
-            background-size: cover !important;
-            background-position: center center !important;
-            background-repeat: no-repeat !important;
-        }
-        
-        .btn-upload-image.has-image i {
-            display: none;
-        }
-        
-        .btn-upload-image.has-image::after {
-            content: '\f021';
-            font-family: "Font Awesome 6 Free";
-            font-weight: 900;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.6);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.2s;
-        }
-        
-        .btn-upload-image.has-image:hover::after {
-            opacity: 1;
-        }
-        
-        .btn-upload-image input[type="file"] {
-            display: none;
-        }
-        
-        /* Preview Tooltip */
-        .image-preview {
-            position: absolute;
-            bottom: 110%;
-            left: 50%;
-            transform: translateX(-50%);
-            padding: 8px;
-            background: #1a1a1a;
-            border: 2px solid var(--color-neutral-400);
-            border-radius: 8px;
-            display: none;
-            z-index: 1000;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-            pointer-events: none;
-        }
-        
-        .btn-upload-image.has-image:hover .image-preview {
-            display: block;
-        }
-        
-        .image-preview img {
-            width: 200px;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 6px;
-            display: block;
-        }
-        
-        .image-preview-text {
-            display: none;
-        }
-        
-        /* 10. Botão Remover (Lixeira) - Identico ao inventario */
-        .btn-remove-item {
-            height: 40px !important;
-            width: 100%;
-            padding: 0 !important;
-            margin: 0 !important;
-            background: #b63434;
-            border: 2px solid transparent !important;
-            border-radius: 8px;
-            cursor: pointer;
-            display: flex !important;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            box-sizing: border-box !important;
-            transition: all 0.2s;
-        }
-        
-        .btn-remove-item:hover {
-            background: #942929;
-            transform: translateY(-1px);
-        }
-        
-        /* 11. Botão Adicionar Item - Identico ao inventario */
-        .btn-add-item {
-            background: var(--color-primary-300);
-            border: none;
-            padding: 10px 16px;
-            border-radius: 8px;
-            cursor: pointer;
-            color: white;
-            font-size: 14px;
-            font-family: var(--font-primary);
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            transition: all 0.2s;
-            margin-top: 15px;
-        }
-        
-        .btn-add-item:hover {
-            background: var(--color-primary-400);
-            transform: translateY(-1px);
-        }
-        
-        /* ===================================================================== */
-        /* DRAG HANDLE - BOTÃO DE ARRASTAR                                      */
-        /* ===================================================================== */
-        
-        .drag-handle {
-            height: 40px !important;
-            width: 100%;
-            padding: 0 !important;
-            margin: 0 !important;
-            background: var(--color-neutral-400);
-            border: 2px solid var(--color-neutral-300) !important;
-            border-radius: 8px;
-            cursor: grab;
-            display: flex !important;
-            align-items: center;
-            justify-content: center;
-            color: var(--color-neutral-200);
-            box-sizing: border-box !important;
-            transition: all 0.2s;
-        }
-        
-        .drag-handle:hover {
-            background: var(--color-neutral-300);
-            border-color: var(--color-primary-300) !important;
-            color: var(--color-primary-300);
-        }
-        
-        .drag-handle:active {
-            cursor: grabbing;
-        }
-        
-        /* Efeito de arrastar - Item fica semi-transparente */
-        .dragging {
-            opacity: 0.5 !important;
-            cursor: grabbing !important;
-        }
-        
-        /* Indicador sutil de onde o item será solto */
-        .drag-over {
-            position: relative;
-        }
-        
-        .drag-over::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--color-primary-300);
-            border-radius: 2px;
-            box-shadow: 0 0 8px rgba(63, 154, 177, 0.6);
-        }
-
-        
-        .drop-indicator.top::before {
-            top: -8px;
-        }
-        
-        .drop-indicator.bottom::before {
-            bottom: -8px;
-        }
-        
-        /* 12. Botão Nova Ambiente */
-        #btnAddAmbiente {
-            background: var(--color-primary-300) !important;
-            color: white !important;
-        }
-        
-        #btnAddAmbiente:hover {
-            background: var(--color-primary-400) !important;
-        }
-        
-        /* 13. Descrição dos inputs */
-        .desc-input {
-            font-size: 12px;
-            color: var(--color-neutral-300);
-            margin-top: 5px;
-            display: block;
-        }
-        
-        /* ===================================================================== */
-        /* GRIDS ESPECÍFICOS PARA CADA SEÇÃO                                    */
-        /* ===================================================================== */
-        
-        /* Seção 2 e 3: Leituras (6 colunas: Drag + 5 campos) */
-        #leituras-agua-gas-container .form-row,
-        #leituras-energia-container .form-row,
-        #aquecimento-container .form-row {
-            grid-template-columns: 40px 1fr 1fr 1fr 1fr 2fr;
-        }
-        
-        /* Seção 4: Água Quente (5 colunas: Drag + 4 campos) */
-        #agua-quente-container .form-row {
-            grid-template-columns: 40px 1fr 1fr 1fr 2fr;
-        }
-        
-        /* Seção 5: Outras Instalações (6 colunas: Drag + 5 campos) */
-        #outras-instalacoes-container .form-row {
-            grid-template-columns: 40px 2fr 1fr 1fr 1fr 2fr;
-        }
-        
-        /* Seção 6: Chaves (6 colunas: Drag + 5 campos) */
-        #chaves-container .form-row {
-            grid-template-columns: 40px 2fr 1fr 1fr 1fr 2fr;
-        }
-        
-        /* Ambientes - Paredes/Teto/Chão (7 colunas: Drag + Item, Condição, Operação, Comentários, Foto, Remover) */
-        .vistoria-table[id^="paredes-teto-chao-container"] .vistoria-item-row {
-            grid-template-columns: 40px 2fr 1fr 1fr 2fr 50px 40px;
-        }
-        
-        /* Ambientes - Equipamentos (8 colunas: Drag + Item, Material, Condição, Operação, Comentários, Foto, Remover) */
-        .vistoria-table[id^="equipamentos-container"] .vistoria-item-row {
-            grid-template-columns: 40px 1.5fr 1fr 1fr 1fr 2fr 50px 40px;
-        }
-        
-        /* ===================================================================== */
-        /* RESPONSIVO                                                            */
-        /* ===================================================================== */
-        
-        @media (max-width: 768px) {
-            .main-principal {
-                padding: 20px;
-            }
-            
-            .tabs-nav {
-                overflow-x: auto;
-            }
-            
-            .form-row,
-            .vistoria-item-row,
-            .list-container .form-row {
-                grid-template-columns: 1fr !important;
-            }
-            
-            .form-actions {
-                flex-direction: column;
-                padding: 20px;
-            }
-            
-            .btn-cancel {
-                margin-left: 0;
-            }
-        }
-    </style>
 </head>
 
 <body>
@@ -589,14 +23,16 @@
     <div class="breadcrumb">
         <a href="#">Laudos de Vistoria</a>
         <i class="fas fa-chevron-right"></i>
-        <span>Novo</span>
+        <span>Editar</span>
     </div>
 
     <div class="page-header">
-        <h1>Novo Laudo de Vistoria</h1>
+        <h1>Editar Laudo de Vistoria</h1>
     </div>
 
     <div class="tabs-nav" id="tabsNav">
+        <!-- NOVA TAB: VISÃO GERAL -->
+
         <button class="tab-nav-btn active" data-tab="geral">
             <i class="fas fa-clipboard-check"></i> Informações Gerais
         </button>
@@ -610,9 +46,19 @@
         <button class="tab-nav-btn" data-tab="assinatura">
           <i class="fas fa-signature"></i> Assinatura
         </button>
+        <button class="tab-nav-btn " data-tab="visao-geral">
+            <i class="fas fa-file"></i> Visão Geral
+        </button>
     </div>
 
-    <div id="tab-geral" class="tab-pane active">
+    <!-- NOVA TAB VISÃO GERAL (vazia) -->
+    <div id="tab-visao-geral" class="tab-pane active">
+        <div class="form-container">
+            <!-- Conteúdo da Visão Geral pode ser adicionado aqui no futuro -->
+        </div>
+    </div>
+
+    <div id="tab-geral" class="tab-pane">
         <div class="form-container">
             
             <div class="form-section">
@@ -972,8 +418,8 @@
 </main>
 </div>
 
-<script src="../assets/js/sidebar-loader.js"></script>
-<script src="../assets/js/dark-mode.js"></script>
+<script src="/assets/js/sidebar-loader.js"></script>
+<script src="/assets/js/dark-mode.js"></script>
 
 <script>
     /* ---------------------- VARIÁVEIS E CONSTANTES ---------------------- */
@@ -1327,7 +773,7 @@
         div.querySelector(".btn-delete-division").onclick = () => {
             tabBtn.remove();
             div.remove();
-            document.querySelector('[data-tab="geral"]').click();
+            document.querySelector('[data-tab="visao-geral"]').click();
         };
 
         // Adicionar item para Paredes/Teto/Chão
@@ -1354,7 +800,6 @@
         
         let fields = '';
         if (tipo === 'completo') {
-            // Layout para Equipamentos/Mobiliário (7 colunas)
             fields = `
                 <div class="drag-handle">
                     <i class="fas fa-arrows-up-down-left-right"></i>
@@ -1366,7 +811,6 @@
                 <input type="text" placeholder="Comentários">
             `;
         } else {
-            // Layout para Paredes, Teto, Chão (6 colunas)
             fields = `
                 <div class="drag-handle">
                     <i class="fas fa-arrows-up-down-left-right"></i>
@@ -1438,9 +882,8 @@
     function handleDragEnd(e) {
         this.classList.remove('dragging');
         
-        // Remove todos os estilos de drag-over
-        document.querySelectorAll('.drag-over-top, .drag-over-bottom').forEach(el => {
-            el.classList.remove('drag-over-top', 'drag-over-bottom');
+        document.querySelectorAll('.drag-over').forEach(el => {
+            el.classList.remove('drag-over');
         });
     }
     
@@ -1450,9 +893,7 @@
         }
         e.dataTransfer.dropEffect = 'move';
         
-        // Adiciona visual em tempo real enquanto arrasta
         if (this !== draggedElement && (this.classList.contains('form-row') || this.classList.contains('vistoria-item-row'))) {
-            // Remove de todos primeiro
             document.querySelectorAll('.drag-over').forEach(el => {
                 if (el !== this) el.classList.remove('drag-over');
             });
@@ -1463,11 +904,9 @@
     }
     
     function handleDragEnter(e) {
-        // Lógica movida para handleDragOver para melhor responsividade
     }
     
     function handleDragLeave(e) {
-        // Só remove se realmente saiu (não é um elemento filho)
         if (!this.contains(e.relatedTarget)) {
             this.classList.remove('drag-over');
         }
@@ -1479,11 +918,9 @@
         }
         
         if (draggedElement !== this && (this.classList.contains('form-row') || this.classList.contains('vistoria-item-row'))) {
-            // Sempre insere antes do elemento alvo (mais previsível)
             this.parentNode.insertBefore(draggedElement, this);
         }
         
-        // Remove todos os indicadores
         document.querySelectorAll('.drag-over').forEach(el => {
             el.classList.remove('drag-over');
         });
@@ -1498,7 +935,6 @@
         });
     });
     
-    // Setup drag and drop imediato para os elementos que já existem
     document.querySelectorAll('.form-row[draggable="true"], .vistoria-item-row[draggable="true"]').forEach(element => {
         setupDragAndDrop(element);
     });

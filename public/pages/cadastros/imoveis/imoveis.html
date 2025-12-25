@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AlugAki - Home</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+<body>
+  <div id="sidebar-container">
+    <div class="sidebar-loading">Carregando...</div>
+  </div>
+  <div class="page-container">
+    <main class="main-principal">
+        <div class="breadcrumb">
+          <a href="/pages/imoveis.html">Imóveis</a>
+          <i class="fas fa-chevron-right"></i>
+          <span>Listar</span>
+        </div>
+        <div class="page-header">
+          <h1 class="page-title">Imóveis</h1>
+          <div class="header-actions">
+            <button class="btn btn-secondary">
+              <i class="fas fa-file-export"></i>
+              Exportar
+            </button>
+            <a href="novoImovel.html" class="btn-criar">
+              <i class="fas fa-plus"></i>
+              Novo Imóvel
+            </a>
+          </div>
+        </div>
+        <div class="filtros-stats">
+          <div class="filters-section">
+            <div class="filters-row">
+              <select class="filter-select">
+                <option>Todos os tipos</option>
+                <option>Apartamento</option>
+                <option>Casa</option>
+                <option>Kitnet</option>
+                <option>Comercial</option>
+              </select>
+              <select class="filter-select">
+                <option>Com e sem aluguel</option>
+                <option>Apenas alugados</option>
+                <option>Apenas disponíveis</option>
+              </select>
+              <select class="filter-select">
+                <option>Todos os status</option>
+                <option>Disponível</option>
+                <option>Alugado</option>
+                <option>Manutenção</option>
+              </select>
+            </div>
+          </div>
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon">
+                <i class="fas fa-home"></i>
+              </div>
+              <div class="stat-content">
+                <div class="stat-label">Alugado / Não Alugado</div>
+                <div class="stat-value">0 / 1</div>
+              </div>
+            </div>
+    
+            <div class="stat-card">
+              <div class="stat-icon">
+                <i class="fas fa-coins"></i>
+              </div>
+              <div class="stat-content">
+                <div class="stat-label">Valor do Aluguel</div>
+                <div class="stat-value">R$ 0,00</div>
+              </div>
+            </div>
+    
+            <div class="stat-card">
+              <div class="stat-icon">
+                <i class="fas fa-chart-line"></i>
+              </div>
+              <div class="stat-content">
+                <div class="stat-label">Valor dos Ativos</div>
+                <div class="stat-value">R$ 0,00</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tabela-container">
+          <div class="toolbar">
+            <div class="search-box">
+              <i class="fas fa-search"></i>
+              <input type="text" placeholder="Pesquisar">
+            </div>
+            <div class="toolbar-actions">
+              <button class="filter-btn">
+                <i class="fas fa-filter"></i>
+                <span class="filter-count">0</span>
+              </button>
+              <button class="view-btn">
+                <i class="fas fa-th-large"></i>
+              </button>
+            </div>
+          </div>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th><input type="checkbox"></th>
+                  <th>Unidade</th>
+                  <th>Tipo</th>
+                  <th>Situação</th>
+                  <th>Unidade</th>
+                  <th>Contrato</th>
+                  <th>Aluguel</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><input type="checkbox"></td>
+                  <td>
+                    <div class="property-info">
+                      <div class="property-avatar">P1</div>
+                      <div class="property-details">
+                        <span class="property-name">Nova propriedade</span>
+                        <span class="property-address"><i class="fas fa-location-dot"></i> Rua Lourdes Reina - 03438050 São Paulo Brasil</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Apartamento</td>
+                  <td><span class="badge badge-success">Disponível</span></td>
+                  <td>-</td>
+                  <td>F2TJ-WTH</td>
+                  <td><span class="price">R$ 0,00</span></td>
+                  <td>
+                    <div class="actions-cell">
+                      <div class="action-btn">
+                        <i class="fas fa-ellipsis-v"></i>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+    </main>
+  </div>
+
+  <script src="/assets/js/main.js"></script>
+  <script src="/assets/js/dark-mode.js"></script>
+  <script src="/assets/js/sidebar-loader.js"></script>
+</body>
+</html>

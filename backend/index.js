@@ -3,6 +3,7 @@ import bcbRoutes from "./routes/bcb.routes.js";
 import ufRoutes from "./routes/uf.routes.js";
 import cepRoutes from "./routes/cep.routes.js";
 import tipoimovelRoutes from "./routes/tipoimovel.routes.js";
+import statusalocacaoRoutes from "./routes/statusalocacao.routes.js";
 
 
 export default (app) => {
@@ -11,10 +12,9 @@ export default (app) => {
   app.use("/api", router);
 
   router.use("/bcb", bcbRoutes);
-
   router.use("/uf", ufRoutes);
-
   router.use("/cep", cepRoutes);
-  
   router.use("/tipoimovel", tipoimovelRoutes);
+  router.use("/statusalocacao", statusalocacaoRoutes);
+
 };

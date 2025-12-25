@@ -6,75 +6,8 @@
   <title>AlugAki - Novo Inventário</title>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/novo.css">
-  <link rel="stylesheet" href="../components/style.css">
-  <link rel="stylesheet" href="../assets/css/inventario.css">
-  
-  <style>
-    /* ===================================================================== */
-    /* DRAG HANDLE - BOTÃO DE ARRASTAR                                      */
-    /* ===================================================================== */
-    
-    .drag-handle {
-        height: 40px !important;
-        width: 100%;
-        padding: 0 !important;
-        margin: 0 !important;
-        background: var(--color-neutral-400);
-        border: 2px solid var(--color-neutral-300) !important;
-        border-radius: 8px;
-        cursor: grab;
-        display: flex !important;
-        align-items: center;
-        justify-content: center;
-        color: var(--color-neutral-200);
-        box-sizing: border-box !important;
-        transition: all 0.2s;
-    }
-    
-    .drag-handle:hover {
-        background: var(--color-neutral-300);
-        border-color: var(--color-primary-300) !important;
-        color: var(--color-primary-300);
-    }
-    
-    .drag-handle:active {
-        cursor: grabbing;
-    }
-    
-    /* Efeito visual ao arrastar - Item fica transparente */
-        /* Efeito de arrastar - Item fica semi-transparente */
-        /* Efeito de arrastar - Item fica semi-transparente */
-        .dragging {
-            opacity: 0.5 !important;
-            cursor: grabbing !important;
-        }
-        
-        /* Indicador sutil de onde o item será solto */
-        .drag-over {
-            position: relative;
-        }
-        
-        .drag-over::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--color-primary-300);
-            border-radius: 2px;
-            box-shadow: 0 0 8px rgba(63, 154, 177, 0.6);
-        }
-        
-        /* Atualização do Grid para incluir coluna de drag */
-        .item-row {
-          display: grid;
-          grid-template-columns: 40px 1.5fr 0.7fr 1fr 1fr 2fr 60px 40px;
-          gap: 12px;
-    }
-  </style>
+  <link rel="stylesheet" href="/assets/css/main.css">
+
 </head>
 
 <body>
@@ -222,8 +155,8 @@
 </main>
 </div>
 
-<script src="../assets/js/sidebar-loader.js"></script>
-<script src="../assets/js/dark-mode.js"></script>
+<script src="/assets/js/sidebar-loader.js"></script>
+<script src="/assets/js/dark-mode.js"></script>
 
 <script>
     /* ---------------------- SISTEMA DE TABS ---------------------- */

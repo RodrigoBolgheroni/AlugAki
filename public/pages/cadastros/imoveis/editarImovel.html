@@ -7,9 +7,7 @@
   <title>AlugAki - Editar Imóvel</title>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../components/style.css">
-  <link rel="stylesheet" href="../assets/css/editar.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
 </head>
 
 <body>
@@ -89,13 +87,9 @@
             <div class="form-row full">
               <div class="form-group">
                 <label>Tipo do Imóvel <span class="required">*</span></label>
-                <select>
-                  <option>Selecione</option>
-                  <option>Casa</option>
-                  <option>Apartamento</option>
-                  <option>Kitnet</option>
-                  <option>Sala Comercial</option>
-                </select>
+                <select id="tipoImovel">
+                  <option value="">Selecione o tipo</option>
+              </select>
               </div>
             </div>
           </div>
@@ -234,11 +228,8 @@
             <div class="form-row">
               <div class="form-group">
                 <label>Status da Alocação <span class="required">*</span></label>
-                <select>
-                  <option value="">Selecione</option>
-                  <option>Disponível</option>
-                  <option>Alugado</option>
-                  <option>Em manutenção</option>
+                <select class="statusalocacao-select" name="status_id" required>
+                  <option value="">Carregando...</option>
                 </select>
               </div>
 
@@ -733,9 +724,16 @@
     </div>
   </div>
 
-  <script src="../assets/js/modal-anexo.js"></script>
-  <script src="../assets/js/sidebar-loader.js"></script>
-  <script src="../assets/js/dark-mode.js"></script>
+  <script src="/assets/js/modal-anexo.js"></script>
+  <script src="/assets/js/sidebar-loader.js"></script>
+  <script src="/assets/js/dark-mode.js"></script>
+  <script src="/assets/js/carregar-statusalocacao.js"></script>
+  <script src="/assets/js/carregar-tipo-imovel.js"></script>
+  <script>
+      document.addEventListener('DOMContentLoaded', () => {
+          carregarTiposImovel('tipoImovel'); 
+      });
+  </script>
 </body>
 
 </html>

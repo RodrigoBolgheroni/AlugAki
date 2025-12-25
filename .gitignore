@@ -56,6 +56,9 @@ build/
 # Arquivos auxiliares do projeto
 # ===============================
 estrutura.txt
+*bkp
+*estilo-completo.css
+*estilo-unificado.css
 
 # ===============================
 # Coverage / testes

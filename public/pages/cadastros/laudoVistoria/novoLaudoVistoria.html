@@ -3,13 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AlugAki - Editar Laudo de Vistoria</title>
+    <title>AlugAki - Novo Laudo de Vistoria</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <link rel="stylesheet" href="../assets/css/novo.css">
-    <link rel="stylesheet" href="../components/style.css">
-    <link rel="stylesheet" href="../assets/css/inventario.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
     
     <style>
         /* ===================================================================== */
@@ -17,24 +14,24 @@
         /* ===================================================================== */
 
         /* Info do Ambiente */
-        .form-row.ambiente-info {
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-            margin-bottom: 20px;
-        }
+.form-row.ambiente-info {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 20px;
+}
 
-        /* Nome do ambiente um pouco menor */
-        .ambiente-nome input {
-            max-width: 420px;
-        }
+/* Nome do ambiente um pouco menor */
+.ambiente-nome input {
+    max-width: 420px;
+}
 
-        /* Textbox grande de comentários */
-        .ambiente-comentarios textarea {
-            width: 100%;
-            min-height: 110px;
-            resize: vertical;
-        }
+/* Textbox grande de comentários */
+.ambiente-comentarios textarea {
+    width: 100%;
+    min-height: 110px;
+    resize: vertical;
+}
 
         
         /* 1. Form Container - Identico ao inventario */
@@ -589,16 +586,14 @@
     <div class="breadcrumb">
         <a href="#">Laudos de Vistoria</a>
         <i class="fas fa-chevron-right"></i>
-        <span>Editar</span>
+        <span>Novo</span>
     </div>
 
     <div class="page-header">
-        <h1>Editar Laudo de Vistoria</h1>
+        <h1>Novo Laudo de Vistoria</h1>
     </div>
 
     <div class="tabs-nav" id="tabsNav">
-        <!-- NOVA TAB: VISÃO GERAL -->
-
         <button class="tab-nav-btn active" data-tab="geral">
             <i class="fas fa-clipboard-check"></i> Informações Gerais
         </button>
@@ -612,19 +607,9 @@
         <button class="tab-nav-btn" data-tab="assinatura">
           <i class="fas fa-signature"></i> Assinatura
         </button>
-        <button class="tab-nav-btn " data-tab="visao-geral">
-            <i class="fas fa-file"></i> Visão Geral
-        </button>
     </div>
 
-    <!-- NOVA TAB VISÃO GERAL (vazia) -->
-    <div id="tab-visao-geral" class="tab-pane active">
-        <div class="form-container">
-            <!-- Conteúdo da Visão Geral pode ser adicionado aqui no futuro -->
-        </div>
-    </div>
-
-    <div id="tab-geral" class="tab-pane">
+    <div id="tab-geral" class="tab-pane active">
         <div class="form-container">
             
             <div class="form-section">
@@ -984,8 +969,8 @@
 </main>
 </div>
 
-<script src="../assets/js/sidebar-loader.js"></script>
-<script src="../assets/js/dark-mode.js"></script>
+<script src="/assets/js/sidebar-loader.js"></script>
+<script src="/assets/js/dark-mode.js"></script>
 
 <script>
     /* ---------------------- VARIÁVEIS E CONSTANTES ---------------------- */
@@ -1339,7 +1324,7 @@
         div.querySelector(".btn-delete-division").onclick = () => {
             tabBtn.remove();
             div.remove();
-            document.querySelector('[data-tab="visao-geral"]').click();
+            document.querySelector('[data-tab="geral"]').click();
         };
 
         // Adicionar item para Paredes/Teto/Chão
@@ -1366,6 +1351,7 @@
         
         let fields = '';
         if (tipo === 'completo') {
+            // Layout para Equipamentos/Mobiliário (7 colunas)
             fields = `
                 <div class="drag-handle">
                     <i class="fas fa-arrows-up-down-left-right"></i>
@@ -1377,6 +1363,7 @@
                 <input type="text" placeholder="Comentários">
             `;
         } else {
+            // Layout para Paredes, Teto, Chão (6 colunas)
             fields = `
                 <div class="drag-handle">
                     <i class="fas fa-arrows-up-down-left-right"></i>
@@ -1448,8 +1435,9 @@
     function handleDragEnd(e) {
         this.classList.remove('dragging');
         
-        document.querySelectorAll('.drag-over').forEach(el => {
-            el.classList.remove('drag-over');
+        // Remove todos os estilos de drag-over
+        document.querySelectorAll('.drag-over-top, .drag-over-bottom').forEach(el => {
+            el.classList.remove('drag-over-top', 'drag-over-bottom');
         });
     }
     
@@ -1459,7 +1447,9 @@
         }
         e.dataTransfer.dropEffect = 'move';
         
+        // Adiciona visual em tempo real enquanto arrasta
         if (this !== draggedElement && (this.classList.contains('form-row') || this.classList.contains('vistoria-item-row'))) {
+            // Remove de todos primeiro
             document.querySelectorAll('.drag-over').forEach(el => {
                 if (el !== this) el.classList.remove('drag-over');
             });
@@ -1470,9 +1460,11 @@
     }
     
     function handleDragEnter(e) {
+        // Lógica movida para handleDragOver para melhor responsividade
     }
     
     function handleDragLeave(e) {
+        // Só remove se realmente saiu (não é um elemento filho)
         if (!this.contains(e.relatedTarget)) {
             this.classList.remove('drag-over');
         }
@@ -1484,9 +1476,11 @@
         }
         
         if (draggedElement !== this && (this.classList.contains('form-row') || this.classList.contains('vistoria-item-row'))) {
+            // Sempre insere antes do elemento alvo (mais previsível)
             this.parentNode.insertBefore(draggedElement, this);
         }
         
+        // Remove todos os indicadores
         document.querySelectorAll('.drag-over').forEach(el => {
             el.classList.remove('drag-over');
         });
@@ -1501,6 +1495,7 @@
         });
     });
     
+    // Setup drag and drop imediato para os elementos que já existem
     document.querySelectorAll('.form-row[draggable="true"], .vistoria-item-row[draggable="true"]').forEach(element => {
         setupDragAndDrop(element);
     });

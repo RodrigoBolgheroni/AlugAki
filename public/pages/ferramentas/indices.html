@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AlugAki - Índices de Inflação</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+
+</head>
+
+<body>
+  <div id="sidebar-container">
+    <div class="sidebar-loading">Carregando...</div>
+  </div>
+
+  <div class="page-container">
+    <main class="main-principal">
+
+      <div class="breadcrumb">
+        <a href="/dashboard.html">Dashboard</a>
+        <i class="fas fa-chevron-right"></i>
+        <span>Índices de Inflação</span>
+      </div>
+
+      <h1 class="page-title">Índices de Inflação</h1>
+
+      <div class="info-alert">
+        <div class="info-alert-icon">
+          <i class="fas fa-info"></i>
+        </div>
+        <div class="info-alert-content">
+          <h4>Informação</h4>
+          <p>
+            Aqui é listada a evolução mensal dos índices de inflação.
+            A atualização é feita via API, portanto a data de atualização
+            depende da publicação oficial dos órgãos responsáveis.
+          </p>
+        </div>
+      </div>
+      
+
+      <!-- Tabs -->
+      <div class="index-tabs">
+        <input type="radio" name="indice" id="ipca" value="ipca">
+        <label for="ipca">IPCA</label>
+
+        <input type="radio" name="indice" id="igpm" value="igpm" checked>
+        <label for="igpm">IGPM</label>
+
+        <input type="radio" name="indice" id="ipcbr" value="ipcbr">
+        <label for="ipcbr">IPC-BR</label>
+
+        <input type="radio" name="indice" id="igpdi" value="igpdi">
+        <label for="igpdi">IGP-DI</label>
+
+        <input type="radio" name="indice" id="inccdi" value="inccdi">
+        <label for="inccdi">INCC-DI</label>
+
+        <input type="radio" name="indice" id="inpc" value="inpc">
+        <label for="inpc">INPC</label>
+
+        <input type="radio" name="indice" id="ipcfipe" value="ipcfipe">
+        <label for="ipcfipe">IPC-FIPE</label>
+
+        <input type="radio" name="indice" id="ivar" value="ivar">
+        <label for="ivar">IVAR</label>
+      </div>
+
+      <!-- Tabela -->
+<!-- Substitua o <div class="tabela-indices"> atual por isso -->
+  <div class="tabela-indices" id="tabela-container">
+    <div class="toolbar">
+      <div class="table-title">Histórico recente</div>
+      <div class="search-container">
+        <div class="search-group">
+          <i class="fas fa-calendar-alt"></i>
+          <input type="text" id="search-mes" placeholder="Digite o Mês (ex: jan,01)" maxlength="10">
+        </div>
+        <div class="search-group">
+          <i class="fas fa-calendar"></i>
+          <input type="number" id="search-ano" placeholder="DIgite o Ano (ex: 2025,25)" maxlength="4">
+        </div>
+        <button id="clear-search" class="clear-btn" title="Limpar filtros">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+    </div>
+  
+    <table>
+      <thead>
+        <tr>
+          <th>Índice</th>
+          <th>Mês/Ano</th>
+          <th>Variação Mensal</th>
+          <th>Acumulado 12 Meses</th>
+        </tr>
+      </thead>
+      <tbody id="table-body"></tbody>
+    </table>
+  
+    <div class="pagination-container">
+      <div id="pagination-info">Página 1 de --</div>
+      <div class="pagination-btns">
+        <button id="prev-page" disabled><i class="fas fa-chevron-left"></i> Anterior</button>
+        <button id="next-page">Próximo <i class="fas fa-chevron-right"></i></button>
+      </div>
+    </div>
+  
+    <div class="table-footer">
+      Mostrando os últimos 12 meses disponíveis
+    </div>
+  </div>
+
+    </main>
+  </div>
+
+  <script src="/assets/js/utils/api.js"></script>
+  <script src="/assets/js/sidebar-loader.js"></script>
+  <script src="/assets/js/indice.js"></script>
+  
+  
+  
+  
+</body>
+</html>
