@@ -1,16 +1,14 @@
+// ============================================
+// TIPO IMÓVEL ROUTES
+// ============================================
+// Define apenas as rotas e chama os controllers
+
 import express from 'express';
-import { listarTipoImovel} from '../services/tipoimovel.service.js';
+import { getTiposImovel } from '../controllers/tipoimovel.controller.js';
 
 const router = express.Router();
 
-router.get('/', async (req, res) => {
-  try {
-    const tipoimovel = await listarTipoImovel();
-    res.json(tipoimovel);
-  } catch (error) {
-    console.error('Erro ao buscar Tipos de Imoveis:', error);
-    res.status(500).json({ error: 'Erro interno ao buscar tipo de imoveis' });
-  }
-});
+// GET /api/tipoimovel - Lista todos os tipos de imóveis
+router.get('/', getTiposImovel);
 
 export default router;

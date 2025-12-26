@@ -18,7 +18,7 @@ async function carregarEstados() {
         // Preenche com os estados do banco
         estados.forEach(estado => {
           const option = document.createElement('option');
-          option.value = estado.sigla;     // ou estado.id se preferir
+          option.value = estado.id;     // ou estado.id se preferir
           option.textContent = estado.nome;
           select.appendChild(option);
         });

@@ -1,16 +1,14 @@
+// ============================================
+// UF ROUTES
+// ============================================
+// Define apenas as rotas e chama os controllers
+
 import express from 'express';
-import { listarUfs } from '../services/uf.service.js';
+import { getUfs } from '../controllers/uf.controller.js';
 
 const router = express.Router();
 
-router.get('/', async (req, res) => {
-  try {
-    const ufs = await listarUfs();
-    res.json(ufs);
-  } catch (error) {
-    console.error('Erro ao buscar UFs:', error);
-    res.status(500).json({ error: 'Erro interno ao buscar estados' });
-  }
-});
+// GET /api/uf - Lista todos os estados
+router.get('/', getUfs);
 
 export default router;

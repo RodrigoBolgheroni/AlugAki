@@ -1,0 +1,60 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model UF {
+  Id                BigInt   @id @unique(map: "Id") @default(autoincrement())
+  Nome              String   @db.VarChar(255)
+  Ativo             Int      @default(1) @db.TinyInt
+  UsuarioInsercaoId BigInt
+  DataInsercao      DateTime @default(dbgenerated("'1901-01-01 00:00:00'")) @db.DateTime(0)
+  UsuarioAlteracao  BigInt
+  DataAlteracao     DateTime @default(dbgenerated("'1901-01-01 00:00:00'")) @db.DateTime(0)
+
+  @@map("tbluf")
+}
+
+model TipoImovel {
+  id                 BigInt   @id @unique(map: "Id") @default(autoincrement()) @map("Id")
+  tipo               String   @unique(map: "Tipo") @map("Tipo") @db.VarChar(150)
+  ativo              Int      @default(1) @map("Ativo") @db.TinyInt
+  UsuarioInsersaoId  BigInt   @default(0)
+  DataInsercao       DateTime @default(dbgenerated("'1901-01-01 00:00:00'")) @db.DateTime(0)
+  UsuarioAlteracaoId BigInt   @default(0)
+  DataAlteracao      DateTime @default(dbgenerated("'1901-01-01 00:00:00'")) @db.DateTime(0)
+
+  @@map("tbltipoimovel")
+}
+
+model StatusLocacao {
+  id                 BigInt   @id @unique(map: "Id") @default(autoincrement()) @map("Id")
+  statusAlocacao     String   @unique(map: "StatusAlocacao") @map("StatusAlocacao") @db.VarChar(150)
+  ativo              Int      @default(1) @map("Ativo") @db.TinyInt
+  UsuarioInsercaoId  BigInt   @default(0)
+  DataInsercao       DateTime @default(dbgenerated("'1901-01-01 00:00:00'")) @db.DateTime(0)
+  UsuarioAlteracaoId BigInt   @default(0)
+  DataAlteracao      DateTime @default(dbgenerated("'1901-01-01 00:00:00'")) @db.DateTime(0)
+
+  @@map("tblstatuslocacao")
+}
+
+model IndiceInflacao {
+  Id                 BigInt   @unique(map: "Id") @default(autoincrement())
+  codIndice          Int      @map("CodIndice")
+  indice             String   @map("Indice") @db.VarChar(50)
+  mesAnoReferencia   DateTime @map("MesAnoReferencia") @db.Date
+  valorMensal        Decimal  @map("ValorMensal") @db.Decimal(5, 2)
+  valorAcumulado     Decimal  @map("ValorAcumulado") @db.Decimal(10, 4)
+  usuarioInsercaoId  BigInt   @map("UsuarioInsercaoId")
+  dataInsercao       DateTime @map("DataInsercao") @db.DateTime(0)
+  usuarioAlteracaoId BigInt   @map("UsuarioAlteracaoId")
+  dataAlteracao      DateTime @updatedAt @map("DataAlteracao") @db.DateTime(0)
+
+  @@id([codIndice, mesAnoReferencia])
+  @@map("tblindicesinflacao")
+}

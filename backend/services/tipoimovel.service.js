@@ -1,7 +1,17 @@
-import { executeQuery } from '../config/database.js';
+import prisma from '../lib/prisma.js';
 
 export async function listarTipoImovel() {
-  const query = 'SELECT Id, Tipo FROM tbltipoimovel WHERE Ativo = 1';
-  const rows = await executeQuery(query);
-  return rows; 
+  const tipos = await prisma.tipoImovel.findMany({
+    where: { ativo: 1 },
+    select: {
+      id: true,
+      tipo: true
+    },
+    orderBy: { tipo: 'asc' }
+  });
+
+  return tipos.map(t => ({
+    Id: t.id,
+    Tipo: t.tipo
+  }));
 }

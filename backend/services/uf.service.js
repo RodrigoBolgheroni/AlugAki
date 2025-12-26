@@ -1,8 +1,17 @@
-import { executeQuery } from '../config/database.js';
+import prisma from '../lib/prisma.js';
 
 export async function listarUfs() {
-  const query = 'SELECT Id, Nome AS nome FROM tbluf WHERE Ativo = 1 ORDER BY Nome';
-  const rows = await executeQuery(query);
-  return rows; 
-}
+  const ufs = await prisma.uF.findMany({
+    where: { Ativo: 1 },
+    select: {
+      Id: true,
+      Nome: true
+    },
+    orderBy: { Nome: 'asc' }
+  });
 
+  return ufs.map(uf => ({
+    Id: uf.Id,
+    nome: uf.Nome
+  }));
+}
